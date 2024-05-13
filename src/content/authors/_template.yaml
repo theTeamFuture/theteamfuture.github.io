@@ -1,0 +1,16 @@
+## Author info YAML template
+
+# Your name (required)
+name: Your name
+
+# Your self introduction (required)
+intro: Your self introduction text
+
+# Your social URL list (optional)
+urls:
+  - name: Github
+    url: https://github.com
+  - name: Weibo
+    url: https://weibo.com
+  - name: Bilibili
+    url: https://bilibili.com
