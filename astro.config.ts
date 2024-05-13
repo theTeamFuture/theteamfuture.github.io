@@ -16,5 +16,6 @@ export default defineConfig({
     rehypePlugins: [[rehypeKatex, { output: 'html' }]],
     remarkPlugins: [remarkMath],
     syntaxHighlight: 'prism'
-  }
+  },
+  site: "https://future-puzzle.github.io"
 });
