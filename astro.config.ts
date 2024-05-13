@@ -1,5 +1,6 @@
 /// Astro config
 import { defineConfig } from 'astro/config';
+import { resolve } from 'path';
 
 // Integerations
 import icon from 'astro-icon';
@@ -17,5 +18,13 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     syntaxHighlight: 'prism'
   },
-  site: "https://future-puzzle.github.io"
+  site: 'https://future-puzzle.github.io',
+  vite: {
+    resolve: {
+      alias: {
+        '@': resolve('./src'),
+        '@avatar': resolve('./src/assets/avatar')
+      }
+    }
+  }
 });
