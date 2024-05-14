@@ -16,6 +16,7 @@
     // Stop old animation
     if (instance !== null) {
       instance.pause();
+      instance.complete?.(instance);
       instance = null;
     }
 
@@ -37,6 +38,7 @@
     // Stop old animation
     if (instance !== null) {
       instance.pause();
+      instance.complete?.(instance);
       instance = null;
     }
 
