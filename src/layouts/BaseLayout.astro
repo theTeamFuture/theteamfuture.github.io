@@ -1,0 +1,37 @@
+---
+import type { SEOProps } from 'astro-seo';
+
+// Style sheets
+import '@/styles/base.css';
+
+// Components
+import { ViewTransitions } from 'astro:transitions';
+import { SEO } from 'astro-seo';
+import LoadBar from '@/components/LoadBar.astro';
+import Preloader from '@/components/Preloader.astro';
+
+// Types
+type Props = {
+  title: string;
+  og?: SEOProps['openGraph'];
+  extend?: SEOProps['extend'];
+};
+
+// Injects
+const { title, og, extend } = Astro.props;
+---
+
+<html lang="zh">
+  <head>
+    <SEO title={title} charset="utf-8" openGraph={og} extend={extend} />
+    <link href="/favicon.svg" rel="icon" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta content={Astro.generator} name="generator" />
+    <ViewTransitions />
+  </head>
+  <body>
+    <Preloader />
+    <LoadBar />
+    <slot />
+  </body>
+</html>

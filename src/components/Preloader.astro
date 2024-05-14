@@ -1,0 +1,99 @@
+<div
+  id="preloader"
+  style={{
+    alignItems: 'center',
+    backgroundColor: '#0a0a0a',
+    display: 'flex',
+    gap: '10px',
+    inset: '0',
+    justifyContent: 'center',
+    position: 'fixed',
+    zIndex: '1000'
+  }}
+  transition:persist>
+  <style>
+    @keyframes stretch {
+      0% {
+        height: 5px;
+      }
+      50% {
+        height: 30px;
+      }
+      100% {
+        height: 5px;
+      }
+    }
+  </style>
+  <div
+    style={{
+      animation: 'stretch 1s infinite ease-in-out',
+      backgroundColor: '#fff',
+      borderRadius: '2.5px',
+      height: '5px',
+      width: '5px'
+    }}>
+  </div>
+  <div
+    style={{
+      animation: 'stretch 1s 0.1s infinite ease-in-out',
+      backgroundColor: '#fff',
+      borderRadius: '2.5px',
+      height: '5px',
+      width: '5px'
+    }}>
+  </div>
+  <div
+    style={{
+      animation: 'stretch 1s 0.2s infinite ease-in-out',
+      backgroundColor: '#fff',
+      borderRadius: '2.5px',
+      height: '5px',
+      width: '5px'
+    }}>
+  </div>
+  <div
+    style={{
+      animation: 'stretch 1s 0.3s infinite ease-in-out',
+      backgroundColor: '#fff',
+      borderRadius: '2.5px',
+      height: '5px',
+      width: '5px'
+    }}>
+  </div>
+  <div
+    style={{
+      animation: 'stretch 1s 0.4s infinite ease-in-out',
+      backgroundColor: '#fff',
+      borderRadius: '2.5px',
+      height: '5px',
+      width: '5px'
+    }}>
+  </div>
+  <div
+    style={{
+      animation: 'stretch 1s 0.5s infinite ease-in-out',
+      backgroundColor: '#fff',
+      borderRadius: '2.5px',
+      height: '5px',
+      width: '5px'
+    }}>
+  </div>
+</div>
+
+<script>
+  import anime from 'animejs';
+
+  // On full loaded
+  window.addEventListener('load', (): void => {
+    anime({
+      targets: '#preloader',
+      opacity: [1, 0],
+      duration: 500,
+      easing: 'easeInOutCubic',
+      complete: (): void => {
+        document.querySelector<HTMLDivElement>('#preloader')!.style.display =
+          'none';
+      }
+    });
+  });
+</script>

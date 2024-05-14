@@ -1,0 +1,13 @@
+/* Fonts */
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 150 700;
+  src: url('/fonts/MiSans-VF.ttf') format('truetype');
+}
+
+/* Global styles */
+body {
+  @apply bg-neutral-900 font-misans text-white;
+}
