@@ -31,5 +31,13 @@
     "@commitlint/prompt-cli": "^19.3.1",
     "@types/animejs": "^3.1.12",
     "husky": "^9.0.11"
+  },
+  "husky": {
+    "hooks": {
+      "post-checkout": "echo $HUSKY_GIT_STDIN | lfs-hooks/post-checkout $HUSKY_GIT_PARAMS",
+      "post-commit": "echo $HUSKY_GIT_STDIN | lfs-hooks/post-commit $HUSKY_GIT_PARAMS",
+      "post-merge": "echo $HUSKY_GIT_STDIN | lfs-hooks/post-merge $HUSKY_GIT_PARAMS",
+      "pre-push": "echo $HUSKY_GIT_STDIN | lfs-hooks/pre-push $HUSKY_GIT_PARAMS"
+    }
   }
 }
