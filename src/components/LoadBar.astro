@@ -1,0 +1,55 @@
+<div
+  class="bg-blue-500 fixed h-1 hidden left-0 top-0 z-[999]"
+  id="load-bar"
+  transition:persist>
+</div>
+
+<script>
+  import type { AnimeInstance } from 'animejs';
+  import anime from 'animejs';
+
+  // Anime instance
+  let instance: AnimeInstance | null = null;
+
+  // On page before preparation
+  document.addEventListener('astro:before-preparation', (): void => {
+    // Stop old animation
+    if (instance !== null) {
+      instance.pause();
+      instance = null;
+    }
+
+    // Start new animation
+    instance = anime({
+      targets: '#load-bar',
+      width: ['0%', '90%'],
+      duration: 5000,
+      easing: 'easeOutCubic',
+      begin: (): void => {
+        document.querySelector<HTMLDivElement>('#load-bar')!.style.display =
+          'block';
+      }
+    });
+  });
+
+  // On page loaded
+  document.addEventListener('astro:after-preparation', (): void => {
+    // Stop old animation
+    if (instance !== null) {
+      instance.pause();
+      instance = null;
+    }
+
+    // Start new animation
+    instance = anime({
+      targets: '#load-bar',
+      width: '100%',
+      duration: 500,
+      easing: 'easeOutCubic',
+      complete: (): void => {
+        document.querySelector<HTMLDivElement>('#load-bar')!.style.display =
+          'none';
+      }
+    });
+  });
+</script>
