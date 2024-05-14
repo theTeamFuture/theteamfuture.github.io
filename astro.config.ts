@@ -23,7 +23,8 @@ export default defineConfig({
     resolve: {
       alias: {
         '@': resolve('./src'),
-        '@avatar': resolve('./src/assets/avatar')
+        '@avatars': resolve('./src/assets/avatars'),
+        '@images': resolve('./src/assets/images')
       }
     }
   }

@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@avatar/*": ["src/assets/avatar/*"]
+      "@avatars/*": ["src/assets/avatars/*"],
+      "@images/*": ["src/assets/images/*"]
     }
   },
   "extends": "astro/tsconfigs/strict"
