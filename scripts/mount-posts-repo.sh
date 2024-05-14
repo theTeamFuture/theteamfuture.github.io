@@ -3,16 +3,19 @@
 # Mount authors
 rm -r src/content/authors
 mv posts-repo/authors src/content/authors
+rm src/content/authors/*.md
 ls -la src/content/authors
 
 # Mount avatars
 rm -r src/assets/avatars
 mv posts-repo/avatars src/assets/avatars
+rm src/assets/avatars/*.md
 ls -la src/assets/avatars
 
 # Mount images
 rm -r src/assets/images
 mv posts-repo/images src/assets/images
+rm src/assets/images/*.md
 ls -la src/assets/images
 
 # Mount posts
