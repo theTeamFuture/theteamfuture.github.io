@@ -5,8 +5,9 @@ import type { SEOProps } from 'astro-seo';
 import '@/styles/base.css';
 
 // Components
-import { ViewTransitions } from 'astro:transitions';
 import { SEO } from 'astro-seo';
+import { ViewTransitions } from 'astro:transitions';
+import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import LoadBar from '@/components/LoadBar.astro';
 import Preloader from '@/components/Preloader.astro';
@@ -33,7 +34,8 @@ const { title, og, extend } = Astro.props;
   <body>
     <Preloader />
     <LoadBar />
-    <slot />
     <Header />
+    <slot />
+    <Footer />
   </body>
 </html>
