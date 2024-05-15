@@ -3,8 +3,12 @@
 import { Icon } from 'astro-icon/components';
 
 // Functions
-const isCurrentNav = (target: string): boolean =>
-  new URL(Astro.request.url).pathname === target;
+const isCurrentNav = (target: string): boolean => {
+  const pathname: string = new URL(Astro.request.url).pathname;
+  const next: number = pathname.indexOf('/', 1);
+
+  return (next === -1 ? pathname : pathname.slice(0, next)) === target;
+};
 ---
 
 <header
