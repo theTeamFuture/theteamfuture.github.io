@@ -17,7 +17,6 @@
     if (instance !== null) {
       instance.pause();
       instance.complete?.(instance);
-      instance = null;
     }
 
     // Start new animation
@@ -29,6 +28,9 @@
       begin: (): void => {
         document.querySelector<HTMLDivElement>('#load-bar')!.style.display =
           'block';
+      },
+      complete: (): void => {
+        instance = null;
       }
     });
   });
@@ -39,7 +41,6 @@
     if (instance !== null) {
       instance.pause();
       instance.complete?.(instance);
-      instance = null;
     }
 
     // Start new animation
@@ -47,10 +48,11 @@
       targets: '#load-bar',
       width: '100%',
       duration: 500,
-      easing: 'easeOutCubic',
+      easing: 'linear',
       complete: (): void => {
         document.querySelector<HTMLDivElement>('#load-bar')!.style.display =
           'none';
+        instance = null;
       }
     });
   });
