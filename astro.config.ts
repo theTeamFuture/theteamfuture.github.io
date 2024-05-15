@@ -18,7 +18,7 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     syntaxHighlight: 'prism'
   },
-  site: 'https://future-puzzle.github.io',
+  site: 'https://theteamfuture.github.io',
   vite: {
     resolve: {
       alias: {
