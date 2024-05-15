@@ -50,14 +50,5 @@ const isCurrentNav = (target: string): boolean =>
       <span class="leading-none text-lg">POSTS</span>
       <span class="text-sm">文章</span>
     </a>
-    <a
-      class:list={[
-        'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/authors') ? 'text-sky-400' : undefined
-      ]}
-      href="/authors">
-      <span class="leading-none text-lg">AUTHORS</span>
-      <span class="text-sm">作者们</span>
-    </a>
   </nav>
 </header>
