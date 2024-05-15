@@ -1,0 +1,63 @@
+---
+// Components
+import { Icon } from 'astro-icon/components';
+
+// Functions
+const isCurrentNav = (target: string): boolean =>
+  new URL(Astro.request.url).pathname === target;
+---
+
+<header
+  class="border-b-2 border-neutral-600 flex items-center justify-between px-8 py-4 select-none sticky top-0">
+  <div class="flex items-center gap-2">
+    <Icon class="text-transparent h-10 w-10" name="logo" />
+    <h1 class="font-bold text-xl">FUTURE 攻坚组</h1>
+  </div>
+  <nav class="flex gap-8 items-center">
+    <a
+      class:list={[
+        'flex flex-col items-start transition-colors hover:text-sky-400',
+        isCurrentNav('/') ? 'text-sky-400' : undefined
+      ]}
+      href="/">
+      <span class="leading-none text-lg">INDEX</span>
+      <span class="text-sm">首页</span>
+    </a>
+    <a
+      class:list={[
+        'flex flex-col items-start transition-colors hover:text-sky-400',
+        isCurrentNav('/about') ? 'text-sky-400' : undefined
+      ]}
+      href="/about">
+      <span class="leading-none text-lg">ABOUT</span>
+      <span class="text-sm">关于</span>
+    </a>
+    <a
+      class:list={[
+        'flex flex-col items-start transition-colors hover:text-sky-400',
+        isCurrentNav('/puzzles') ? 'text-sky-400' : undefined
+      ]}
+      href="/puzzles">
+      <span class="leading-none text-lg">PUZZLES</span>
+      <span class="text-sm">谜题</span>
+    </a>
+    <a
+      class:list={[
+        'flex flex-col items-start transition-colors hover:text-sky-400',
+        isCurrentNav('/posts') ? 'text-sky-400' : undefined
+      ]}
+      href="/posts">
+      <span class="leading-none text-lg">POSTS</span>
+      <span class="text-sm">文章</span>
+    </a>
+    <a
+      class:list={[
+        'flex flex-col items-start transition-colors hover:text-sky-400',
+        isCurrentNav('/authors') ? 'text-sky-400' : undefined
+      ]}
+      href="/authors">
+      <span class="leading-none text-lg">AUTHORS</span>
+      <span class="text-sm">作者们</span>
+    </a>
+  </nav>
+</header>
