@@ -16,7 +16,7 @@
     "@astrojs/check": "^0.6.0",
     "@astrojs/tailwind": "^5.1.0",
     "animejs": "^3.2.2",
-    "astro": "^4.8.3",
+    "astro": "^4.8.4",
     "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.3",
     "rehype-katex": "^7.0.0",
