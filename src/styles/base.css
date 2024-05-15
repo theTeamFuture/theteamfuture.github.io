@@ -8,6 +8,10 @@
 }
 
 /* Global styles */
+a {
+  @apply text-blue-500 transition-colors hover:text-red-500;
+}
+
 body {
   @apply bg-neutral-900 font-misans text-white;
 }

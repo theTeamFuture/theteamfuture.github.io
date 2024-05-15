@@ -12,7 +12,7 @@ const isCurrentNav = (target: string): boolean => {
 ---
 
 <header
-  class="border-b-2 border-neutral-600 flex items-center justify-between px-8 py-4 select-none sticky top-0">
+  class="bg-neutral-900 border-b-2 border-neutral-600 flex items-center justify-between px-8 py-4 select-none sticky top-0">
   <div class="flex items-center gap-2">
     <Icon class="text-transparent h-10 w-10" name="logo" />
     <h1 class="font-bold text-xl">FUTURE 攻坚组</h1>
@@ -21,7 +21,7 @@ const isCurrentNav = (target: string): boolean => {
     <a
       class:list={[
         'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/') ? 'text-sky-400' : undefined
+        isCurrentNav('/') ? 'text-sky-400' : 'text-white'
       ]}
       href="/">
       <span class="leading-none text-lg">INDEX</span>
@@ -30,7 +30,7 @@ const isCurrentNav = (target: string): boolean => {
     <a
       class:list={[
         'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/about') ? 'text-sky-400' : undefined
+        isCurrentNav('/about') ? 'text-sky-400' : 'text-white'
       ]}
       href="/about">
       <span class="leading-none text-lg">ABOUT</span>
@@ -39,7 +39,7 @@ const isCurrentNav = (target: string): boolean => {
     <a
       class:list={[
         'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/puzzles') ? 'text-sky-400' : undefined
+        isCurrentNav('/puzzles') ? 'text-sky-400' : 'text-white'
       ]}
       href="/puzzles">
       <span class="leading-none text-lg">PUZZLES</span>
@@ -48,7 +48,7 @@ const isCurrentNav = (target: string): boolean => {
     <a
       class:list={[
         'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/posts') ? 'text-sky-400' : undefined
+        isCurrentNav('/posts') ? 'text-sky-400' : 'text-white'
       ]}
       href="/posts">
       <span class="leading-none text-lg">POSTS</span>
