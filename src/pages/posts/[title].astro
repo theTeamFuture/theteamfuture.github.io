@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import { getEntry } from 'astro:content';
+import { posts } from '@/utils/meta';
+
+// Layouts
+import PostLayout from '@/layouts/PostLayout.astro';
+
+// Export path function
+export const getStaticPaths = (() =>
+  posts.map((v: CollectionEntry<'posts'>) => ({
+    params: { title: v.data.title },
+    props: { post: v }
+  }))) satisfies GetStaticPaths;
+
+// Injects
+const { post } = Astro.props;
+
+// Contants
+const { Content, remarkPluginFrontmatter } = await post.render();
+---
+
+<PostLayout
+  title={post.data.title}
+  date={post.data.published_at}
+  tags={post.data.tags}
+  length={remarkPluginFrontmatter.content_length}
+  author={await getEntry(post.data.author)}>
+  <Content />
+</PostLayout>
