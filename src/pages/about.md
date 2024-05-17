@@ -4,6 +4,10 @@ title: 关于
 date: 2024-05-16
 ---
 
+中文 | [English](#English)
+
+# 中文 
+
 **Q：** FUTURE 攻坚组是什么？  
 **A：** [埃及研（_GORIE）](https://weibo.com/u/6812997138)当初为了解决 FUTURE 谜题而建立的分支组织。
 
@@ -27,3 +31,29 @@ date: 2024-05-16
 
 **Q：** 我可以转载 FUTURE 攻坚组的文章吗？  
 **A：** 除另有声明外，所有文章使用 [知识共享 署名-非商业性使用-相同方式共享 4.0 国际（CC BY-NC-SA 4.0）许可协议](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)，只要你遵守如上分享协议即可转载。
+
+# English
+
+**Q:** What is Team Future?  
+**A:** A branch of [_GORIE](https://weibo.com/u/6812997138) that aimed at solving Future Puzzle.
+
+**Q:** What's your relationship with GORIE?  
+**A:** The [successor](https://weibo.com/6812997138/ObOHUkSM0) of GORIE.
+
+**Q:** What kind of orgnization is Team Future?  
+**A:** A union of puzzle enthusiasts.
+
+**Q:** Will Team Future recruit more members?  
+**A:** No since the future puzzle is solved.
+
+**Q:** Does Team Future accept submission of clues?  
+**A:** We won't ask for clues on any platforms, though we won't deny you send to us with DM (thanks!). We will actively seeking any possible clues on all platforms, so sharing clues with everyone on public domain is recommeded.
+
+**Q:** Why you being mysterious in puzzle reports?  
+**A:** We won't publish clues/result without proof to ensure everyone enjoy the puzzle. We will only mention limited information as hint.
+
+**Q:** I saw your account on platform XXX, is that you?  
+**A:** All official account are listed in [Homepage](/), accounts in anywhere else aren't run by Team Future, do not trust them.
+
+**Q:** Can I repost articles from Team Future?  
+**A:** All articles posted by Team Future are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0) unless there's another declaration in it, feel free to share with anyone else as you follow the license. 
