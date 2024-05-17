@@ -1,0 +1,60 @@
+---
+import moment from 'moment';
+
+// Style sheets
+import '@/styles/markdown.css';
+
+// Layouts
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+// Components
+import { Icon } from 'astro-icon/components';
+
+// Types
+type Props = {
+  title: string;
+  list: {
+    url: string;
+    title: string;
+    excerpt: string;
+    published_at: Date;
+    tags?: string[];
+  }[];
+};
+
+// Injects
+const { title, list } = Astro.props;
+---
+
+<BaseLayout title={`${title} - FUTURE 攻坚组`}>
+  <main class="flex flex-col gap-4 mx-auto my-12 w-1/2">
+    {
+      list.map(({ url, title, excerpt, published_at, tags }) => (
+        <a
+          class="border border-neutral-600 flex flex-col p-4 rounded-lg text-white hover:bg-neutral-800 hover:text-white"
+          href={url}
+          title={title}>
+          <h1 class="font-bold text-lg">{title}</h1>
+          <div class="flex gap-4 items-center text-neutral-500 text-xs">
+            <div class="flex gap-1 items-center">
+              <Icon name="mdi:calendar" />
+              <span>{moment(published_at).format('YYYY/MM/DD')}</span>
+            </div>
+            {tags && (
+              <div class="flex gap-1 items-center">
+                <Icon name="mdi:tag" />
+                {tags.map((v: string) => (
+                  <span>{v}</span>
+                ))}
+              </div>
+            )}
+          </div>
+          <p class="mt-4 text-neutral-300 text-sm">{excerpt}</p>
+        </a>
+      ))
+    }
+    <div class="font-bold mt-8 text-center text-neutral-700 select-none">
+      End of Posts
+    </div>
+  </main>
+</BaseLayout>

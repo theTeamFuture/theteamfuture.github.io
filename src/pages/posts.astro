@@ -1,8 +1,17 @@
 ---
+import { posts } from '@/utils/meta';
+
 // Layouts
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArchiveLayout from '@/layouts/ArchiveLayout.astro';
 ---
 
-<BaseLayout title="文章 - FUTURE 攻坚组">
-  <h1 class="font-bold my-40 text-3xl text-center select-none">Constructing</h1>
-</BaseLayout>
+<ArchiveLayout
+  title="文章"
+  list={posts.map(({ data }) => ({
+    url: `/posts/${data.title}`,
+    title: data.title,
+    excerpt: data.excerpt,
+    published_at: data.published_at,
+    tags: data.tags
+  }))}
+/>
