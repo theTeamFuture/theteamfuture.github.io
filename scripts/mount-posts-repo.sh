@@ -18,9 +18,8 @@ rm src/assets/images/*.md
 # Mount posts
 rm -r src/content/posts/*
 for FOLDER_DIR in posts-repo/posts/*; do
+  echo $FOLDER_DIR
   if [[ -d "$FOLDER_DIR" ]]; then
-    echo $FOLDER_DIR
-
     # Get folder name
     FOLDER_NAME=${FOLDER_DIR##*/}
     echo $FOLDER_NAME
