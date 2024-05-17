@@ -9,6 +9,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
 // Components
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 
 // Types
@@ -44,7 +45,8 @@ const formatNumber = (num: number, unit: string): string => {
       <span>返回</span>
     </button>
     <h1 class="font-bold mt-8 text-3xl">{title}</h1>
-    <div class="flex items-center gap-4 text-neutral-500 text-sm">
+    <div
+      class="border-b border-neutral-700 flex items-center gap-4 text-neutral-500 text-sm">
       <div class="flex items-center gap-1">
         <Icon name="mdi:calendar" />
         <span title={date.toISOString()}
@@ -66,7 +68,31 @@ const formatNumber = (num: number, unit: string): string => {
         <span title={length.toString()}>{formatNumber(length, '字')}</span>
       </div>
     </div>
-    <article class="my-8">
+    <div class="flex flex-col my-4">
+      <div class="flex items-center">
+        <Image
+          alt="avatar"
+          class="rounded-full transition-transform hover:scale-110"
+          height="60"
+          src={author.data.avatar}
+          width="60"
+        />
+        <div class="flex flex-col ml-4">
+          <h1 class="font-bold">{author.data.name}</h1>
+          <p class="text-sm text-neutral-400">{author.data.intro}</p>
+          <div class="flex gap-2 items-center mt-1 text-sm">
+            {
+              author.data.urls?.map(({ name, url }) => (
+                <a href={url} rel="nofollow noopener noreferer" target="_blank">
+                  {name}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    <article class="my-12">
       <slot />
     </article>
     <div class="font-bold mt-8 text-center text-neutral-700 select-none">
