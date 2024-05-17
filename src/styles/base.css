@@ -8,6 +8,16 @@
 }
 
 /* Global styles */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-700 cursor-pointer rounded;
+}
+::-webkit-scrollbar-track {
+  @apply bg-neutral-500 cursor-pointer;
+}
+
 a {
   @apply text-blue-500 transition-colors hover:text-red-500;
 }
