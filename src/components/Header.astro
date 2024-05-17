@@ -39,20 +39,20 @@ const isCurrentNav = (target: string): boolean => {
     <a
       class:list={[
         'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/puzzles') ? 'text-sky-400' : 'text-white'
-      ]}
-      href="/puzzles">
-      <span class="leading-none text-lg">PUZZLES</span>
-      <span class="text-sm">谜题</span>
-    </a>
-    <a
-      class:list={[
-        'flex flex-col items-start transition-colors hover:text-sky-400',
         isCurrentNav('/posts') ? 'text-sky-400' : 'text-white'
       ]}
       href="/posts">
       <span class="leading-none text-lg">POSTS</span>
       <span class="text-sm">文章</span>
+    </a>
+    <a
+      class:list={[
+        'flex flex-col items-start transition-colors hover:text-sky-400',
+        isCurrentNav('/puzzles') ? 'text-sky-400' : 'text-white'
+      ]}
+      href="/puzzles">
+      <span class="leading-none text-lg">PUZZLES</span>
+      <span class="text-sm">谜题</span>
     </a>
   </nav>
 </header>
