@@ -18,15 +18,12 @@ rm src/assets/images/*.md
 # Mount posts
 rm -r src/content/posts/*
 for FOLDER_DIR in posts-repo/posts/*; do
-  echo $FOLDER_DIR
   if [[ -d "$FOLDER_DIR" ]]; then
     # Get folder name
     FOLDER_NAME=${FOLDER_DIR##*/}
-    echo $FOLDER_NAME
 
     # Get folder name SHA256
     HASH_NAME=$(echo -n $FOLDER_NAME | sha256sum | awk '{print $1}')
-    echo $HASH_NAME
 
     # Move markdown to contents collection
     mv $FOLDER_DIR"/post.md" "src/content/posts/"$HASH_NAME".md"
@@ -38,4 +35,3 @@ for FOLDER_DIR in posts-repo/posts/*; do
     sed -i "s/\.\//\.\/_"$HASH_NAME"\//g" "src/contents/posts/"$HASH_NAME".md"
   fi
 done
-ls -la src/content/posts
