@@ -1,0 +1,76 @@
+/* Markdown */
+
+article {
+  blockquote {
+    @apply border-l-4 border-neutral-500 pl-4 text-neutral-500;
+  }
+
+  code {
+    @apply bg-neutral-600 font-mono px-1 py-0.5 rounded text-sm text-white;
+  }
+
+  figure {
+    @apply my-4;
+
+    figcaption {
+      @apply mt-1 text-center text-neutral-500 text-sm;
+    }
+
+    img {
+      @apply mx-auto max-w-[75%];
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold my-4;
+  }
+  h1 {
+    @apply border-b-2 border-neutral-700 text-2xl;
+  }
+  h2 {
+    @apply border-b border-neutral-700 text-xl;
+  }
+  h3 {
+    @apply text-lg;
+  }
+  h4 {
+    @apply text-base;
+  }
+  h5 {
+    @apply text-sm;
+  }
+  h6 {
+    @apply text-xs;
+  }
+
+  hr {
+    @apply border-t-2 border-dashed border-neutral-500 my-4;
+  }
+
+  ol {
+    @apply list-decimal pl-8;
+  }
+
+  p {
+    @apply my-4;
+  }
+
+  table {
+    @apply border-2 border-neutral-500 my-4 w-full;
+  }
+  td {
+    @apply border-2 border-neutral-500 px-2 py-1;
+  }
+  th {
+    @apply bg-neutral-700 border-2 border-neutral-500 px-2 py-1;
+  }
+
+  ul {
+    @apply list-disc pl-8;
+  }
+}

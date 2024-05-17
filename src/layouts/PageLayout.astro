@@ -1,0 +1,89 @@
+---
+import type { MarkdownLayoutProps } from 'astro';
+import moment from 'moment';
+
+// Style sheets
+import '@/styles/markdown.css';
+
+// Layouts
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+// Components
+import { Icon } from 'astro-icon/components';
+
+// Types
+type Props = MarkdownLayoutProps<{
+  title: string;
+  date: string;
+}>;
+
+// Injects
+const { frontmatter, rawContent } = Astro.props;
+
+// Functions
+const formatNumber = (num: number, unit: string): string => {
+  if (num < 1000) {
+    return num.toString() + ' ' + unit;
+  } else if (num < 1000000) {
+    return (num / 1000).toFixed(1) + 'k ' + unit;
+  } else {
+    return (num / 1000000).toFixed(1) + 'm ' + unit;
+  }
+};
+---
+
+<BaseLayout title={`${frontmatter.title} - FUTURE 攻坚组`}>
+  <main class="mx-auto my-12 w-1/2">
+    <h1 class="font-bold text-3xl">{frontmatter.title}</h1>
+    <div class="flex items-center gap-4 text-neutral-500 text-sm">
+      <div class="flex items-center gap-1">
+        <Icon name="mdi:calendar" />
+        <span title={frontmatter.date}
+          >{moment(frontmatter.date).format('YYYY/MM/DD')}</span
+        >
+      </div>
+      <div class="flex items-center gap-1">
+        <Icon name="mdi:text" />
+        <span title={rawContent().length.toString()}
+          >{formatNumber(rawContent().length, '字')}</span
+        >
+      </div>
+    </div>
+    <article class="my-8">
+      <slot />
+    </article>
+  </main>
+</BaseLayout>
+
+<script>
+  document.addEventListener('astro:page-load', (): void =>
+    document
+      .querySelectorAll<HTMLAnchorElement>('article a')
+      .forEach((el: HTMLAnchorElement): void => {
+        // If not an anchor
+        if (!el.getAttribute('href')?.startsWith('#')) {
+          return;
+        }
+
+        // Add listener
+        el.addEventListener('click', (ev: MouseEvent): void => {
+          // Prevent default
+          ev.preventDefault();
+
+          // Get target element
+          const target: HTMLElement | null = document.querySelector(
+            el.getAttribute('href')!
+          );
+          if (target === null) {
+            return;
+          }
+
+          // Scroll to element
+          window.scrollTo({
+            top: window.scrollY + target.getBoundingClientRect().top - 80,
+            behavior: 'smooth'
+          });
+        });
+      })
+  );
+</script>
