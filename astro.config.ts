@@ -11,6 +11,7 @@ import rehypeExternalLinks from 'rehype-external-links';
 import rehypeFigure from 'rehype-figure';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
+import remarkContentLength from './intergrations/remark-content-length';
 
 // Export config
 export default defineConfig({
@@ -24,7 +25,7 @@ export default defineConfig({
       [rehypeFigure, {}],
       [rehypeKatex, { output: 'html' }]
     ],
-    remarkPlugins: [remarkMath],
+    remarkPlugins: [remarkContentLength, remarkMath],
     syntaxHighlight: 'prism'
   },
   site: 'https://theteamfuture.github.io',

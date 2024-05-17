@@ -15,10 +15,11 @@ import { Icon } from 'astro-icon/components';
 type Props = MarkdownLayoutProps<{
   title: string;
   date: string;
+  content_length: number;
 }>;
 
 // Injects
-const { frontmatter, rawContent } = Astro.props;
+const { frontmatter } = Astro.props;
 
 // Functions
 const formatNumber = (num: number, unit: string): string => {
@@ -44,8 +45,8 @@ const formatNumber = (num: number, unit: string): string => {
       </div>
       <div class="flex items-center gap-1">
         <Icon name="mdi:text" />
-        <span title={rawContent().length.toString()}
-          >{formatNumber(rawContent().length, '字')}</span
+        <span title={frontmatter.content_length.toString()}
+          >{formatNumber(frontmatter.content_length, '字')}</span
         >
       </div>
     </div>
