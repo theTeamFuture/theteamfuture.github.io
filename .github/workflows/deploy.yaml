@@ -24,6 +24,12 @@ jobs:
           repository: theTeamFuture/posts
           path: posts-repo
           token: ${{ secrets.GH_PAT }}
+      - name: Checkout time capsule repository
+        uses: actions/checkout@v4
+        with:
+          repository: theTeamFuture/time-capsules
+          path: time-capsules-repo
+          token: ${{ secrets.GH_PAT }}
       - name: Mount posts
         run: scripts/mount-posts-repo.sh
       - name: Build Astro

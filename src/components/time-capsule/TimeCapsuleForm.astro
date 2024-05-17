@@ -1,0 +1,24 @@
+---
+// Components
+import { Icon } from 'astro-icon/components';
+---
+
+<div class="flex flex-col gap-4 items-center">
+  <Icon class="h-96 text-neutral-500 w-96" name="time-capsule" />
+  <input
+    class="bg-transparent border-2 border-neutral-500 outline-none p-2 w-80"
+    id="entry-id-in"
+    placeholder="Entry ID"
+    type="text"
+  />
+  <input
+    class="bg-transparent border-2 border-neutral-500 outline-none p-2 w-80"
+    id="passwd-in"
+    placeholder="Password"
+    type="password"
+  />
+  <button
+    class="bg-neutral-500 mt-8 px-2 py-1 rounded-xl enabled:hover:bg-neutral-600 disabled:bg-neutral-700"
+    id="query-btn">Query</button
+  >
+</div>
