@@ -10,8 +10,8 @@ import PostLayout from '@/layouts/PostLayout.astro';
 // Export path function
 export const getStaticPaths = (() =>
   posts.map((v: CollectionEntry<'posts'>) => {
-    if ((v.slug as unknown) === 'page') {
-      throw Error('Slug cannot be "page"');
+    if (!/^(?!page$)[\da-zA-Z-]+$/.test(v.slug)) {
+      throw Error('Slug invalid: ' + v.slug);
     }
 
     return {
