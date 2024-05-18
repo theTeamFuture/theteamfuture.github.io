@@ -33,58 +33,37 @@ const formatNumber = (num: number, unit: string): string => {
 };
 ---
 
-<BaseLayout title={`${frontmatter.title} - FUTURE 攻坚组`}>
-  <main class="mx-auto my-12 w-1/2">
+<BaseLayout
+  title={`${frontmatter.title} - FUTURE 攻坚组`}
+  og={{
+    basic: {
+      title: `${frontmatter.title} - FUTURE 攻坚组`,
+      type: 'website',
+      image: '/favicon.svg',
+      url: Astro.request.url
+    }
+  }}>
+  <main class="min-h-[calc(100vh-75px)] mx-auto my-12 w-1/2">
     <h1 class="font-bold text-3xl">{frontmatter.title}</h1>
     <div class="flex items-center gap-4 text-neutral-500 text-sm">
       <div class="flex items-center gap-1">
         <Icon name="mdi:calendar" />
-        <span title={frontmatter.date}
-          >{moment(frontmatter.date).format('YYYY/MM/DD')}</span
-        >
+        <span title={frontmatter.date}>
+          {moment(frontmatter.date).format('YYYY/MM/DD')}
+        </span>
       </div>
       <div class="flex items-center gap-1">
         <Icon name="mdi:text" />
-        <span title={frontmatter.content_length.toString()}
-          >{formatNumber(frontmatter.content_length, '字')}</span
-        >
+        <span title={frontmatter.content_length.toString()}>
+          {formatNumber(frontmatter.content_length, '字')}
+        </span>
       </div>
     </div>
     <article class="my-8">
       <slot />
     </article>
+    <div class="font-bold mb-auto text-center text-neutral-700 select-none">
+      End of Page
+    </div>
   </main>
 </BaseLayout>
-
-<script>
-  document.addEventListener('astro:page-load', (): void =>
-    document
-      .querySelectorAll<HTMLAnchorElement>('article a')
-      .forEach((el: HTMLAnchorElement): void => {
-        // If not an anchor
-        if (!el.getAttribute('href')?.startsWith('#')) {
-          return;
-        }
-
-        // Add listener
-        el.addEventListener('click', (ev: MouseEvent): void => {
-          // Prevent default
-          ev.preventDefault();
-
-          // Get target element
-          const target: HTMLElement | null = document.querySelector(
-            el.getAttribute('href')!
-          );
-          if (target === null) {
-            return;
-          }
-
-          // Scroll to element
-          window.scrollTo({
-            top: window.scrollY + target.getBoundingClientRect().top - 80,
-            behavior: 'smooth'
-          });
-        });
-      })
-  );
-</script>

@@ -37,8 +37,17 @@ const formatNumber = (num: number, unit: string): string => {
 };
 ---
 
-<BaseLayout title={`${title} - FUTURE 攻坚组`}>
-  <main class="mx-auto my-12 w-1/2">
+<BaseLayout
+  title={`${title} - FUTURE 攻坚组`}
+  og={{
+    basic: {
+      title: `${title} - FUTURE 攻坚组`,
+      type: 'article',
+      image: '/favicon.svg',
+      url: Astro.request.url
+    }
+  }}>
+  <main class="flex flex-col min-h-screen mx-auto my-12 w-1/2">
     <button
       class="flex items-center text-neutral-400 transition-colors hover:text-white"
       id="back-posts-btn">
@@ -108,7 +117,7 @@ const formatNumber = (num: number, unit: string): string => {
     <article class="my-12">
       <slot />
     </article>
-    <div class="font-bold mt-8 text-center text-neutral-700 select-none">
+    <div class="font-bold mb-auto text-center text-neutral-700 select-none">
       End of Post
     </div>
   </main>

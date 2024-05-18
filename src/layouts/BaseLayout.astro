@@ -16,16 +16,15 @@ import Preloader from '@/components/Preloader.astro';
 type Props = {
   title: string;
   og?: SEOProps['openGraph'];
-  extend?: SEOProps['extend'];
 };
 
 // Injects
-const { title, og, extend } = Astro.props;
+const { title, og } = Astro.props;
 ---
 
 <html lang="zh">
   <head>
-    <SEO title={title} charset="utf-8" openGraph={og} extend={extend} />
+    <SEO title={title} charset="utf-8" openGraph={og} />
     <link href="/favicon.svg" rel="icon" />
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <meta content={Astro.generator} name="generator" />
@@ -37,19 +36,7 @@ const { title, og, extend } = Astro.props;
       src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"
       defer
       is:inline></script>
-    <script>
-      document.addEventListener('astro:page-load', (): void => {
-        document
-          .querySelectorAll<HTMLAnchorElement>('article a:not([target])')
-          .forEach((el: HTMLAnchorElement): void => {
-            const url: URL = new URL(el.href, location.origin);
-            if (url.origin !== location.origin) {
-              el.rel = 'nofollow noopener noreferer';
-              el.target = '_blank';
-            }
-          });
-      });
-    </script>
+    <script src="@/scripts/base-layout"></script>
     <ViewTransitions />
   </head>
   <body>

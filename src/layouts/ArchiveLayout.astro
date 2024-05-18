@@ -13,6 +13,7 @@ import { Icon } from 'astro-icon/components';
 // Types
 type Props = {
   title: string;
+  total: number;
   list: {
     url: string;
     title: string;
@@ -23,11 +24,21 @@ type Props = {
 };
 
 // Injects
-const { title, list } = Astro.props;
+const { title, total, list } = Astro.props;
 ---
 
-<BaseLayout title={`${title} - FUTURE 攻坚组`}>
-  <main class="flex flex-col gap-4 mx-auto my-12 w-1/2">
+<BaseLayout
+  title={`${title} - FUTURE 攻坚组`}
+  og={{
+    basic: {
+      title: `${title} - FUTURE 攻坚组`,
+      type: 'website',
+      image: '/favicon.svg',
+      url: Astro.request.url
+    }
+  }}>
+  <main class="flex flex-col gap-4 min-h-screen mx-auto my-12 w-1/2">
+    <h1 class="font-bold text-2xl">{title} ({total})</h1>
     {
       list.map(({ url, title, excerpt, published_at, tags }) => (
         <a
@@ -53,8 +64,8 @@ const { title, list } = Astro.props;
         </a>
       ))
     }
-    <div class="font-bold mt-8 text-center text-neutral-700 select-none">
-      End of Posts
+    <div class="font-bold mb-auto text-center text-neutral-700 select-none">
+      End of Archives
     </div>
   </main>
 </BaseLayout>

@@ -6,7 +6,8 @@ import ArchiveLayout from '@/layouts/ArchiveLayout.astro';
 ---
 
 <ArchiveLayout
-  title="文章"
+  title="所有文章"
+  total={posts.length}
   list={posts.map(({ slug, data }) => ({
     url: `/posts/${slug}`,
     title: data.title,
