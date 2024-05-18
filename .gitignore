@@ -1,5 +1,7 @@
 # build output
 dist/
+meta.json
+
 # generated types
 .astro/
 

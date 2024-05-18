@@ -4,6 +4,7 @@ import { resolve } from 'path';
 
 // Integerations
 import icon from 'astro-icon';
+import mountAssets from './intergrations/mount-assets';
 import tailwind from '@astrojs/tailwind';
 
 // Plugins
@@ -11,11 +12,11 @@ import rehypeExternalLinks from 'rehype-external-links';
 import rehypeFigure from 'rehype-figure';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
-import remarkContentLength from './intergrations/remark-content-length';
+import remarkContentLength from './plugins/remark-content-length';
 
 // Export config
 export default defineConfig({
-  integrations: [icon(), tailwind({ nesting: true })],
+  integrations: [icon(), mountAssets(), tailwind({ nesting: true })],
   markdown: {
     rehypePlugins: [
       [
