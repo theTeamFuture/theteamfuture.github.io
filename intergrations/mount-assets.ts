@@ -30,7 +30,11 @@ export default () =>
             // Check assets
             const assetsPath: string =
               'src/content/posts/' + dir.name + '/assets';
-            if (!fs.statSync(assetsPath).isDirectory()) {
+            try {
+              if (!fs.statSync(assetsPath).isDirectory()) {
+                return;
+              }
+            } catch {
               return;
             }
 
