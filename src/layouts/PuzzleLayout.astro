@@ -1,0 +1,93 @@
+---
+import { avatars } from '@/utils/meta';
+import moment from 'moment';
+
+// Style sheets
+import '@/styles/markdown.css';
+
+// Layouts
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+// Components
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+// Types
+type Props = {
+  puzzle: CollectionEntry<'puzzles'>;
+};
+
+// Injects
+const { puzzle } = Astro.props;
+---
+
+<BaseLayout
+  title={`${puzzle.data.title} - FUTURE 攻坚组`}
+  og={{
+    basic: {
+      title: `${puzzle.data.title} - FUTURE 攻坚组`,
+      type: 'article',
+      image: '/favicon.svg',
+      url: Astro.request.url
+    }
+  }}>
+  <main class="flex flex-col min-h-screen mx-auto my-12 w-1/2">
+    <button
+      class="flex items-center text-neutral-400 transition-colors hover:text-white"
+      id="back-puzzles-btn">
+      <Icon class="text-2xl" name="mdi:arrow-back" />
+      <span>返回</span>
+    </button>
+    <h1 class="font-bold mt-8 text-3xl">{puzzle.data.title}</h1>
+    <div
+      class="border-b border-neutral-700 flex items-center gap-4 text-neutral-500 text-sm">
+      <div class="flex items-center gap-1">
+        <Icon name="mdi:calendar" />
+        <span title={puzzle.data.published_at.toISOString()}>
+          {moment(puzzle.data.published_at).format('YYYY/MM/DD')}
+        </span>
+      </div>
+    </div>
+    <div class="flex gap-4 items-center justify-center my-4">
+      {
+        puzzle.data.report ? (
+          <>
+            <Icon class="text-5xl text-neutral-700" name="mdi:box-variant" />
+            <a
+              class="font-bold text-2xl text-neutral-700"
+              href={puzzle.data.report}>
+              Solved
+            </a>
+          </>
+        ) : (
+          <>
+            <Icon
+              class="text-5xl text-neutral-500"
+              name="mdi:box-variant-closed"
+            />
+            <p class="font-bold text-2xl text-neutral-500">Mistery</p>
+          </>
+        )
+      }
+    </div>
+    <article class="my-12">
+      <slot />
+    </article>
+    <div class="font-bold mb-auto text-center text-neutral-700 select-none">
+      End of Puzzle
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  import { navigate } from 'astro:transitions/client';
+
+  document.addEventListener('astro:page-load', (): void => {
+    document
+      .querySelector<HTMLButtonElement>('#back-puzzles-btn')
+      ?.addEventListener('click', (): void => {
+        navigate('/puzzles');
+      });
+  });
+</script>

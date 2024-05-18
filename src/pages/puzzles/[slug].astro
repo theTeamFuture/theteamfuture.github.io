@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import { getEntry } from 'astro:content';
+import { puzzles } from '@/utils/meta';
+
+// Layouts
+import PuzzleLayout from '@/layouts/PuzzleLayout.astro';
+
+// Export path function
+export const getStaticPaths = (() =>
+  puzzles.map((v: CollectionEntry<'puzzles'>) => {
+    if (!/^(?!page$)[\da-zA-Z-]+$/.test(v.slug)) {
+      throw Error('Slug invalid: ' + v.slug);
+    }
+
+    return {
+      params: { slug: v.slug },
+      props: { puzzle: v }
+    };
+  })) satisfies GetStaticPaths;
+
+// Injects
+const { puzzle } = Astro.props;
+
+// Contants
+const { Content } = await puzzle.render();
+---
+
+<PuzzleLayout {puzzle}>
+  <Content />
+</PuzzleLayout>

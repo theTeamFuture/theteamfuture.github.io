@@ -128,35 +128,6 @@ const formatNumber = (num: number, unit: string): string => {
 
   document.addEventListener('astro:page-load', (): void => {
     document
-      .querySelectorAll<HTMLAnchorElement>('article a')
-      .forEach((el: HTMLAnchorElement): void => {
-        // If not an anchor
-        if (!el.getAttribute('href')?.startsWith('#')) {
-          return;
-        }
-
-        // Add listener
-        el.addEventListener('click', (ev: MouseEvent): void => {
-          // Prevent default
-          ev.preventDefault();
-
-          // Get target element
-          const target: HTMLElement | null = document.querySelector(
-            el.getAttribute('href')!
-          );
-          if (target === null) {
-            return;
-          }
-
-          // Scroll to element
-          window.scrollTo({
-            top: window.scrollY + target.getBoundingClientRect().top - 80,
-            behavior: 'smooth'
-          });
-        });
-      });
-
-    document
       .querySelector<HTMLButtonElement>('#back-posts-btn')
       ?.addEventListener('click', (): void => {
         navigate('/posts');
