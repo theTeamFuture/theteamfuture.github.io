@@ -44,7 +44,7 @@ date: 2024-05-16
 **A:** A union of puzzle enthusiasts.
 
 **Q:** Will Team Future recruit more members?  
-**A:** No since the future puzzle is solved.
+**A:** No since the Future Puzzle is solved.
 
 **Q:** Does Team Future accept submission of clues?  
 **A:** We won't ask for clues on any platforms, though we won't deny you send to us with DM (thanks!). We will actively seeking any possible clues on all platforms, so sharing clues with everyone on public domain is recommeded.
