@@ -38,7 +38,7 @@ date: 2024-05-16
 **A:** A branch of [_GORIE](https://weibo.com/u/6812997138) that aimed at solving Future Puzzle.
 
 **Q:** What's your relationship with GORIE?  
-**A:** The [successor](https://weibo.com/6812997138/ObOHUkSM0) of GORIE.
+**A:** The [successor](https://weibo.com/6812997138/ObOHUkSM0) of _GORIE.
 
 **Q:** What kind of orgnization is Team Future?  
 **A:** A union of puzzle enthusiasts.
