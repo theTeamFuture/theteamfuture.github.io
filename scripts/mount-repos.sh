@@ -47,7 +47,7 @@ for FOLDER_DIR in posts-repo/puzzles/*; do
     HASH_NAME=$(echo -n $FOLDER_NAME | sha256sum | awk '{print $1}')
 
     # Move markdown to contents collection
-    mv $FOLDER_DIR"/post.md" "src/content/puzzles/"$HASH_NAME".md"
+    mv $FOLDER_DIR"/puzzle.md" "src/content/puzzles/"$HASH_NAME".md"
 
     # Move rest folder to contents collection with ignore
     mv $FOLDER_DIR "src/content/puzzles/_"$HASH_NAME
