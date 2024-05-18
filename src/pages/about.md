@@ -53,7 +53,7 @@ date: 2024-05-16
 **A:** We won't publish clues/result without proof to ensure everyone enjoy the puzzle. We will only mention limited information as hint.
 
 **Q:** I saw your account on platform XXX, is that you?  
-**A:** All official account are listed in [Homepage](/), accounts in anywhere else aren't run by Team Future, do not trust them.
+**A:** All official accounts are listed in [Homepage](/), accounts in anywhere else aren't run by Team Future, do not trust them.
 
 **Q:** Can I repost articles from Team Future?  
 **A:** All articles posted by Team Future are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0) unless there's another declaration in it, feel free to share with anyone else as you follow the license. 
