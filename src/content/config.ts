@@ -30,8 +30,18 @@ const postCollection = defineCollection({
   })
 });
 
+const puzzleCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string().min(1),
+    published_at: z.date(),
+    report: z.string().url().optional()
+  })
+});
+
 // Export config
 export const collections = {
   authors: authorCollection,
-  posts: postCollection
+  posts: postCollection,
+  puzzles: puzzleCollection
 };
