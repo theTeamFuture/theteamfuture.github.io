@@ -30,8 +30,8 @@ jobs:
           repository: theTeamFuture/time-capsules
           path: time-capsules-repo
           token: ${{ secrets.GH_PAT }}
-      - name: Mount posts
-        run: scripts/mount-posts-repo.sh
+      - name: Mount repositories
+        run: scripts/mount-repos.sh
       - name: Build Astro
         uses: withastro/action@v2
   deploy:
