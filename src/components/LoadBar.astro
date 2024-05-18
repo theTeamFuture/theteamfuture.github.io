@@ -6,33 +6,42 @@
 
 <script>
   import type { AnimeInstance } from 'animejs';
+  import type { TransitionBeforePreparationEvent } from 'astro:transitions/client';
 
   // Anime instance
   let instance: AnimeInstance | null = null;
 
   // On page before preparation
-  document.addEventListener('astro:before-preparation', (): void => {
-    // Stop old animation
-    if (instance !== null) {
-      instance.pause();
-      instance.complete?.(instance);
-    }
-
-    // Start new animation
-    instance = anime({
-      targets: '#load-bar',
-      width: ['0%', '90%'],
-      duration: 5000,
-      easing: 'easeOutCubic',
-      begin: (): void => {
-        document.querySelector<HTMLDivElement>('#load-bar')!.style.display =
-          'block';
-      },
-      complete: (): void => {
-        instance = null;
+  document.addEventListener(
+    'astro:before-preparation',
+    (ev: TransitionBeforePreparationEvent): void => {
+      // Not show load bar when get assets
+      if (ev.to.pathname.startsWith('/assets')) {
+        return;
       }
-    });
-  });
+
+      // Stop old animation
+      if (instance !== null) {
+        instance.pause();
+        instance.complete?.(instance);
+      }
+
+      // Start new animation
+      instance = anime({
+        targets: '#load-bar',
+        width: ['0%', '90%'],
+        duration: 5000,
+        easing: 'easeOutCubic',
+        begin: (): void => {
+          document.querySelector<HTMLDivElement>('#load-bar')!.style.display =
+            'block';
+        },
+        complete: (): void => {
+          instance = null;
+        }
+      });
+    }
+  );
 
   // On page loaded
   document.addEventListener('astro:after-preparation', (): void => {
