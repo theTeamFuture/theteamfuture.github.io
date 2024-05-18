@@ -75,20 +75,18 @@ const formatNumber = (num: number, unit: string): string => {
           author.data.avatar.startsWith('@avatars/') ? (
             <Image
               alt="avatar"
-              class="rounded-full transition-transform hover:scale-110"
-              height="60"
+              class="h-[60px] rounded-full transition-transform w-[60px] hover:scale-110"
               src={avatars[
                 author.data.avatar.replace(/^@avatars/, '/src/assets/avatars')
               ]()}
-              width="60"
             />
           ) : (
             <Image
               alt="avatar"
-              class="rounded-full transition-transform hover:scale-110"
-              height="60"
+              class="h-[60px] rounded-full transition-transform w-[60px] hover:scale-110"
+              height="200"
               src={author.data.avatar}
-              width="60"
+              width="200"
             />
           )
         }
