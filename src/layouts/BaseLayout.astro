@@ -37,6 +37,19 @@ const { title, og, extend } = Astro.props;
       src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"
       defer
       is:inline></script>
+    <script>
+      document.addEventListener('astro:page-load', (): void => {
+        document
+          .querySelectorAll<HTMLAnchorElement>('article a:not([target])')
+          .forEach((el: HTMLAnchorElement): void => {
+            const url: URL = new URL(el.href, location.origin);
+            if (url.origin !== location.origin) {
+              el.rel = 'nofollow noopener noreferer';
+              el.target = '_blank';
+            }
+          });
+      });
+    </script>
     <ViewTransitions />
   </head>
   <body>

@@ -2,8 +2,8 @@
 import type { AstroIntegration } from 'astro';
 
 import fs from 'fs';
-import path from 'path';
 
+// Export intergration
 export default () =>
   ({
     name: 'mount-assets',
