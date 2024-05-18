@@ -1,6 +1,10 @@
 /* Markdown */
 
 article {
+  audio {
+    @apply my-4 w-full;
+  }
+
   blockquote {
     @apply border-l-4 border-neutral-500 pl-4 text-neutral-500;
   }
