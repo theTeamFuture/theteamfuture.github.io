@@ -80,19 +80,16 @@
   </div>
 </div>
 
-<script>
-  import anime from 'animejs';
-
+<script is:inline>
   // On full loaded
-  window.addEventListener('load', (): void => {
+  window.addEventListener('load', () => {
     anime({
       targets: '#preloader',
       opacity: [1, 0],
       duration: 500,
       easing: 'easeInOutCubic',
-      complete: (): void => {
-        document.querySelector<HTMLDivElement>('#preloader')!.style.display =
-          'none';
+      complete: () => {
+        document.querySelector('#preloader').style.display = 'none';
       }
     });
   });

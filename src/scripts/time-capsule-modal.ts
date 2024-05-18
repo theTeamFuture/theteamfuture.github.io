@@ -1,5 +1,4 @@
 /// Time capsule modal module
-import anime from 'animejs';
 
 // Busy flag
 let busy: boolean = false;
