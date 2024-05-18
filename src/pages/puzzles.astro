@@ -1,8 +1,8 @@
 ---
+import { puzzles } from '@/utils/meta';
+
 // Layouts
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import DatabaseLayout from '@/layouts/DatabaseLayout.astro';
 ---
 
-<BaseLayout title="谜题 - FUTURE 攻坚组">
-  <h1 class="font-bold my-96 text-3xl text-center select-none">Constructing...</h1>
-</BaseLayout>
+<DatabaseLayout title="所有谜题" total={puzzles.length} list={puzzles} />

@@ -35,7 +35,10 @@ const puzzleCollection = defineCollection({
   schema: z.object({
     title: z.string().min(1),
     published_at: z.date(),
-    report: z.string().url().optional()
+    report: z
+      .string()
+      .regex(/^\/posts\/.*/)
+      .optional()
   })
 });
 
