@@ -3,12 +3,7 @@
 
 import type anime from 'animejs';
 
-// Rehype figure type define
-declare module 'rehype-figure' {
-  export default (option: any) => (tree: Root, file: VFile) => undefined;
-}
-
-// Global type inject
+// Window type inject
 declare global {
   // Anime.js
   declare module anime {
