@@ -47,7 +47,7 @@ date: 2024-05-16
 **A:** No since the Future Puzzle is solved.
 
 **Q:** Does Team Future accept submission of clues?  
-**A:** We won't ask for clues on any platforms, though we won't deny you send to us with DM (thanks!). We will actively seeking any possible clues on all platforms, so sharing clues with everyone on public domain is recommeded.
+**A:** We won't ask for clues on any platforms, though we won't deny you send to us with DM (thanks!). We will actively seek any possible clues on all platforms, so sharing clues with everyone on public domain is recommeded.
 
 **Q:** Why you being mysterious in puzzle reports?  
 **A:** We won't publish clues/result without proof to ensure everyone enjoy the puzzle. We will only mention limited information as hint.
