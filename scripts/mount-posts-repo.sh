@@ -38,4 +38,5 @@ done
 
 # Mount time capsule
 rm -rf public/pool
+rm -rf time-capsules-repo/pool/_*
 mv time-capsules-repo/pool public/pool
