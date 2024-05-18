@@ -27,6 +27,6 @@ const { puzzle } = Astro.props;
 const { Content } = await puzzle.render();
 ---
 
-<PuzzleLayout {puzzle}>
+<PuzzleLayout puzzle={puzzle}>
   <Content />
 </PuzzleLayout>
