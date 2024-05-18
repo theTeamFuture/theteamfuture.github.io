@@ -51,7 +51,13 @@ import TimeCapsuleModal from '@/components/time-capsule/TimeCapsuleModal.astro';
           }
 
           // Try get
-          fetch('/pool/' + sha256(sha256(id) + sha256(passwd)))
+          fetch('/pool/' + sha256(sha256(id) + sha256(passwd)), {
+            method: 'GET',
+            headers: {
+              'Cache-Control': 'no-cache',
+              'Pragma': 'no-cache'
+            }
+          })
             .then((res: Response): Promise<ArrayBuffer> => {
               if (!res.ok) {
                 throw 'Not Found';
