@@ -55,8 +55,7 @@ const formatNumber = (num: number, unit: string): string => {
       <span>返回</span>
     </button>
     <h1 class="font-bold mt-8 text-3xl">{title}</h1>
-    <div
-      class="border-b border-neutral-700 flex items-center gap-4 text-neutral-500 text-sm">
+    <div class="flex items-center gap-4 mt-1 text-neutral-500 text-sm">
       <div class="flex items-center gap-1">
         <Icon name="mdi:calendar" />
         <span title={date.toISOString()}
@@ -78,46 +77,50 @@ const formatNumber = (num: number, unit: string): string => {
         <span title={length.toString()}>{formatNumber(length, '字')}</span>
       </div>
     </div>
-    <div class="flex flex-col my-4">
-      <div class="flex items-center">
-        {
-          author.data.avatar.startsWith('@avatars/') ? (
-            <Image
-              alt="avatar"
-              class="h-[60px] rounded-full transition-transform w-[60px] hover:scale-110"
-              src={avatars[
-                author.data.avatar.replace(/^@avatars/, '/src/assets/avatars')
-              ]()}
-            />
-          ) : (
-            <Image
-              alt="avatar"
-              class="h-[60px] rounded-full transition-transform w-[60px] hover:scale-110"
-              height="200"
-              src={author.data.avatar}
-              width="200"
-            />
-          )
-        }
-        <div class="flex flex-col ml-4">
-          <h1 class="font-bold">{author.data.name}</h1>
-          <p class="text-sm text-neutral-400">{author.data.intro}</p>
-          <div class="flex gap-2 items-center mt-1 text-sm">
-            {
-              author.data.urls?.map(({ name, url }) => (
-                <a href={url} rel="nofollow noopener noreferer" target="_blank">
-                  {name}
-                </a>
-              ))
-            }
-          </div>
+    <hr class="border-t-2 border-neutral-700 my-4" />
+    <div class="flex items-center my-4">
+      {
+        author.data.avatar.startsWith('@avatars/') ? (
+          <Image
+            alt="avatar"
+            class="h-[60px] rounded-full transition-transform w-[60px] hover:scale-110"
+            src={avatars[
+              author.data.avatar.replace(/^@avatars/, '/src/assets/avatars')
+            ]()}
+          />
+        ) : (
+          <Image
+            alt="avatar"
+            class="h-[60px] rounded-full transition-transform w-[60px] hover:scale-110"
+            height="200"
+            src={author.data.avatar}
+            width="200"
+          />
+        )
+      }
+      <div class="flex flex-col ml-4">
+        <h1 class="font-bold">{author.data.name}</h1>
+        <p class="text-sm text-neutral-400">{author.data.intro}</p>
+        <div class="flex gap-2 items-center mt-1 text-sm">
+          {
+            author.data.urls?.map(({ name, url }) => (
+              <a href={url} rel="nofollow noopener noreferer" target="_blank">
+                {name}
+              </a>
+            ))
+          }
         </div>
       </div>
     </div>
-    <article class="my-12">
+    <div
+      class="border-dashed border-b-2 border-neutral-800 font-bold text-center text-neutral-800 text-sm select-none">
+      Start of Post
+    </div>
+    <article class="my-8">
       <slot />
     </article>
-    <div class="font-bold mb-auto text-center text-neutral-700 select-none">
+    <div
+      class="border-dashed border-neutral-800 border-t-2 font-bold mb-auto text-center text-neutral-800 text-sm select-none">
       End of Post
     </div>
   </main>

@@ -47,7 +47,7 @@ const { puzzle } = Astro.props;
         </span>
       </div>
     </div>
-    <div class="flex gap-4 items-center justify-center my-4">
+    <div class="flex gap-4 items-center justify-center my-8">
       {
         puzzle.data.report ? (
           <>
@@ -69,10 +69,15 @@ const { puzzle } = Astro.props;
         )
       }
     </div>
-    <article class="my-12">
+    <div
+      class="border-dashed border-b-2 border-neutral-800 font-bold text-center text-neutral-800 text-sm select-none">
+      Start of Puzzle
+    </div>
+    <article class="my-8">
       <slot />
     </article>
-    <div class="font-bold mb-auto text-center text-neutral-700 select-none">
+    <div
+      class="border-dashed border-neutral-800 border-t-2 font-bold mb-auto text-center text-neutral-800 text-sm select-none">
       End of Puzzle
     </div>
   </main>
