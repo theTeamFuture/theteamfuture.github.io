@@ -56,6 +56,10 @@ article {
     @apply border-t-2 border-dashed border-neutral-500 my-4;
   }
 
+  iframe {
+    @apply my-4;
+  }
+
   ol {
     @apply list-decimal pl-8;
   }
