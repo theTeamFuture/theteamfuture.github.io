@@ -9,7 +9,7 @@
 
 /* Global styles */
 ::-webkit-scrollbar {
-  @apply w-2;
+  @apply h-2 w-2;
 }
 ::-webkit-scrollbar-thumb {
   @apply bg-neutral-700 cursor-pointer rounded;
