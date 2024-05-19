@@ -13,6 +13,7 @@ import rehypeFigure from 'rehype-figure';
 import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import remarkContentLength from './plugins/remark-content-length';
+import remarkSpoiler from './plugins/remark-spoiler';
 
 // Export config
 export default defineConfig({
@@ -26,7 +27,7 @@ export default defineConfig({
       [rehypeFigure, {}],
       [rehypeKatex, { output: 'html' }]
     ],
-    remarkPlugins: [remarkContentLength, remarkMath],
+    remarkPlugins: [remarkContentLength, remarkMath, remarkSpoiler],
     syntaxHighlight: 'prism'
   },
   site: 'https://theteamfuture.github.io',
