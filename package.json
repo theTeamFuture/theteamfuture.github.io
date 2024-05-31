@@ -16,7 +16,7 @@
     "@astrojs/check": "^0.6.0",
     "@astrojs/tailwind": "^5.1.0",
     "@iconify-json/mdi": "^1.1.66",
-    "astro": "^4.8.6",
+    "astro": "^4.9.2",
     "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.3",
     "countapi-js": "^1.0.2",
