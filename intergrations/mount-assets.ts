@@ -65,7 +65,7 @@ export default () =>
             }
 
             // Move assets
-            const slug: string = meta.post[dir.name.slice(1) + '.md'];
+            const slug: string = meta.puzzle[dir.name.slice(1) + '.md'];
             fs.renameSync(assetsPath, 'dist/assets/puzzles/' + slug);
             logger.info(`Move: ${assetsPath} -> dist/assets/puzzles/${slug}`);
           }
