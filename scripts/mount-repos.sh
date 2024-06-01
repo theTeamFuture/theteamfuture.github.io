@@ -23,16 +23,16 @@ for FOLDER_DIR in posts-repo/posts/*; do
     FOLDER_NAME=${FOLDER_DIR##*/}
 
     # Get folder name SHA256
-    HASH_NAME=$(echo -n $FOLDER_NAME | sha256sum | awk '{print $1}')
+    HASH_NAME=$(echo -n "$FOLDER_NAME" | sha256sum | awk '{print $1}')
 
     # Move markdown to contents collection
-    mv $FOLDER_DIR"/post.md" "src/content/posts/"$HASH_NAME".md"
+    mv "$FOLDER_DIR/post.md" "src/content/posts/$HASH_NAME.md"
 
     # Move rest folder to contents collection with ignore
-    mv $FOLDER_DIR "src/content/posts/_"$HASH_NAME
+    mv "$FOLDER_DIR" "src/content/posts/_$HASH_NAME"
 
     # Replace relative path
-    sed -i "s/\.\//\.\/_"$HASH_NAME"\//g" "src/content/posts/"$HASH_NAME".md"
+    sed -i "s/\.\//\.\/_$HASH_NAME\//g" "src/content/posts/$HASH_NAME.md"
   fi
 done
 
@@ -44,16 +44,16 @@ for FOLDER_DIR in posts-repo/puzzles/*; do
     FOLDER_NAME=${FOLDER_DIR##*/}
 
     # Get folder name SHA256
-    HASH_NAME=$(echo -n $FOLDER_NAME | sha256sum | awk '{print $1}')
+    HASH_NAME=$(echo -n "$FOLDER_NAME" | sha256sum | awk '{print $1}')
 
     # Move markdown to contents collection
-    mv $FOLDER_DIR"/puzzle.md" "src/content/puzzles/"$HASH_NAME".md"
+    mv "$FOLDER_DIR/puzzle.md" "src/content/puzzles/$HASH_NAME.md"
 
     # Move rest folder to contents collection with ignore
-    mv $FOLDER_DIR "src/content/puzzles/_"$HASH_NAME
+    mv "$FOLDER_DIR" "src/content/puzzles/_$HASH_NAME"
 
     # Replace relative path
-    sed -i "s/\.\//\.\/_"$HASH_NAME"\//g" "src/content/puzzles/"$HASH_NAME".md"
+    sed -i "s/\.\//\.\/_$HASH_NAME\//g" "src/content/puzzles/$HASH_NAME.md"
   fi
 done
 

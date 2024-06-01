@@ -13,6 +13,10 @@ export default () =>
         fs.mkdirSync('dist/assets/puzzles', { recursive: true });
         logger.info('Assets folders created');
 
+        // Mount global assets
+        fs.renameSync('posts-repo/assets', 'dist/assets/_');
+        fs.rmSync('dist/assets/_/README.md');
+
         // Get meta
         const meta: Record<string, Record<string, string>> = JSON.parse(
           fs.readFileSync('meta.json', 'utf-8')
