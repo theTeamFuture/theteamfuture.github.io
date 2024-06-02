@@ -1,19 +1,23 @@
 #!/bin/bash
 
+#------------------------------------------------------------------------------
+# Mount build-time required resources
+#------------------------------------------------------------------------------
+
 # Mount authors
 rm -rf src/content/authors
+rm posts-repo/authors/README.md
 mv posts-repo/authors src/content/authors
-rm src/content/authors/*.md
 
 # Mount avatars
 rm -rf src/assets/avatars
+rm posts-repo/avatars/README.md
 mv posts-repo/avatars src/assets/avatars
-rm src/assets/avatars/*.md
 
 # Mount images
 rm -rf src/assets/images
+rm posts-repo/images/README.md
 mv posts-repo/images src/assets/images
-rm src/assets/images/*.md
 
 # Mount posts
 rm -rf src/content/posts/*
@@ -32,7 +36,7 @@ for FOLDER_DIR in posts-repo/posts/*; do
     mv "$FOLDER_DIR" "src/content/posts/_$HASH_NAME"
 
     # Replace relative path
-    sed -i "s/\.\//\.\/_$HASH_NAME\//g" "src/content/posts/$HASH_NAME.md"
+    sed -i "s#\./#\./_$HASH_NAME/#g" "src/content/posts/$HASH_NAME.md"
   fi
 done
 
@@ -53,11 +57,11 @@ for FOLDER_DIR in posts-repo/puzzles/*; do
     mv "$FOLDER_DIR" "src/content/puzzles/_$HASH_NAME"
 
     # Replace relative path
-    sed -i "s/\.\//\.\/_$HASH_NAME\//g" "src/content/puzzles/$HASH_NAME.md"
+    sed -i "s#\./#\./_$HASH_NAME/#g" "src/content/puzzles/$HASH_NAME.md"
   fi
 done
 
-# Mount time capsule
+# Mount time capsules
 rm -rf public/pool
 rm -rf time-capsules-repo/pool/_*
 mv time-capsules-repo/pool public/pool

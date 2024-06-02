@@ -1,12 +1,12 @@
 ---
 layout: '@/layouts/PageLayout.astro'
 title: 关于
-date: 2024-05-16
+date: 2024-05-19
 ---
 
 中文 | [English](#english)
 
-# 中文 
+# 中文
 
 **Q：** FUTURE 攻坚组是什么？  
 **A：** [埃及研（_GORIE）](https://weibo.com/u/6812997138)当初为了解决 FUTURE 谜题而建立的分支组织。
@@ -56,4 +56,4 @@ date: 2024-05-16
 **A:** All official accounts are listed in [Homepage](/), accounts in anywhere else aren't run by Team Future, do not trust them.
 
 **Q:** Can I repost articles from Team Future?  
-**A:** All articles posted by Team Future are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0) unless there's another declaration in it, feel free to share with anyone else as you follow the license. 
+**A:** All articles posted by Team Future are licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0) unless there's another declaration in it, feel free to share with anyone else as you follow the license.

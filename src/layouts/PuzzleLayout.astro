@@ -30,7 +30,7 @@ const { puzzle } = Astro.props;
       url: Astro.request.url
     }
   }}>
-  <main class="flex flex-col min-h-screen mx-auto my-12 w-1/2">
+  <main class="flex flex-col mx-4 my-12 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
     <button
       class="flex items-center text-neutral-400 transition-colors hover:text-white"
       id="back-puzzles-btn">
@@ -38,8 +38,7 @@ const { puzzle } = Astro.props;
       <span>返回</span>
     </button>
     <h1 class="font-bold mt-8 text-3xl">{puzzle.data.title}</h1>
-    <div
-      class="border-b border-neutral-700 flex items-center gap-4 text-neutral-500 text-sm">
+    <div class="flex items-center gap-4 mt-1 text-neutral-500 text-sm">
       <div class="flex items-center gap-1">
         <Icon name="mdi:calendar" />
         <span title={puzzle.data.published_at.toISOString()}>
@@ -47,6 +46,7 @@ const { puzzle } = Astro.props;
         </span>
       </div>
     </div>
+    <hr class="border-t-2 border-neutral-700 my-4" />
     <div class="flex gap-4 items-center justify-center my-8">
       {
         puzzle.data.report ? (
@@ -84,13 +84,11 @@ const { puzzle } = Astro.props;
 </BaseLayout>
 
 <script>
-  import { navigate } from 'astro:transitions/client';
-
   document.addEventListener('astro:page-load', (): void => {
     document
       .querySelector<HTMLButtonElement>('#back-puzzles-btn')
       ?.addEventListener('click', (): void => {
-        navigate('/puzzles');
+        history.back();
       });
   });
 </script>

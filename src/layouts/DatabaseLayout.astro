@@ -29,9 +29,10 @@ const { title, total, list } = Astro.props;
       url: Astro.request.url
     }
   }}>
-  <main class="flex flex-col gap-4 min-h-screen mx-auto my-12 w-1/2">
+  <main
+    class="flex flex-col gap-4 mx-4 my-12 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
     <h1 class="font-bold text-2xl">{title} ({total})</h1>
-    <div class="gap-4 grid grid-cols-2">
+    <div class="gap-4 grid md:grid-cols-2">
       {
         list.map(({ slug, data }) => (
           <a

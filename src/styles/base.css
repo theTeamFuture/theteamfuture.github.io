@@ -1,4 +1,4 @@
-/* Fonts */
+/* Font faces */
 @font-face {
   font-display: swap;
   font-family: mi-sans;
@@ -20,8 +20,4 @@
 
 a {
   @apply text-blue-500 transition-colors hover:text-red-500;
-}
-
-body {
-  @apply bg-neutral-900 font-misans text-white;
 }

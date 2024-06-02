@@ -16,12 +16,13 @@ export default () =>
         // Mount global assets
         fs.renameSync('posts-repo/assets', 'dist/assets/_');
         fs.rmSync('dist/assets/_/README.md');
+        logger.info('Global assets mounted');
 
-        // Get meta
+        // Get meta data
         const meta: Record<string, Record<string, string>> = JSON.parse(
           fs.readFileSync('meta.json', 'utf-8')
         );
-        logger.info('Meta got');
+        logger.info('Meta data got');
 
         // Find posts assets
         fs.readdirSync('src/content/posts', { withFileTypes: true }).forEach(
@@ -32,8 +33,7 @@ export default () =>
             }
 
             // Check assets
-            const assetsPath: string =
-              'src/content/posts/' + dir.name + '/assets';
+            const assetsPath: string = `src/content/posts/${dir.name}/assets`;
             try {
               if (!fs.statSync(assetsPath).isDirectory()) {
                 return;
@@ -42,10 +42,10 @@ export default () =>
               return;
             }
 
-            // Move assets
+            // Mount assets
             const slug: string = meta.post[dir.name.slice(1) + '.md'];
-            fs.renameSync(assetsPath, 'dist/assets/posts/' + slug);
-            logger.info(`Move: ${assetsPath} -> dist/assets/posts/${slug}`);
+            fs.renameSync(assetsPath, `dist/assets/posts/${slug}`);
+            logger.info(`Mount: ${assetsPath} -> dist/assets/posts/${slug}`);
           }
         );
 
@@ -58,8 +58,7 @@ export default () =>
             }
 
             // Check assets
-            const assetsPath: string =
-              'src/content/puzzles/' + dir.name + '/assets';
+            const assetsPath: string = `src/content/puzzles/${dir.name}/assets`;
             try {
               if (!fs.statSync(assetsPath).isDirectory()) {
                 return;
@@ -68,10 +67,10 @@ export default () =>
               return;
             }
 
-            // Move assets
+            // Mount assets
             const slug: string = meta.puzzle[dir.name.slice(1) + '.md'];
-            fs.renameSync(assetsPath, 'dist/assets/puzzles/' + slug);
-            logger.info(`Move: ${assetsPath} -> dist/assets/puzzles/${slug}`);
+            fs.renameSync(assetsPath, `dist/assets/puzzles/${slug}`);
+            logger.info(`Mount: ${assetsPath} -> dist/assets/puzzles/${slug}`);
           }
         );
       }

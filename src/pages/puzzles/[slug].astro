@@ -9,6 +9,7 @@ import PuzzleLayout from '@/layouts/PuzzleLayout.astro';
 // Export path function
 export const getStaticPaths = (() =>
   puzzles.map((v: CollectionEntry<'puzzles'>) => {
+    // Validate slug
     if (!/^(?!page$)[\da-zA-Z-]+$/.test(v.slug)) {
       throw Error('Slug invalid: ' + v.slug);
     }

@@ -47,7 +47,7 @@ const formatNumber = (num: number, unit: string): string => {
       url: Astro.request.url
     }
   }}>
-  <main class="flex flex-col min-h-screen mx-auto my-12 w-1/2">
+  <main class="flex flex-col mx-4 my-12 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
     <button
       class="flex items-center text-neutral-400 transition-colors hover:text-white"
       id="back-posts-btn">
@@ -127,13 +127,11 @@ const formatNumber = (num: number, unit: string): string => {
 </BaseLayout>
 
 <script>
-  import { navigate } from 'astro:transitions/client';
-
   document.addEventListener('astro:page-load', (): void => {
     document
       .querySelector<HTMLButtonElement>('#back-posts-btn')
       ?.addEventListener('click', (): void => {
-        navigate('/posts');
+        history.back();
       });
   });
 </script>

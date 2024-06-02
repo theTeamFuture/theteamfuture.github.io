@@ -10,11 +10,12 @@ import { Icon } from 'astro-icon/components';
 ---
 
 <BaseLayout title="FUTURE 攻坚组">
-  <main class="mx-auto my-12 w-1/2">
+  <main class="mx-4 my-8 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
     <h1 class="font-bold my-8 text-2xl text-center">
       We create puzzles, we reveal puzzles
     </h1>
-    <div class="flex gap-4 items-center justify-center">
+    <div
+      class="flex flex-wrap gap-4 items-center justify-center md:flex-nowrap">
       <a
         href="https://www.skland.com/"
         rel="nofollow noopener noreferer"
@@ -58,7 +59,7 @@ import { Icon } from 'astro-icon/components';
     </div>
     <hr class="border-neutral-500 border-t-4 my-12" />
     <h2 class="font-bold my-4 text-xl">最新文章</h2>
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-rows-3 gap-4 md:grid-cols-3 md:grid-rows-1">
       {
         posts.slice(0, 3).map(({ slug, data }) => (
           <a
@@ -77,7 +78,7 @@ import { Icon } from 'astro-icon/components';
     </div>
     <p class="my-2 text-right text-sm"><a href="/posts">查看全部</a></p>
     <h2 class="font-bold my-4 text-xl">最新谜题</h2>
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid grid-rows-3 gap-4 md:grid-cols-3 md:grid-rows-1">
       {
         puzzles.slice(0, 3).map(({ slug, data }) => (
           <a
