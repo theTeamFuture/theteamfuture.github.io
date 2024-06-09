@@ -20,7 +20,6 @@
     "astro": "^4.10.1",
     "astro-icon": "^1.1.0",
     "astro-seo": "^0.8.4",
-    "countapi-js": "^1.0.2",
     "js-base64": "^3.7.7",
     "js-sha256": "^0.11.0",
     "mdast-util-to-string": "^4.0.0",
