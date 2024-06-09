@@ -32,6 +32,9 @@ importers:
       countapi-js:
         specifier: ^1.0.2
         version: 1.0.2
+      js-base64:
+        specifier: ^3.7.7
+        version: 3.7.7
       js-sha256:
         specifier: ^0.11.0
         version: 0.11.0
@@ -1871,6 +1874,9 @@ packages:
   jiti@1.21.3:
     resolution: {integrity: sha512-uy2bNX5zQ+tESe+TiC7ilGRz8AtRGmnJH55NC5S0nSUjvvvM2hJHmefHErugGXN4pNv4Qx7vLsnNw9qJ9mtIsw==}
     hasBin: true
+
+  js-base64@3.7.7:
+    resolution: {integrity: sha512-7rCnleh0z2CkXhH67J8K1Ytz0b2Y+yxTPL+/KOJoa20hfnVQ/3/T6W/KflYI4bRHRagNeXeU2bkNGI3v1oS/lw==}
 
   js-sha256@0.11.0:
     resolution: {integrity: sha512-6xNlKayMZvds9h1Y1VWc0fQHQ82BxTXizWPEtEeGvmOUYpBRy4gbWroHLpzowe6xiQhHpelCQiE7HEdznyBL9Q==}
@@ -5069,6 +5075,8 @@ snapshots:
       '@pkgjs/parseargs': 0.11.0
 
   jiti@1.21.3: {}
+
+  js-base64@3.7.7: {}
 
   js-sha256@0.11.0: {}
 
