@@ -29,7 +29,7 @@ document
     }
 
     // Try get
-    fetch('/pool/' + sha256(sha256(id) + sha256(passwd)), {
+    fetch(`/pool/${sha256(sha256(id) + sha256(passwd))}`, {
       method: 'GET',
       headers: {
         'Cache-Control': 'no-cache',
@@ -42,7 +42,10 @@ document
         }
         return res.text();
       })
-      .then((data: string): void => {
+      .then(async (data: string): Promise<void> => {
+        // File decrypt
+        data = await decryptFile(data, passwd);
+
         // Get file name
         const fileName: string | null = data.split('\n', 1)[0] ?? null;
         if (fileName === null) {
@@ -86,3 +89,39 @@ document
 document
   .querySelector<HTMLDivElement>('#modal-bg')!
   .addEventListener('click', hideModal);
+
+// Decrypt file
+const decryptFile = async (raw: string, passwd: string): Promise<string> => {
+  // Get raw parts
+  const parts: string[] = raw.split('\n');
+  if (parts.length !== 2) {
+    throw 'File Corrupted';
+  }
+
+  // Get raw data
+  const iv: ArrayBuffer = Base64.toUint8Array(parts[0]);
+  const data: ArrayBuffer = Base64.toUint8Array(parts[1]);
+
+  // Get key
+  const rawkey: ArrayBuffer = sha256.create().update(passwd).arrayBuffer();
+  const key: CryptoKey = await crypto.subtle.importKey(
+    'raw',
+    rawkey,
+    { name: 'AES-GCM' },
+    false,
+    ['decrypt']
+  );
+
+  // Decrypt
+  const binData: ArrayBuffer = await crypto.subtle.decrypt(
+    { name: 'AES-GCM', iv },
+    key,
+    data
+  );
+  const utf8Data: string = new TextDecoder().decode(binData);
+  if (utf8Data.split('\n').length !== 3) {
+    throw 'Wrong password';
+  }
+
+  return utf8Data;
+};
