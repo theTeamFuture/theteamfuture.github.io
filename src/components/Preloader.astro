@@ -1,95 +1,43 @@
 <div
+  class="bg-neutral-950 fixed flex gap-[10px] inset-0 items-center justify-center z-[1000] *:bg-white *:h-1 *:rounded-sm *:w-1"
   id="preloader"
-  style={{
-    alignItems: 'center',
-    backgroundColor: '#0a0a0a',
-    display: 'flex',
-    gap: '10px',
-    inset: '0',
-    justifyContent: 'center',
-    position: 'fixed',
-    zIndex: '1000'
-  }}
   transition:persist>
-  <style>
-    @keyframes stretch {
-      0% {
-        height: 5px;
-      }
-      50% {
-        height: 30px;
-      }
-      100% {
-        height: 5px;
-      }
-    }
-  </style>
-  <div
-    style={{
-      animation: 'stretch 1s infinite ease-in-out',
-      backgroundColor: '#fff',
-      borderRadius: '2.5px',
-      height: '5px',
-      width: '5px'
-    }}>
-  </div>
-  <div
-    style={{
-      animation: 'stretch 1s 0.1s infinite ease-in-out',
-      backgroundColor: '#fff',
-      borderRadius: '2.5px',
-      height: '5px',
-      width: '5px'
-    }}>
-  </div>
-  <div
-    style={{
-      animation: 'stretch 1s 0.2s infinite ease-in-out',
-      backgroundColor: '#fff',
-      borderRadius: '2.5px',
-      height: '5px',
-      width: '5px'
-    }}>
-  </div>
-  <div
-    style={{
-      animation: 'stretch 1s 0.3s infinite ease-in-out',
-      backgroundColor: '#fff',
-      borderRadius: '2.5px',
-      height: '5px',
-      width: '5px'
-    }}>
-  </div>
-  <div
-    style={{
-      animation: 'stretch 1s 0.4s infinite ease-in-out',
-      backgroundColor: '#fff',
-      borderRadius: '2.5px',
-      height: '5px',
-      width: '5px'
-    }}>
-  </div>
-  <div
-    style={{
-      animation: 'stretch 1s 0.5s infinite ease-in-out',
-      backgroundColor: '#fff',
-      borderRadius: '2.5px',
-      height: '5px',
-      width: '5px'
-    }}>
-  </div>
+  <div></div>
+  <div style={{ animationDelay: '0.1s' }}></div>
+  <div style={{ animationDelay: '0.2s' }}></div>
+  <div style={{ animationDelay: '0.3s' }}></div>
+  <div style={{ animationDelay: '0.4s' }}></div>
+  <div style={{ animationDelay: '0.5s' }}></div>
 </div>
 
-<script is:inline>
-  // On full loaded
-  window.addEventListener('load', () => {
+<style>
+  @keyframes stretch {
+    0% {
+      height: 5px;
+    }
+    50% {
+      height: 30px;
+    }
+    100% {
+      height: 5px;
+    }
+  }
+
+  #preloader > div {
+    animation: stretch 1s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  window.addEventListener('load', (): void => {
     anime({
       targets: '#preloader',
       opacity: [1, 0],
       duration: 500,
       easing: 'easeInOutCubic',
       complete: () => {
-        document.querySelector('#preloader').style.display = 'none';
+        document.querySelector<HTMLDivElement>('#preloader')!.style.display =
+          'none';
       }
     });
   });
