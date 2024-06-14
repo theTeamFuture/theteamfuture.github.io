@@ -8,6 +8,12 @@ export default () =>
     name: 'mount-assets',
     hooks: {
       'astro:build:done': ({ logger }): void => {
+        // Skip local build
+        if (process.env.GITHUB_ACTIONS !== 'true') {
+          logger.info('Skip mounting on local build');
+          return;
+        }
+
         // Create assets folders
         fs.mkdirSync('dist/assets/posts', { recursive: true });
         fs.mkdirSync('dist/assets/puzzles', { recursive: true });
