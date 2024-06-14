@@ -1,5 +1,24 @@
 /// Base layout scriptes
 
+// Install service worker
+document.addEventListener('DOMContentLoaded', async (): Promise<void> => {
+  if ('serviceWorker' in navigator) {
+    try {
+      const registration: ServiceWorkerRegistration =
+        await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+
+      await registration.update();
+
+      registration.addEventListener('updatefound', (): void => {
+        registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
+        console.log('[SW Cache] Updated');
+      });
+    } catch (err: unknown) {
+      console.error(err);
+    }
+  }
+});
+
 // On page load
 document.addEventListener('astro:page-load', (): void => {
   // Add attributes for article external links
