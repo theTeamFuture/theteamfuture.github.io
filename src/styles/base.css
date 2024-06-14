@@ -3,8 +3,78 @@
   font-display: swap;
   font-family: mi-sans;
   font-style: normal;
-  font-weight: 150 700;
-  src: url('/fonts/MiSans-VF.ttf') format('truetype');
+  font-weight: 150;
+  src: url('/fonts/MiSans-Thin.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 200;
+  src: url('/fonts/MiSans-ExtraLight.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 250;
+  src: url('/fonts/MiSans-Light.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 305;
+  src: url('/fonts/MiSans-Normal.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 305;
+  src: url('/fonts/MiSans-Normal.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 330;
+  src: url('/fonts/MiSans-Regular.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 380;
+  src: url('/fonts/MiSans-Medium.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 450;
+  src: url('/fonts/MiSans-Demibold.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 520;
+  src: url('/fonts/MiSans-Semibold.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 630;
+  src: url('/fonts/MiSans-Bold.woff2');
+}
+@font-face {
+  font-display: swap;
+  font-family: mi-sans;
+  font-style: normal;
+  font-weight: 700;
+  src: url('/fonts/MiSans-Heavy.woff2');
 }
 
 /* Global styles */
