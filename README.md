@@ -1,5 +1,9 @@
 # Website
 
+## Notice
+
+Repository uses LFS to host large font files, please make sure you have installed Git LFS plugin.
+
 ## License
 
 Most of the files are distributed under AGPL-3 license, **EXCEPT**:
