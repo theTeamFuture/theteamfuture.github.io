@@ -1,4 +1,5 @@
 name: Deploy
+run-name: "deploy: ${{ github.event.repository.name == 'theteamfuture.github.io' && 'update site' || github.event.action }}"
 
 on:
   repository_dispatch:
@@ -10,20 +11,24 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Checkout posts repository
         uses: actions/checkout@v4
         with:
           path: posts-repo
           repository: theTeamFuture/posts
           token: ${{ secrets.GH_PAT }}
+
       - name: Checkout time capsule repository
         uses: actions/checkout@v4
         with:
           path: time-capsules-repo
           repository: theTeamFuture/time-capsules
           token: ${{ secrets.GH_PAT }}
+
       - name: Mount repositories
         run: scripts/mount-repos.sh
+
       - name: Build Astro
         uses: withastro/action@v2
 
@@ -40,6 +45,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
       - name: Clean up artifacts
         uses: geekyeggo/delete-artifact@v5
         with:
