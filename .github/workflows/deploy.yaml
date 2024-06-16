@@ -1,5 +1,5 @@
 name: Deploy
-run-name: "deploy: ${{ github.event_name == 'workflow_dispatch' && github.event.action || 'update site' }}"
+run-name: "deploy: ${{ github.event_name == 'repository_dispatch' && github.event.action || 'update site' }}"
 
 on:
   repository_dispatch:
