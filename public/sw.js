@@ -44,11 +44,12 @@ sw.addEventListener('activate', (ev) => {
 sw.addEventListener('fetch', (ev) => {
   const url = new URL(ev.request.url);
 
+  const isAstro = url.pathname.startsWith('/_astro/');
   const isFont = ['.otf', '.ttf', '.woff', '.woff2'].some((ext) =>
     url.pathname.endsWith(ext)
   );
 
-  if (isFont) {
+  if (isAstro || isFont) {
     ev.respondWith(cachedFetch(ev.request));
   } else {
     ev.respondWith(networkFetch(ev.request));
