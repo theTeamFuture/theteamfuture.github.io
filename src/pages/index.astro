@@ -6,7 +6,9 @@ import moment from 'moment';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 // Components
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+import ExternalLink from '@/components/utils/ExternalLink.astro';
 ---
 
 <BaseLayout title="FUTURE 攻坚组">
@@ -16,46 +18,42 @@ import { Icon } from 'astro-icon/components';
     </h1>
     <div
       class="flex flex-wrap gap-4 items-center justify-center md:flex-nowrap">
-      <a
-        href="https://www.skland.com/"
-        rel="nofollow noopener noreferer"
-        target="_blank">
-        <img
+      <ExternalLink href="https://www.skland.com/">
+        <Image
           alt="Skland"
           draggable="false"
+          loading="eager"
           src="https://img.shields.io/badge/Skland-FUTURE%E6%94%BB%E5%9D%9A%E7%BB%84-gray?labelColor=90C208&style=for-the-badge"
+          inferSize
         />
-      </a>
-      <a
-        href="https://space.bilibili.com/1795756019"
-        rel="nofollow noopener noreferer"
-        target="_blank">
-        <img
+      </ExternalLink>
+      <ExternalLink href="https://space.bilibili.com/1795756019">
+        <Image
           alt="Bilibili"
           draggable="false"
+          loading="eager"
           src="https://img.shields.io/badge/Bilibili-FUTURE%E6%94%BB%E5%9D%9A%E7%BB%84-gray?labelColor=00AEEC&style=for-the-badge"
+          inferSize
         />
-      </a>
-      <a
-        href="https://weibo.com/u/7917542342"
-        rel="nofollow noopener noreferer"
-        target="_blank">
-        <img
+      </ExternalLink>
+      <ExternalLink href="https://weibo.com/u/7917542342">
+        <Image
           alt="Weibo"
           draggable="false"
+          loading="eager"
           src="https://img.shields.io/badge/Weibo-FUTURE%E6%94%BB%E5%9D%9A%E7%BB%84-gray?labelColor=FF8200&style=for-the-badge"
+          inferSize
         />
-      </a>
-      <a
-        href="https://github.com/theTeamFuture"
-        rel="nofollow noopener noreferer"
-        target="_blank">
-        <img
+      </ExternalLink>
+      <ExternalLink href="https://github.com/theTeamFuture">
+        <Image
           alt="GitHub"
           draggable="false"
+          loading="eager"
           src="https://img.shields.io/badge/GitHub-theTeamFuture-gray?labelColor=22272E&style=for-the-badge"
+          inferSize
         />
-      </a>
+      </ExternalLink>
     </div>
     <hr class="border-neutral-500 border-t-4 my-12" />
     <h2 class="font-bold my-4 text-xl">最新文章</h2>
