@@ -9,7 +9,7 @@
 const sw = self;
 
 // Constants
-const VERSION = '2';
+const VERSION = 3;
 const CACHE_NAME = `cache-${VERSION}`;
 
 // Install service worker
