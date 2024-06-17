@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async (): Promise<void> => {
 
       registration.addEventListener('updatefound', (): void => {
         registration.waiting?.postMessage({ type: 'SKIP_WAITING' });
-        console.log('[SW Cache] Updated');
+        console.debug('[SW Cache] Updated');
       });
     } catch (err: unknown) {
       console.error(err);

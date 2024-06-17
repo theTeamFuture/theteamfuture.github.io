@@ -9,12 +9,12 @@
 const sw = self;
 
 // Constants
-const VERSION = '1';
+const VERSION = '2';
 const CACHE_NAME = `cache-${VERSION}`;
 
 // Install service worker
 sw.addEventListener('install', () => {
-  console.log('[SW Cache] Installed');
+  console.debug('[SW Cache] Installed');
 });
 
 // Message handle
@@ -37,7 +37,7 @@ sw.addEventListener('activate', (ev) => {
     })
   );
 
-  console.log('[SW Cache] Activated');
+  console.debug('[SW Cache] Activated');
 });
 
 // On fetch
@@ -60,10 +60,10 @@ const cachedFetch = async (request) => {
   try {
     const cachedData = await caches.match(request);
     if (cachedData !== undefined) {
-      console.log(`[SW Cache] Hit: ${request.url}`);
+      console.debug(`[SW Cache] Hit: ${request.url}`);
       return cachedData;
     }
-    console.log(`[SW Cache] Miss: ${request.url}`);
+    console.debug(`[SW Cache] Miss: ${request.url}`);
 
     const fetchedData = await fetch(request);
     const cache = await caches.open(CACHE_NAME);
