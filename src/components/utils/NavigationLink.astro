@@ -1,0 +1,40 @@
+---
+// Types
+type Props = {
+  altFlag?: boolean;
+  name: string;
+  title: string;
+  url: string;
+};
+
+// Injects
+const { altFlag, name, title, url } = Astro.props;
+
+// Functions
+const isCurrent = (): boolean => {
+  const pathname: string = new URL(Astro.request.url).pathname;
+  const next: number = pathname.indexOf('/', 1);
+
+  return (next === -1 ? pathname : pathname.slice(0, next)) === url;
+};
+---
+
+{
+  altFlag ? (
+    <a
+      class="flex gap-2 items-baseline transition-colors hover:text-sky-400"
+      class:list={[isCurrent() ? 'text-sky-400' : 'text-white']}
+      href={url}>
+      <span class="text-xl">{title}</span>
+      <span>{name}</span>
+    </a>
+  ) : (
+    <a
+      class="flex flex-col items-start transition-colors hover:text-sky-400"
+      class:list={[isCurrent() ? 'text-sky-400' : 'text-white']}
+      href={url}>
+      <span class="leading-none text-lg">{title}</span>
+      <span class="text-sm">{name}</span>
+    </a>
+  )
+}

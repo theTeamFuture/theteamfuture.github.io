@@ -1,13 +1,27 @@
 ---
+import type {
+  TransitionAnimation,
+  TransitionAnimationPair,
+  TransitionDirectionalAnimations
+} from 'astro';
+
 // Components
 import { Icon } from 'astro-icon/components';
+import NavigationLink from '@/components/utils/NavigationLink.astro';
 
-// Functions
-const isCurrentNav = (target: string): boolean => {
-  const pathname: string = new URL(Astro.request.url).pathname;
-  const next: number = pathname.indexOf('/', 1);
-
-  return (next === -1 ? pathname : pathname.slice(0, next)) === target;
+// Animation define
+const fadeAnimation: TransitionAnimation = {
+  name: 'fade',
+  duration: 200,
+  easing: 'linear'
+};
+const fadeAnimationPair: TransitionAnimationPair = {
+  new: fadeAnimation,
+  old: fadeAnimation
+};
+const fade: TransitionDirectionalAnimations = {
+  forwards: fadeAnimationPair,
+  backwards: fadeAnimationPair
 };
 ---
 
@@ -18,42 +32,10 @@ const isCurrentNav = (target: string): boolean => {
     <h1 class="font-bold text-xl text-white">FUTURE 攻坚组</h1>
   </a>
   <nav class="hidden gap-8 items-center md:flex">
-    <a
-      class:list={[
-        'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/') ? 'text-sky-400' : 'text-white'
-      ]}
-      href="/">
-      <span class="leading-none text-lg">INDEX</span>
-      <span class="text-sm">首页</span>
-    </a>
-    <a
-      class:list={[
-        'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/about') ? 'text-sky-400' : 'text-white'
-      ]}
-      href="/about">
-      <span class="leading-none text-lg">ABOUT</span>
-      <span class="text-sm">关于</span>
-    </a>
-    <a
-      class:list={[
-        'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/posts') ? 'text-sky-400' : 'text-white'
-      ]}
-      href="/posts">
-      <span class="leading-none text-lg">POSTS</span>
-      <span class="text-sm">文章</span>
-    </a>
-    <a
-      class:list={[
-        'flex flex-col items-start transition-colors hover:text-sky-400',
-        isCurrentNav('/puzzles') ? 'text-sky-400' : 'text-white'
-      ]}
-      href="/puzzles">
-      <span class="leading-none text-lg">PUZZLES</span>
-      <span class="text-sm">谜题</span>
-    </a>
+    <NavigationLink name="首页" title="INDEX" url="/" />
+    <NavigationLink name="关于" title="ABOUT" url="/about" />
+    <NavigationLink name="文章" title="POSTS" url="/posts" />
+    <NavigationLink name="谜题" title="PUZZLES" url="/puzzles" />
   </nav>
   <button class="md:hidden" id="nav-menu-btn" transition:persist>
     <Icon class="text-2xl" name="mdi:menu" />
@@ -61,35 +43,31 @@ const isCurrentNav = (target: string): boolean => {
   <div
     class="bg-black/90 fixed hidden items-center justify-center inset-0 z-40"
     id="alt-nav"
-    transition:persist>
-    <div class="flex flex-col gap-4">
-      <a
-        class="flex gap-2 items-baseline text-white transition-colors hover:text-sky-400"
-        href="/">
-        <span class="text-xl">INDEX</span>
-        <span>首页</span>
-      </a>
-      <a
-        class="flex gap-2 items-baseline text-white transition-colors hover:text-sky-400"
-        href="/about">
-        <span class="text-xl">ABOUT</span>
-        <span>关于</span>
-      </a>
-      <a
-        class="flex gap-2 items-baseline text-white transition-colors hover:text-sky-400"
-        href="/posts">
-        <span class="text-xl">POSTS</span>
-        <span>文章</span>
-      </a>
-      <a
-        class="flex gap-2 items-baseline text-white transition-colors hover:text-sky-400"
-        href="/puzzles">
-        <span class="text-xl">PUZZLES</span>
-        <span>谜题</span>
-      </a>
-    </div>
+    transition:animate={fade}>
+    <nav class="flex flex-col gap-4">
+      <NavigationLink altFlag={true} name="首页" title="INDEX" url="/" />
+      <NavigationLink altFlag={true} name="关于" title="ABOUT" url="/about" />
+      <NavigationLink altFlag={true} name="文章" title="POSTS" url="/posts" />
+      <NavigationLink
+        altFlag={true}
+        name="谜题"
+        title="PUZZLES"
+        url="/puzzles"
+      />
+    </nav>
   </div>
 </header>
+
+<style>
+  @keyframes fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
 
 <script>
   // Show alternative navigation bar
@@ -109,18 +87,20 @@ const isCurrentNav = (target: string): boolean => {
     });
 
   // Hide alternative navigation bar
-  document
-    .querySelector<HTMLDivElement>('#alt-nav')!
-    .addEventListener('click', (): void => {
-      anime({
-        targets: '#alt-nav',
-        opacity: ['1', '0'],
-        duration: 200,
-        easing: 'linear',
-        complete: (): void => {
-          document.querySelector<HTMLDivElement>('#alt-nav')!.style.display =
-            'none';
-        }
-      });
-    });
+  document.addEventListener('astro:page-load', (): void =>
+    document
+      .querySelector<HTMLDivElement>('#alt-nav')!
+      .addEventListener('click', (): void => {
+        anime({
+          targets: '#alt-nav',
+          opacity: ['1', '0'],
+          duration: 200,
+          easing: 'linear',
+          complete: (): void => {
+            document.querySelector<HTMLDivElement>('#alt-nav')!.style.display =
+              'none';
+          }
+        });
+      })
+  );
 </script>
