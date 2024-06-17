@@ -9,7 +9,7 @@ date: 2024-05-19
 # 中文
 
 **Q：** FUTURE 攻坚组是什么？  
-**A：** [埃及研（_GORIE）](https://weibo.com/u/6812997138)当初为了解决 FUTURE 谜题而建立的分支组织。
+**A：** [埃及研（\_GORIE）](https://weibo.com/u/6812997138)当初为了解决 FUTURE 谜题而建立的分支组织。
 
 **Q：** FUTURE 攻坚组和埃及研的关系？  
 **A：** 是埃及研的 [继承者](https://weibo.com/6812997138/ObOHUkSM0)。
@@ -35,10 +35,10 @@ date: 2024-05-19
 # English
 
 **Q:** What is Team Future?  
-**A:** A branch of [_GORIE](https://weibo.com/u/6812997138) that aimed at solving Future Puzzle.
+**A:** A branch of [\_GORIE](https://weibo.com/u/6812997138) that aimed at solving Future Puzzle.
 
 **Q:** What's your relationship with GORIE?  
-**A:** The [successor](https://weibo.com/6812997138/ObOHUkSM0) of _GORIE.
+**A:** The [successor](https://weibo.com/6812997138/ObOHUkSM0) of \_GORIE.
 
 **Q:** What kind of orgnization is Team Future?  
 **A:** A union of puzzle enthusiasts.
