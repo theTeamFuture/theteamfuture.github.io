@@ -1,6 +1,5 @@
 ---
 import type { MarkdownLayoutProps } from 'astro';
-import moment from 'moment';
 
 // Style sheets
 import '@/styles/markdown.css';
@@ -9,7 +8,7 @@ import '@/styles/markdown.css';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
 // Components
-import { Icon } from 'astro-icon/components';
+import ArticleMeta from '@/components/ArticleMeta.astro';
 
 // Types
 type Props = MarkdownLayoutProps<{
@@ -20,17 +19,6 @@ type Props = MarkdownLayoutProps<{
 
 // Injects
 const { frontmatter } = Astro.props;
-
-// Functions
-const formatNumber = (num: number, unit: string): string => {
-  if (num < 1000) {
-    return num.toString() + ' ' + unit;
-  } else if (num < 1000000) {
-    return (num / 1000).toFixed(1) + 'k ' + unit;
-  } else {
-    return (num / 1000000).toFixed(1) + 'm ' + unit;
-  }
-};
 ---
 
 <BaseLayout
@@ -45,20 +33,10 @@ const formatNumber = (num: number, unit: string): string => {
   }}>
   <main class="mx-4 my-12 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
     <h1 class="font-bold text-3xl">{frontmatter.title}</h1>
-    <div class="flex items-center gap-4 text-neutral-500 text-sm">
-      <div class="flex items-center gap-1">
-        <Icon name="mdi:calendar" />
-        <span title={frontmatter.date}>
-          {moment(frontmatter.date).format('YYYY/MM/DD')}
-        </span>
-      </div>
-      <div class="flex items-center gap-1">
-        <Icon name="mdi:text" />
-        <span title={frontmatter.content_length.toString()}>
-          {formatNumber(frontmatter.content_length, '字')}
-        </span>
-      </div>
-    </div>
+    <ArticleMeta
+      date={new Date(frontmatter.date)}
+      length={frontmatter.content_length}
+    />
     <article class="my-8">
       <slot />
     </article>

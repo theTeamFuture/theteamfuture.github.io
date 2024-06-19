@@ -1,7 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { avatars } from '@/utils/meta';
-import moment from 'moment';
 
 // Style sheets
 import '@/styles/markdown.css';
@@ -12,6 +11,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 // Components
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
+import ArticleMeta from '@/components/ArticleMeta.astro';
 
 // Types
 type Props = {
@@ -24,17 +24,6 @@ type Props = {
 
 // Injects
 const { title, date, tags, length, author } = Astro.props;
-
-// Functions
-const formatNumber = (num: number, unit: string): string => {
-  if (num < 1000) {
-    return num.toString() + ' ' + unit;
-  } else if (num < 1000000) {
-    return (num / 1000).toFixed(1) + 'k ' + unit;
-  } else {
-    return (num / 1000000).toFixed(1) + 'm ' + unit;
-  }
-};
 ---
 
 <BaseLayout
@@ -55,28 +44,7 @@ const formatNumber = (num: number, unit: string): string => {
       <span>返回</span>
     </button>
     <h1 class="font-bold mt-8 text-3xl">{title}</h1>
-    <div class="flex items-center gap-4 mt-1 text-neutral-500 text-sm">
-      <div class="flex items-center gap-1">
-        <Icon name="mdi:calendar" />
-        <span title={date.toISOString()}
-          >{moment(date).format('YYYY/MM/DD')}</span
-        >
-      </div>
-      {
-        tags && (
-          <div class="flex gap-1 items-center">
-            <Icon name="mdi:tag" />
-            {tags.map((v: string) => (
-              <span>{v}</span>
-            ))}
-          </div>
-        )
-      }
-      <div class="flex items-center gap-1">
-        <Icon name="mdi:text" />
-        <span title={length.toString()}>{formatNumber(length, '字')}</span>
-      </div>
-    </div>
+    <ArticleMeta date={date} length={length} tags={tags} />
     <hr class="border-t-2 border-neutral-700 my-4" />
     <div class="flex items-center my-4">
       {
