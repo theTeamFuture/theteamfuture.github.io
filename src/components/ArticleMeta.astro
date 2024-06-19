@@ -7,7 +7,7 @@ import { Icon } from 'astro-icon/components';
 // Types
 type Props = {
   date: Date;
-  length: number;
+  length?: number;
   tags?: string[];
 };
 
@@ -41,8 +41,12 @@ const formatNumber = (num: number, unit: string): string => {
       </div>
     )
   }
-  <div class="flex items-center gap-1">
-    <Icon name="mdi:text" />
-    <span title={length.toString()}>{formatNumber(length, '字')}</span>
-  </div>
+  {
+    length && (
+      <div class="flex items-center gap-1">
+        <Icon name="mdi:text" />
+        <span title={length.toString()}>{formatNumber(length, '字')}</span>
+      </div>
+    )
+  }
 </div>

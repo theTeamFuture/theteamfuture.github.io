@@ -1,7 +1,4 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import { avatars } from '@/utils/meta';
-
 // Style sheets
 import '@/styles/markdown.css';
 
@@ -10,21 +7,18 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 
 // Components
 import { Icon } from 'astro-icon/components';
-import { Image } from 'astro:assets';
 import ArticleMeta from '@/components/ArticleMeta.astro';
-import ExternalLink from '@/components/utils/ExternalLink.astro';
 
 // Types
 type Props = {
   title: string;
   date: Date;
   tags?: string[];
-  length: number;
-  author: CollectionEntry<'authors'>;
+  length?: number;
 };
 
 // Injects
-const { title, date, tags, length, author } = Astro.props;
+const { title, date, tags, length } = Astro.props;
 ---
 
 <BaseLayout
@@ -47,49 +41,7 @@ const { title, date, tags, length, author } = Astro.props;
     <h1 class="font-bold mt-8 text-3xl">{title}</h1>
     <ArticleMeta date={date} length={length} tags={tags} />
     <hr class="border-t-2 border-neutral-700 my-4" />
-    <div class="flex items-center my-4">
-      {
-        author.data.avatar.startsWith('@avatars/') ? (
-          <Image
-            alt="avatar"
-            class="h-[60px] rounded-full transition-transform w-[60px] hover:scale-110"
-            src={avatars[
-              author.data.avatar.replace(/^@avatars/, '/src/assets/avatars')
-            ]()}
-          />
-        ) : (
-          <Image
-            alt="avatar"
-            class="h-[60px] rounded-full transition-transform w-[60px] hover:scale-110"
-            height="200"
-            src={author.data.avatar}
-            width="200"
-          />
-        )
-      }
-      <div class="flex flex-col ml-4">
-        <h1 class="font-bold">{author.data.name}</h1>
-        <p class="text-sm text-neutral-400">{author.data.intro}</p>
-        <div class="flex gap-2 items-center mt-1 text-sm">
-          {
-            author.data.urls?.map(({ name, url }) => (
-              <ExternalLink href={url}>{name}</ExternalLink>
-            ))
-          }
-        </div>
-      </div>
-    </div>
-    <div
-      class="border-dashed border-b-2 border-neutral-800 font-bold text-center text-neutral-800 text-sm select-none">
-      Start of Post
-    </div>
-    <article class="my-8">
-      <slot />
-    </article>
-    <div
-      class="border-dashed border-neutral-800 border-t-2 font-bold mb-auto text-center text-neutral-800 text-sm select-none">
-      End of Post
-    </div>
+    <slot />
   </main>
 </BaseLayout>
 
