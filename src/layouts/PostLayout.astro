@@ -71,11 +71,13 @@ const { title, date, tags, length, author } = Astro.props;
         <p class="text-sm text-neutral-400">{author.data.intro}</p>
         <div class="flex gap-2 items-center mt-1 text-sm">
           {
-            author.data.urls?.map(({ name, url }) => (
-              <a href={url} rel="nofollow noopener noreferer" target="_blank">
-                {name}
-              </a>
-            ))
+            author.data.urls?.map(
+              ({ name, url }: { name: string; url: string }) => (
+                <a href={url} rel="nofollow noopener noreferer" target="_blank">
+                  {name}
+                </a>
+              )
+            )
           }
         </div>
       </div>
