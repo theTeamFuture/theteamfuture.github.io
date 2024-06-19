@@ -47,28 +47,24 @@ const { puzzle } = Astro.props;
       </div>
     </div>
     <hr class="border-t-2 border-neutral-700 my-4" />
-    <div class="flex gap-4 items-center justify-center my-8">
-      {
-        puzzle.data.report ? (
-          <>
-            <Icon class="text-5xl text-neutral-700" name="mdi:box-variant" />
-            <a
-              class="font-bold text-2xl text-neutral-700"
-              href={puzzle.data.report}>
-              Solved
-            </a>
-          </>
-        ) : (
-          <>
-            <Icon
-              class="text-5xl text-neutral-500"
-              name="mdi:box-variant-closed"
-            />
-            <p class="font-bold text-2xl text-neutral-500">Mistery</p>
-          </>
-        )
-      }
-    </div>
+    {
+      puzzle.data.report ? (
+        <a
+          class="flex font-bold gap-4 items-center justify-center my-8 select-none self-center text-2xl text-neutral-700 hover:text-neutral-400"
+          href={puzzle.data.report}>
+          <Icon class="text-5xl" name="mdi:box-variant" />
+          <span>Solved</span>
+        </a>
+      ) : (
+        <div class="flex gap-4 items-center justify-center my-8 select-none">
+          <Icon
+            class="text-5xl text-neutral-500"
+            name="mdi:box-variant-closed"
+          />
+          <p class="font-bold text-2xl text-neutral-500">Mistery</p>
+        </div>
+      )
+    }
     <div
       class="border-dashed border-b-2 border-neutral-800 font-bold text-center text-neutral-800 text-sm select-none">
       Start of Puzzle
