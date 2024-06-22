@@ -30,6 +30,10 @@ export default defineConfig({
     remarkPlugins: [remarkContentLength, remarkMath, remarkSpoiler],
     syntaxHighlight: 'prism'
   },
+  redirects:
+    import.meta.env.PROD && process.env.SITE_REDIRECT
+      ? JSON.parse(process.env.SITE_REDIRECT)
+      : undefined,
   site: 'https://theteamfuture.github.io',
   vite: {
     resolve: {

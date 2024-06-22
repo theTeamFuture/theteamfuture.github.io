@@ -48,7 +48,9 @@ jobs:
         run: pnpm install
 
       - name: Build Astro
-        run: pnpm run build
+        run: |
+          export SITE_REDIRECT=$(cat posts-repo/redirect.json)
+          pnpm run build
 
       - name: Create artifact
         run: |
