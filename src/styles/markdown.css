@@ -1,16 +1,16 @@
 /* Markdown */
 
 article {
+  :not(pre) > code {
+    @apply bg-neutral-600 font-mono px-1 py-0.5 rounded text-sm text-white;
+  }
+
   audio {
     @apply my-4 w-full;
   }
 
   blockquote {
     @apply border-l-4 border-neutral-500 pl-4 text-neutral-500;
-  }
-
-  code {
-    @apply bg-neutral-600 font-mono px-1 py-0.5 rounded text-sm text-white;
   }
 
   figure {
