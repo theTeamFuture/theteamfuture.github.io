@@ -1,0 +1,35 @@
+---
+// Style sheets
+import '@/styles/base.css';
+import '@/styles/font.css';
+
+// Components
+import { SEO } from 'astro-seo';
+import Preloader from '@/components/Preloader.astro';
+---
+
+<html lang="zh">
+  <head>
+    <SEO title="404 - FUTURE 攻坚组" charset="utf-8" />
+    <link href="/favicon.svg" rel="icon" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta content={Astro.generator} name="generator" />
+    <script
+      src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"
+      defer
+      is:inline></script>
+  </head>
+  <body class="bg-neutral-900 font-misans text-white">
+    <Preloader />
+    <div class="fixed flex flex-col gap-4 inset-0 items-center justify-center">
+      <div class="flex font-bold gap-1 items-end select-none text-neutral-700">
+        <h1 class="leading-none text-5xl">404</h1>
+        <div class="text-xl">
+          <h2 class="leading-none">Not</h2>
+          <h2 class="leading-none">Found</h2>
+        </div>
+      </div>
+      <a class="text-sm" href="/">回到主页</a>
+    </div>
+  </body>
+</html>
