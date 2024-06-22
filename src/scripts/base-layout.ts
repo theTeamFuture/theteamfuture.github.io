@@ -21,20 +21,6 @@ document.addEventListener('DOMContentLoaded', async (): Promise<void> => {
 
 // On page load
 document.addEventListener('astro:page-load', (): void => {
-  // Add attributes for article external links
-  document
-    .querySelectorAll<HTMLAnchorElement>('article a:not([target])')
-    .forEach((el: HTMLAnchorElement): void => {
-      // Get full URL
-      const url: URL = new URL(el.href, location.origin);
-
-      // If is external link
-      if (url.origin !== location.origin) {
-        el.rel = 'nofollow noopener noreferer';
-        el.target = '_blank';
-      }
-    });
-
   // Add smooth scrolling for article anchors
   document
     .querySelectorAll<HTMLAnchorElement>(
