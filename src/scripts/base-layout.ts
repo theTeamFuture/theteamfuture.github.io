@@ -1,4 +1,5 @@
 /// Base layout scriptes
+import { fetchAndShow } from '@/utils/vercount';
 
 // Install service worker
 document.addEventListener('DOMContentLoaded', async (): Promise<void> => {
@@ -54,4 +55,7 @@ document.addEventListener('astro:page-load', (): void => {
       // Update attribute
       el.setAttribute('data-smooth-scrolling', '');
     });
+
+  // Show site count
+  fetchAndShow();
 });

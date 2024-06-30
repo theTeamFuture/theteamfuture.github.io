@@ -14,6 +14,10 @@ import ExternalLink from '@/components/utils/ExternalLink.astro';
   </p>
   <div class="flex gap-2 items-center justify-center">
     <p>&copy;{new Date().getFullYear()} FUTURE 攻坚组</p>
+    <p class="hidden select-none sm:block">|</p>
+    <p class="hidden sm:block">
+      总访问量 <span id="busuanzi_value_site_pv">…</span>
+    </p>
     <p class="hidden select-none md:block">|</p>
     <p class="hidden md:block">
       使用 <ExternalLink href="https://astro.build">Astro</ExternalLink> 强力驱动
