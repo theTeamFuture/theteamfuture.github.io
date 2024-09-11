@@ -1,11 +1,14 @@
 ---
 // Style sheets
 import '@/styles/base.css';
-import '@/styles/font.css';
 
 // Components
 import { SEO } from 'astro-seo';
 import Preloader from '@/components/Preloader.astro';
+
+// Fonts
+import { css as miNormal } from '@/assets/fonts/MiSans-Normal.ttf';
+import { css as miSemi } from '@/assets/fonts/MiSans-Semibold.ttf';
 ---
 
 <html lang="zh">
@@ -18,6 +21,18 @@ import Preloader from '@/components/Preloader.astro';
       src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"
       defer
       is:inline></script>
+    <style
+      define:vars={{ miNormal: miNormal.family, miSemi: miSemi.family }}
+      is:global
+    >
+      .font-misans {
+        font-family: var(--miNormal);
+      }
+      .font-bold {
+        font-family: var(--miSemi);
+        font-weight: unset;
+      }
+    </style>
   </head>
   <body class="bg-neutral-900 font-misans text-white">
     <Preloader />

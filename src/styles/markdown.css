@@ -63,9 +63,17 @@ article {
   ol {
     @apply list-decimal pl-8;
   }
+  :not(ol) ol,
+  :not(ul) ol {
+    @apply my-4;
+  }
 
   p {
     @apply break-words my-4;
+  }
+
+  pre {
+    @apply my-4 p-4;
   }
 
   span.spoiler {
@@ -73,16 +81,26 @@ article {
   }
 
   table {
-    @apply border-2 border-neutral-500 my-4 w-full;
-  }
-  td {
-    @apply border-2 border-neutral-500 px-2 py-1;
-  }
-  th {
-    @apply bg-neutral-700 border-2 border-neutral-500 px-2 py-1;
+    @apply border-2 border-neutral-500 mx-auto my-4;
+
+    td {
+      @apply border-2 border-neutral-500 px-2 py-1;
+    }
+
+    th {
+      @apply bg-neutral-700 border-2 border-neutral-500 px-2 py-1 whitespace-nowrap;
+    }
   }
 
   ul {
     @apply list-disc pl-8;
+  }
+  :not(ol) ul,
+  :not(ul) ul {
+    @apply my-4;
+  }
+
+  .table-wrapper {
+    @apply my-4 overflow-x-auto;
   }
 }

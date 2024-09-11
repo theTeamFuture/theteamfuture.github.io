@@ -3,7 +3,6 @@ import type { SEOProps } from 'astro-seo';
 
 // Style sheets
 import '@/styles/base.css';
-import '@/styles/font.css';
 
 // Components
 import { SEO } from 'astro-seo';
@@ -12,6 +11,10 @@ import Footer from '@/components/Footer.astro';
 import Header from '@/components/Header.astro';
 import LoadBar from '@/components/LoadBar.astro';
 import Preloader from '@/components/Preloader.astro';
+
+// Fonts
+import { css as miNormal } from '@/assets/fonts/MiSans-Normal.ttf';
+import { css as miSemi } from '@/assets/fonts/MiSans-Semibold.ttf';
 
 // Types
 type Props = {
@@ -30,10 +33,6 @@ const { title, og } = Astro.props;
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <meta content={Astro.generator} name="generator" />
     <link
-      href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-one-dark.min.css"
-      rel="stylesheet"
-    />
-    <link
       href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
       rel="stylesheet"
     />
@@ -42,6 +41,18 @@ const { title, og } = Astro.props;
       defer
       is:inline></script>
     <script src="@/scripts/base-layout"></script>
+    <style
+      define:vars={{ miNormal: miNormal.family, miSemi: miSemi.family }}
+      is:global
+    >
+      .font-misans {
+        font-family: var(--miNormal);
+      }
+      .font-bold {
+        font-family: var(--miSemi);
+        font-weight: unset;
+      }
+    </style>
     <ViewTransitions />
   </head>
   <body

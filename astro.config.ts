@@ -14,6 +14,7 @@ import remarkMath from 'remark-math';
 import remarkSpoiler from './remark-plugins/sploiler';
 
 // Rehype plugins
+import rehypeElementWrapper from './rehype-plugins/element-wrapper';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeFigure from 'rehype-figure';
 import rehypeKatex from 'rehype-katex';
@@ -26,6 +27,10 @@ export default defineConfig({
   integrations: [icon(), mountAssets(), tailwind({ nesting: true })],
   markdown: {
     rehypePlugins: [
+      [
+        rehypeElementWrapper,
+        { selector: 'table', wrapper: 'div.table-wrapper' }
+      ],
       [
         rehypeExternalLinks,
         {
