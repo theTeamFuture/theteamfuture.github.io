@@ -1,19 +1,25 @@
 /// Astro config
 import { defineConfig } from 'astro/config';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 
 // Integerations
 import icon from 'astro-icon';
 import mountAssets from './intergrations/mount-assets';
 import tailwind from '@astrojs/tailwind';
 
-// Plugins
+// Remark plugins
+import remarkContentLength from './remark-plugins/content-length';
+import remarkExtendedTable from 'remark-extended-table';
+import remarkMath from 'remark-math';
+import remarkSpoiler from './remark-plugins/sploiler';
+
+// Rehype plugins
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeFigure from 'rehype-figure';
 import rehypeKatex from 'rehype-katex';
-import remarkMath from 'remark-math';
-import remarkContentLength from './plugins/remark-content-length';
-import remarkSpoiler from './plugins/remark-spoiler';
+
+// Vite plugins
+import font from 'vite-plugin-font';
 
 // Export config
 export default defineConfig({
@@ -22,13 +28,22 @@ export default defineConfig({
     rehypePlugins: [
       [
         rehypeExternalLinks,
-        { rel: ['nofollow', 'noopener', 'noreferer'], target: '_blank' }
+        {
+          protocols: ['http', 'https', 'mailto'],
+          rel: ['noopener', 'noreferer'],
+          target: '_blank'
+        }
       ],
-      [rehypeFigure, {}],
+      rehypeFigure,
       [rehypeKatex, { output: 'html' }]
     ],
-    remarkPlugins: [remarkContentLength, remarkMath, remarkSpoiler],
-    syntaxHighlight: 'prism'
+    remarkPlugins: [
+      remarkContentLength,
+      remarkExtendedTable,
+      remarkMath,
+      remarkSpoiler
+    ],
+    shikiConfig: { theme: 'one-dark-pro' }
   },
   redirects:
     import.meta.env.PROD && process.env.SITE_REDIRECT
@@ -36,6 +51,7 @@ export default defineConfig({
       : undefined,
   site: 'https://theteamfuture.github.io',
   vite: {
+    plugins: [font.vite()],
     resolve: {
       alias: {
         '@': resolve('./src'),
