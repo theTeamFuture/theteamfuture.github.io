@@ -119,7 +119,7 @@ const decryptFile = async (raw: string, passwd: string): Promise<string> => {
     data
   );
   const utf8Data: string = new TextDecoder().decode(binData);
-  if (utf8Data.split('\n').length !== 3) {
+  if (utf8Data.split('\n').length < 3) {
     throw 'Wrong password';
   }
 
