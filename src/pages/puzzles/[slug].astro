@@ -30,7 +30,10 @@ export const getStaticPaths = (() =>
   })) satisfies GetStaticPaths;
 ---
 
-<PostLayout title={puzzle.data.title} date={puzzle.data.published_at}>
+<PostLayout
+  menuUrl="/puzzles"
+  title={puzzle.data.title}
+  date={puzzle.data.published_at}>
   {
     puzzle.data.report ? (
       <a

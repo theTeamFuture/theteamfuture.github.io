@@ -14,7 +14,7 @@
     "@astrojs/tailwind": "^5.1.2",
     "@iconify-json/mdi": "^1.2.1",
     "alfaaz": "^1.1.0",
-    "astro": "^4.16.1",
+    "astro": "^4.15.12",
     "astro-icon": "^1.1.1",
     "astro-seo": "^0.8.4",
     "hast-util-parse-selector": "^4.0.0",

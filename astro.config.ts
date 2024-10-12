@@ -50,6 +50,7 @@ export default defineConfig({
     ],
     shikiConfig: { theme: 'one-dark-pro' }
   },
+  output: 'static',
   redirects:
     import.meta.env.PROD && process.env.SITE_REDIRECT
       ? JSON.parse(process.env.SITE_REDIRECT)
