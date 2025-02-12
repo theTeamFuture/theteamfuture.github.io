@@ -2,9 +2,6 @@ name: Deploy
 run-name: "deploy: ${{ github.event_name == 'repository_dispatch' && github.event.action || 'update site' }}"
 
 on:
-  push:
-    branches:
-      - main
   repository_dispatch:
   workflow_dispatch:
 
@@ -40,7 +37,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: lts/Iron
+          node-version: lts/Jod
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
