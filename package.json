@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.6.0",
-    "@astrojs/tailwind": "^5.1.2",
-    "@iconify-json/mdi": "^1.2.1",
+    "@astrojs/tailwind": "^5.1.5",
+    "@iconify-json/mdi": "^1.2.3",
     "alfaaz": "^1.1.0",
     "astro": "^4.16.18",
-    "astro-icon": "^1.1.1",
+    "astro-icon": "^1.1.5",
     "astro-seo": "^0.8.4",
     "hast-util-parse-selector": "^4.0.0",
     "hast-util-select": "^6.0.3",
@@ -29,16 +29,16 @@
     "remark-extended-table": "^2.0.2",
     "remark-math": "^6.0.0",
     "sharp": "^0.33.5",
-    "tailwindcss": "^3.4.14",
-    "typescript": "^5.6.3",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
     "unist-util-visit": "^5.0.0",
-    "vite-plugin-font": "^2.1.7"
+    "vite-plugin-font": "^5.1.0"
   },
   "devDependencies": {
-    "@types/animejs": "^3.1.12",
+    "@types/animejs": "^3.1.13",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
-    "prettier": "^3.3.3"
+    "prettier": "^3.5.0"
   },
   "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
 }
