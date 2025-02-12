@@ -33,7 +33,7 @@ document
       method: 'GET',
       headers: {
         'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache'
+        Pragma: 'no-cache'
       }
     })
       .then((res: Response): Promise<string> => {
@@ -99,8 +99,8 @@ const decryptFile = async (raw: string, passwd: string): Promise<string> => {
   }
 
   // Get raw data
-  const iv: ArrayBuffer = Base64.toUint8Array(parts[0]);
-  const data: ArrayBuffer = Base64.toUint8Array(parts[1]);
+  const iv: Uint8Array = Base64.toUint8Array(parts[0]);
+  const data: Uint8Array = Base64.toUint8Array(parts[1]);
 
   // Get key
   const rawkey: ArrayBuffer = sha256.create().update(passwd).arrayBuffer();
