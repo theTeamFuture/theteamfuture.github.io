@@ -75,5 +75,8 @@ echo "[mount-repos] Puzzles mounted"
 # Mount time capsules
 rm -rf public/pool
 rm -rf time-capsules-repo/pool/_*
+for FILE_PATH in time-capsules-repo/pool/*; do
+  mv "$FILE_PATH" "$FILE_PATH.dat"
+done
 mv time-capsules-repo/pool public/pool
 echo "[mount-repos] Time capsules mounted"
