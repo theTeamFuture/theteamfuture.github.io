@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import { resolve } from "node:path";
 
 // Integrations
+import htmlMinify from "./integrations/html-minify";
 import icon from "astro-icon";
 import mountAssets from "./integrations/mount-assets";
 
@@ -23,7 +24,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [icon(), mountAssets()],
+  integrations: [htmlMinify(), icon(), mountAssets()],
   markdown: {
     rehypePlugins: [
       [

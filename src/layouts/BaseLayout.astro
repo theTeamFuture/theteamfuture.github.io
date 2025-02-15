@@ -1,0 +1,49 @@
+---
+// Style sheets
+import "@/styles/base.css";
+
+// Components
+import { ClientRouter } from "astro:transitions";
+
+// Fonts
+import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
+---
+
+<html lang="zh">
+  <head>
+    <!-- Title -->
+    <slot name="head-title" />
+
+    <!-- Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <slot name="head-metas" />
+
+    <!-- Links -->
+    <link rel="canonical" href={Astro.url} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+    <slot name="head-links" />
+
+    <!-- Styles -->
+    <style define:vars={{ ff: css.family }}>
+      @import "tailwindcss";
+
+      body {
+        @apply bg-neutral-900 flex flex-col min-h-screen text-white;
+        font-family: var(--ff);
+      }
+    </style>
+    <slot name="head-styles" />
+
+    <!-- Scripts -->
+    <slot name="head-scripts" />
+
+    <!-- View transition -->
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

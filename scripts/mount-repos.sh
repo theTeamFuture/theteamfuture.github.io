@@ -11,9 +11,9 @@ if [[ "$GITHUB_ACTIONS" != "true" ]]; then
 fi
 
 # Mount authors
-rm -rf src/content/authors
+rm -rf contents/authors
 rm posts-repo/authors/README.md
-mv posts-repo/authors src/content/authors
+mv posts-repo/authors contents/authors
 echo "[mount-repos] Authors mounted"
 
 # Mount avatars
@@ -29,7 +29,7 @@ mv posts-repo/images src/assets/images
 echo "[mount-repos] Images mounted"
 
 # Mount posts
-rm -rf src/content/posts/*
+rm -rf contents/posts/*
 for FOLDER_DIR in posts-repo/posts/*; do
   if [[ -d "$FOLDER_DIR" ]]; then
     # Get folder name
@@ -39,19 +39,19 @@ for FOLDER_DIR in posts-repo/posts/*; do
     HASH_NAME=$(echo -n "$FOLDER_NAME" | sha256sum | awk '{print $1}')
 
     # Move markdown to contents collection
-    mv "$FOLDER_DIR/post.md" "src/content/posts/$HASH_NAME.md"
+    mv "$FOLDER_DIR/post.md" "contents/posts/$HASH_NAME.md"
 
     # Move rest folder to contents collection with ignore
-    mv "$FOLDER_DIR" "src/content/posts/_$HASH_NAME"
+    mv "$FOLDER_DIR" "contents/posts/_$HASH_NAME"
 
     # Replace relative path
-    sed -i "s#\./#\./_$HASH_NAME/#g" "src/content/posts/$HASH_NAME.md"
+    sed -i "s#\./#\./_$HASH_NAME/#g" "contents/posts/$HASH_NAME.md"
   fi
 done
 echo "[mount-repos] Posts mounted"
 
 # Mount puzzles
-rm -rf src/content/puzzles/*
+rm -rf contents/puzzles/*
 for FOLDER_DIR in posts-repo/puzzles/*; do
   if [[ -d "$FOLDER_DIR" ]]; then
     # Get folder name
@@ -61,13 +61,13 @@ for FOLDER_DIR in posts-repo/puzzles/*; do
     HASH_NAME=$(echo -n "$FOLDER_NAME" | sha256sum | awk '{print $1}')
 
     # Move markdown to contents collection
-    mv "$FOLDER_DIR/puzzle.md" "src/content/puzzles/$HASH_NAME.md"
+    mv "$FOLDER_DIR/puzzle.md" "contents/puzzles/$HASH_NAME.md"
 
     # Move rest folder to contents collection with ignore
-    mv "$FOLDER_DIR" "src/content/puzzles/_$HASH_NAME"
+    mv "$FOLDER_DIR" "contents/puzzles/_$HASH_NAME"
 
     # Replace relative path
-    sed -i "s#\./#\./_$HASH_NAME/#g" "src/content/puzzles/$HASH_NAME.md"
+    sed -i "s#\./#\./_$HASH_NAME/#g" "contents/puzzles/$HASH_NAME.md"
   fi
 done
 echo "[mount-repos] Puzzles mounted"

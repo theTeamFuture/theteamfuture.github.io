@@ -30,7 +30,7 @@ export default function mountAssets(): AstroIntegration {
         logger.info("Meta data got");
 
         // Find posts assets
-        fs.readdirSync("src/content/posts", { withFileTypes: true }).forEach(
+        fs.readdirSync("contents/posts", { withFileTypes: true }).forEach(
           (dir: fs.Dirent): void => {
             // If not directory
             if (!dir.isDirectory()) {
@@ -38,7 +38,7 @@ export default function mountAssets(): AstroIntegration {
             }
 
             // Check assets
-            const assetsPath: string = `src/content/posts/${dir.name}/assets`;
+            const assetsPath: string = `contents/posts/${dir.name}/assets`;
             try {
               if (!fs.statSync(assetsPath).isDirectory()) {
                 return;
@@ -55,7 +55,7 @@ export default function mountAssets(): AstroIntegration {
         );
 
         // Find puzzles assets
-        fs.readdirSync("src/content/puzzles", { withFileTypes: true }).forEach(
+        fs.readdirSync("contents/puzzles", { withFileTypes: true }).forEach(
           (dir: fs.Dirent): void => {
             // If not directory
             if (!dir.isDirectory()) {
@@ -63,7 +63,7 @@ export default function mountAssets(): AstroIntegration {
             }
 
             // Check assets
-            const assetsPath: string = `src/content/puzzles/${dir.name}/assets`;
+            const assetsPath: string = `contents/puzzles/${dir.name}/assets`;
             try {
               if (!fs.statSync(assetsPath).isDirectory()) {
                 return;
