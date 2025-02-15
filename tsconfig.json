@@ -1,4 +1,13 @@
 {
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@avatars/*": ["src/assets/avatars/*"],
+      "@images/*": ["src/assets/images/*"]
+    },
+    "types": ["vite-plugin-font/src/font"]
+  },
   "extends": "astro/tsconfigs/strict",
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]

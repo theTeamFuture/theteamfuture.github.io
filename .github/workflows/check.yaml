@@ -1,0 +1,42 @@
+name: Check
+
+on: push
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Checkout posts repository
+        uses: actions/checkout@v4
+        with:
+          path: posts-repo
+          repository: theTeamFuture/posts
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Checkout time capsule repository
+        uses: actions/checkout@v4
+        with:
+          path: time-capsules-repo
+          repository: theTeamFuture/time-capsules
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/Jod
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Check astro
+        run: pnpm astro check
