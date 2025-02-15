@@ -1,0 +1,25 @@
+---
+// Types
+type Props = {
+  alt?: boolean;
+  name: string;
+  title: string;
+  url: string;
+  re: RegExp;
+};
+
+// Injects
+const { alt = false, name, title, url, re } = Astro.props;
+---
+
+<a
+  class:list={[
+    alt
+      ? "flex gap-2 items-baseline transition-colors hover:text-sky-400"
+      : "flex flex-col items-start transition-colors hover:text-sky-400",
+    re.test(Astro.url.pathname) ? "text-sky-400" : "text-white",
+  ]}
+  href={url}>
+  <span class={alt ? "text-xl" : "leading-none text-lg"}>{title}</span>
+  <span class={alt ? "" : "text-sm"}>{name}</span>
+</a>

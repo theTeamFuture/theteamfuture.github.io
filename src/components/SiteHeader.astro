@@ -1,0 +1,120 @@
+---
+import type {
+  TransitionAnimation,
+  TransitionAnimationPair,
+  TransitionDirectionalAnimations,
+} from "astro";
+
+// Components
+import { Icon } from "astro-icon/components";
+import NavLink from "@/components/NavLink.astro";
+
+// Animation define
+const fadeAnimation: TransitionAnimation = {
+  name: "fade",
+  duration: 200,
+  easing: "linear",
+};
+const fadeAnimationPair: TransitionAnimationPair = {
+  new: fadeAnimation,
+  old: fadeAnimation,
+};
+const fade: TransitionDirectionalAnimations = {
+  forwards: fadeAnimationPair,
+  backwards: fadeAnimationPair,
+};
+---
+
+<header
+  class="bg-neutral-900 border-b-2 border-neutral-600 flex items-center justify-between p-4 select-none sticky top-0 z-[998] md:px-8">
+  <a class="flex items-center gap-2" href="/">
+    <Icon class="text-transparent h-10 w-10" name="logo" />
+    <h1 class="font-bold text-xl text-white">FUTURE 攻坚组</h1>
+  </a>
+  <nav class="hidden gap-8 items-center md:flex">
+    <NavLink name="首页" title="INDEX" url="/" re={/^\/$/} />
+    <NavLink name="关于" title="ABOUT" url="/about" re={/^\/about$/} />
+    <NavLink name="文章" title="POSTS" url="/posts" re={/^\/posts(\/.*)?$/} />
+    <NavLink
+      name="谜题"
+      title="PUZZLES"
+      url="/puzzles"
+      re={/^\/puzzles(\/.*)?$/}
+    />
+  </nav>
+  <button class="md:hidden" id="nav-menu-btn" transition:persist>
+    <Icon class="text-2xl" name="mdi:menu" />
+  </button>
+  <div
+    class="bg-black/90 fixed hidden items-center justify-center inset-0 z-40"
+    id="alt-nav"
+    transition:animate={fade}>
+    <nav class="flex flex-col gap-4">
+      <NavLink alt name="首页" title="INDEX" url="/" re={/^\/$/} />
+      <NavLink alt name="关于" title="ABOUT" url="/about" re={/^\/about$/} />
+      <NavLink
+        alt
+        name="文章"
+        title="POSTS"
+        url="/posts"
+        re={/^\/posts(\/.*)?$/}
+      />
+      <NavLink
+        alt
+        name="谜题"
+        title="PUZZLES"
+        url="/puzzles"
+        re={/^\/puzzles(\/.*)?$/}
+      />
+    </nav>
+  </div>
+</header>
+
+<style>
+  @keyframes fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  import anime from "animejs";
+
+  // Show alternative navigation bar
+  document
+    .querySelector<HTMLButtonElement>("#nav-menu-btn")!
+    .addEventListener("click", (): void => {
+      anime({
+        targets: "#alt-nav",
+        opacity: ["0", "1"],
+        duration: 200,
+        easing: "linear",
+        begin: (): void => {
+          document.querySelector<HTMLDivElement>("#alt-nav")!.style.display =
+            "flex";
+        },
+      });
+    });
+
+  // Hide alternative navigation bar
+  document.addEventListener("astro:page-load", (): void =>
+    document
+      .querySelector<HTMLDivElement>("#alt-nav")!
+      .addEventListener("click", (): void => {
+        anime({
+          targets: "#alt-nav",
+          opacity: ["1", "0"],
+          duration: 200,
+          easing: "linear",
+          complete: (): void => {
+            document.querySelector<HTMLDivElement>("#alt-nav")!.style.display =
+              "none";
+          },
+        });
+      })
+  );
+</script>

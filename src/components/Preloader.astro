@@ -1,0 +1,59 @@
+<f-preloader transition:persist>
+  <div></div>
+  <div style={{ animationDelay: "0.1s" }}></div>
+  <div style={{ animationDelay: "0.2s" }}></div>
+  <div style={{ animationDelay: "0.3s" }}></div>
+  <div style={{ animationDelay: "0.4s" }}></div>
+  <div style={{ animationDelay: "0.5s" }}></div>
+</f-preloader>
+
+<style is:global>
+  @import "tailwindcss";
+
+  @keyframes f-preloader-stretch {
+    0% {
+      height: 5px;
+    }
+    50% {
+      height: 30px;
+    }
+    100% {
+      height: 5px;
+    }
+  }
+
+  f-preloader {
+    @apply bg-neutral-950 fixed flex gap-[10px] inset-0 items-center justify-center z-[1000];
+
+    & div {
+      @apply bg-white h-1 rounded-sm w-1;
+      animation: f-preloader-stretch 1s ease-in-out infinite;
+    }
+  }
+</style>
+
+<script>
+  import anime from "animejs";
+
+  class Preloader extends HTMLElement {
+    public connectedCallback(): void {
+      window.addEventListener(
+        "load",
+        (): void => {
+          anime({
+            targets: this,
+            opacity: [1, 0],
+            duration: 500,
+            delay: 1000,
+            easing: "easeInOutCubic",
+            complete: () => {
+              this.style.display = "none";
+            },
+          });
+        },
+        { once: true }
+      );
+    }
+  }
+  customElements.define("f-preloader", Preloader);
+</script>

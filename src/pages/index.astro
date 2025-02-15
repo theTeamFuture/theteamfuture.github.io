@@ -1,10 +1,122 @@
 ---
-import Layout from '../layouts/BaseLayout.astro';
+import { posts, puzzles } from "@/utils/meta";
+import moment from "moment";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Layouts
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+// Components
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import ExtLink from "@/components/ExtLink.astro";
 ---
 
-<Layout>
-  AAAAAAAAAA
-</Layout>
+<BaseLayout>
+  <!-- Title -->
+  <title slot="head-title">FUTURE 攻坚组</title>
+
+  <main class="mx-4 my-8 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
+    <h1 class="font-bold my-8 text-2xl text-center">
+      We create puzzles, we reveal puzzles
+    </h1>
+    <div
+      class="flex flex-wrap gap-4 items-center justify-center md:flex-nowrap">
+      <ExtLink href="https://www.skland.com/">
+        <Image
+          alt="Skland"
+          draggable="false"
+          loading="eager"
+          src="https://img.shields.io/badge/Skland-FUTURE%E6%94%BB%E5%9D%9A%E7%BB%84-gray?labelColor=90C208&style=for-the-badge"
+          inferSize
+        />
+      </ExtLink>
+      <ExtLink href="https://space.bilibili.com/1795756019">
+        <Image
+          alt="Bilibili"
+          draggable="false"
+          loading="eager"
+          src="https://img.shields.io/badge/Bilibili-FUTURE%E6%94%BB%E5%9D%9A%E7%BB%84-gray?labelColor=00AEEC&style=for-the-badge"
+          inferSize
+        />
+      </ExtLink>
+      <ExtLink href="https://weibo.com/u/7917542342">
+        <Image
+          alt="Weibo"
+          draggable="false"
+          loading="eager"
+          src="https://img.shields.io/badge/Weibo-FUTURE%E6%94%BB%E5%9D%9A%E7%BB%84-gray?labelColor=FF8200&style=for-the-badge"
+          inferSize
+        />
+      </ExtLink>
+      <ExtLink href="https://github.com/theTeamFuture">
+        <Image
+          alt="GitHub"
+          draggable="false"
+          loading="eager"
+          src="https://img.shields.io/badge/GitHub-theTeamFuture-gray?labelColor=22272E&style=for-the-badge"
+          inferSize
+        />
+      </ExtLink>
+    </div>
+    <hr class="border-neutral-500 border-t-4 my-12" />
+    <h2 class="font-bold my-4 text-xl">最新文章</h2>
+    <div class="grid grid-rows-3 gap-4 md:grid-cols-3 md:grid-rows-1">
+      {
+        posts.slice(0, 3).map(({ data }) => (
+          <a
+            class="border border-neutral-600 flex flex-col pt-4 px-4 pb-2 rounded-lg hover:bg-neutral-800"
+            href={`/posts/${data.slug}`}
+            title={data.title}>
+            <h1 class="font-bold">{data.title}</h1>
+            <p class="mb-4 text-neutral-500 text-sm">{data.excerpt}</p>
+            <div class="flex gap-1 items-center justify-end mt-auto text-xs">
+              <Icon name="mdi:calendar" />
+              <span>{moment(data.published_at).format("YYYY/MM/DD")}</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    <p class="my-2 text-right text-sm">
+      <a
+        class="text-blue-500 transition-colors hover:text-red-500"
+        href="/posts">查看全部</a
+      >
+    </p>
+    <h2 class="font-bold my-4 text-xl">最新谜题</h2>
+    <div class="grid grid-rows-3 gap-4 md:grid-cols-3 md:grid-rows-1">
+      {
+        puzzles.slice(0, 3).map(({ data }) => (
+          <a
+            class="border border-neutral-600 flex gap-1 justify-between p-4 rounded-lg hover:bg-neutral-800"
+            href={`/puzzles/${data.slug}`}
+            title={data.title}>
+            <div class="flex flex-col gap-2 justify-between">
+              <h1 class="font-bold">{data.title}</h1>
+              <div class="flex gap-1 items-center text-xs">
+                <Icon name="mdi:calendar" />
+                <span>{moment(data.published_at).format("YYYY/MM/DD")}</span>
+              </div>
+            </div>
+            {data.report ? (
+              <Icon
+                class="flex-shrink-0 text-5xl self-center text-neutral-700"
+                name="mdi:box-variant"
+              />
+            ) : (
+              <Icon
+                class="flex-shrink-0 text-5xl self-center text-neutral-500"
+                name="mdi:box-variant-closed"
+              />
+            )}
+          </a>
+        ))
+      }
+    </div>
+    <p class="my-2 text-right text-sm">
+      <a
+        class="text-blue-500 transition-colors hover:text-red-500"
+        href="/puzzles">查看全部</a>
+    </p>
+  </main>
+</BaseLayout>

@@ -4,6 +4,10 @@ import "@/styles/base.css";
 
 // Components
 import { ClientRouter } from "astro:transitions";
+import Loader from "@/components/Loader.astro";
+import Preloader from "@/components/Preloader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
 
 // Fonts
 import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
@@ -38,12 +42,59 @@ import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
     <slot name="head-styles" />
 
     <!-- Scripts -->
+    <script>
+      import { fetchAndShow } from "@/utils/vercount";
+
+      // On page load
+      document.addEventListener("astro:page-load", (): void => {
+        // Add smooth scrolling for article anchors
+        document
+          .querySelectorAll<HTMLAnchorElement>(
+            "article a:not([data-smooth-scrolling])"
+          )
+          .forEach((el: HTMLAnchorElement): void => {
+            // If not an anchor
+            if (!el.getAttribute("href")?.startsWith("#")) {
+              return;
+            }
+
+            // Add listener
+            el.addEventListener("click", (ev: MouseEvent): void => {
+              ev.preventDefault();
+
+              // Get target element
+              const target: HTMLElement | null = document.querySelector(
+                el.getAttribute("href")!
+              );
+              if (target === null) {
+                return;
+              }
+
+              // Scroll to element
+              window.scrollTo({
+                top: window.scrollY + target.getBoundingClientRect().top - 80,
+                behavior: "smooth",
+              });
+            });
+
+            // Update attribute
+            el.setAttribute("data-smooth-scrolling", "");
+          });
+
+        // Show site count
+        fetchAndShow();
+      });
+    </script>
     <slot name="head-scripts" />
 
     <!-- View transition -->
     <ClientRouter />
   </head>
   <body>
+    <Preloader />
+    <Loader />
+    <SiteHeader />
     <slot />
+    <SiteFooter />
   </body>
 </html>

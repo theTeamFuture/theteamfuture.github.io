@@ -1,0 +1,58 @@
+---
+import moment from "moment";
+
+// Components
+import { Icon } from "astro-icon/components";
+
+// Types
+type Props = {
+  date: Date;
+  word_count?: number;
+  tags?: string[];
+};
+
+// Injects
+const { date, word_count, tags } = Astro.props;
+
+// Functions
+const formatNumber = (num: number, unit: string): string => {
+  if (num < 1000) {
+    return num.toString() + " " + unit;
+  } else if (num < 1000000) {
+    return (num / 1000).toFixed(1) + "k " + unit;
+  } else {
+    return (num / 1000000).toFixed(1) + "m " + unit;
+  }
+};
+---
+
+<div class="flex items-center gap-4 text-neutral-500 text-sm">
+  <div class="flex items-center gap-1">
+    <Icon name="mdi:calendar" />
+    <span>{moment(date).format("YYYY/MM/DD")}</span>
+  </div>
+  {
+    tags && (
+      <div class="flex gap-1 items-center">
+        <Icon name="mdi:tag" />
+        {tags.map((v: string) => (
+          <span>{v}</span>
+        ))}
+      </div>
+    )
+  }
+  {
+    word_count && (
+      <div class="flex items-center gap-1">
+        <Icon name="mdi:text" />
+        <span title={word_count.toString()}>
+          {formatNumber(word_count, "字")}
+        </span>
+      </div>
+    )
+  }
+  <div class="flex items-center gap-1">
+    <Icon name="mdi:eye-outline" />
+    <span id="busuanzi_value_page_pv">…</span>
+  </div>
+</div>

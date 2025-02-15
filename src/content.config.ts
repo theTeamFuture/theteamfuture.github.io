@@ -25,6 +25,7 @@ const posts = defineCollection({
     author: reference("authors"),
     title: z.string().min(1),
     excerpt: z.string().min(1),
+    slug: z.string().min(1),
     published_at: z.date(),
     tags: z.array(z.string().min(1)).optional(),
   }),
@@ -34,6 +35,7 @@ const puzzles = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "contents/puzzles" }),
   schema: z.object({
     title: z.string().min(1),
+    slug: z.string().min(1),
     published_at: z.date(),
     report: z
       .string()

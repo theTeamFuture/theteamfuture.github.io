@@ -1,0 +1,74 @@
+<f-loader transition:persist></f-loader>
+
+<style is:global>
+  @import "tailwindcss";
+
+  f-loader {
+    @apply bg-blue-500 fixed h-1 hidden left-0 top-0 z-[999];
+  }
+</style>
+
+<script>
+  import type { AnimeInstance } from "animejs";
+  import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
+  import anime from "animejs";
+
+  class Loader extends HTMLElement {
+    private instance: AnimeInstance | null = null;
+
+    public connectedCallback(): void {
+      // On page before preparation
+      document.addEventListener(
+        "astro:before-preparation",
+        (ev: TransitionBeforePreparationEvent): void => {
+          // Not show load bar when get assets
+          if (ev.to.pathname.startsWith("/assets")) {
+            return;
+          }
+
+          // Stop old animation
+          if (this.instance !== null) {
+            this.instance.pause();
+            this.instance.complete?.(this.instance);
+          }
+
+          // Start new animation
+          this.instance = anime({
+            targets: this,
+            width: ["0%", "90%"],
+            duration: 5000,
+            easing: "easeOutCubic",
+            begin: (): void => {
+              this.style.display = "block";
+            },
+            complete: (): void => {
+              this.instance = null;
+            },
+          });
+        }
+      );
+
+      // On page loaded
+      document.addEventListener("astro:after-preparation", (): void => {
+        // Stop old animation
+        if (this.instance !== null) {
+          this.instance.pause();
+          this.instance.complete?.(this.instance);
+        }
+
+        // Start new animation
+        this.instance = anime({
+          targets: this,
+          width: "100%",
+          duration: 500,
+          easing: "linear",
+          complete: (): void => {
+            this.style.display = "none";
+            this.instance = null;
+          },
+        });
+      });
+    }
+  }
+  customElements.define("f-loader", Loader);
+</script>

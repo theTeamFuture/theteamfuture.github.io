@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+// Types
+type Props = HTMLAttributes<"a">;
+---
+
+<a
+  class="text-blue-500 transition-colors hover:text-red-500"
+  rel="noopener noreferer"
+  target="_blank"
+  {...Astro.props}><slot /></a
+>

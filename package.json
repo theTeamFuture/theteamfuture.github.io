@@ -14,6 +14,7 @@
     "@iconify-json/mdi": "^1.2.3",
     "@tailwindcss/vite": "^4.0.6",
     "alfaaz": "^1.1.0",
+    "animejs": "^3.2.2",
     "astro": "^5.3.0",
     "astro-icon": "^1.1.5",
     "chalk": "^5.4.1",
@@ -22,6 +23,7 @@
     "html-minifier-terser": "^7.2.0",
     "mdast-util-find-and-replace": "^3.0.2",
     "mdast-util-to-string": "^4.0.0",
+    "moment": "^2.30.1",
     "rehype-external-links": "^3.0.0",
     "rehype-katex": "^7.0.1",
     "remark-extended-table": "^2.0.2",
@@ -35,6 +37,7 @@
   },
   "packageManager": "pnpm@10.4.0+sha512.6b849d0787d97f8f4e1f03a9b8ff8f038e79e153d6f11ae539ae7c435ff9e796df6a862c991502695c7f9e8fac8aeafc1ac5a8dab47e36148d183832d886dd52",
   "devDependencies": {
+    "@types/animejs": "^3.1.13",
     "@types/hast": "^3.0.4",
     "@types/html-minifier-terser": "^7.0.2",
     "@types/mdast": "^4.0.4",

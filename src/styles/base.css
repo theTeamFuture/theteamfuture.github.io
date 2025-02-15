@@ -10,8 +10,3 @@
 ::-webkit-scrollbar-track {
   @apply bg-neutral-500 cursor-pointer;
 }
-
-/* Default anchor */
-a {
-  @apply text-blue-500 transition-colors hover:text-red-500;
-}
