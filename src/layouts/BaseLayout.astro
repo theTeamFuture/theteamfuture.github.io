@@ -31,7 +31,7 @@ import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
     <slot name="head-links" />
 
     <!-- Styles -->
-    <style define:vars={{ ff: css.family }}>
+    <style define:vars={{ ff: css.family }} is:global>
       @import "tailwindcss";
 
       body {
@@ -43,7 +43,7 @@ import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
 
     <!-- Scripts -->
     <script>
-      import { fetchAndShow } from "@/utils/vercount";
+      import { fetchAndShow } from "@/utils/vercount.client";
 
       // On page load
       document.addEventListener("astro:page-load", (): void => {

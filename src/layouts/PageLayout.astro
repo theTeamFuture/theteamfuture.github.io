@@ -22,16 +22,7 @@ type Props = MarkdownLayoutProps<{
 const { frontmatter } = Astro.props;
 ---
 
-<BaseLayout
-  title={`${frontmatter.title} - FUTURE 攻坚组`}
-  og={{
-    basic: {
-      title: `${frontmatter.title} - FUTURE 攻坚组`,
-      type: "website",
-      image: "/favicon.svg",
-      url: Astro.request.url,
-    },
-  }}>
+<BaseLayout>
   <!-- Title -->
   <title slot="head-title">{`${frontmatter.title} - FUTURE 攻坚组`}</title>
 
@@ -58,6 +49,13 @@ const { frontmatter } = Astro.props;
     <meta name="word_count" content={frontmatter.word_count.toString()} />
   </Fragment>
 
+  <!-- Links -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Main body -->
   <main class="mx-4 my-12 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
     <h1 class="font-bold text-3xl">{frontmatter.title}</h1>
     <ArticleMeta

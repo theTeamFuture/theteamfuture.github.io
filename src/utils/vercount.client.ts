@@ -1,3 +1,6 @@
+import { formatNumber } from "@/utils/number";
+
+// Global nonce
 let nonce: number | null = null;
 
 export const fetchAndShow = async (): Promise<void> => {
@@ -22,7 +25,9 @@ export const fetchAndShow = async (): Promise<void> => {
         `#busuanzi_value_${id}`
       );
       if (el !== null) {
-        el.textContent = data[id] || "0";
+        const num: number = parseInt(data[id] || "0");
+        el.textContent = formatNumber(num, "");
+        el.title = num.toString();
       }
     });
   } catch (err: unknown) {

@@ -1,0 +1,45 @@
+---
+// Style sheets
+import "@/styles/base.css";
+
+// Fonts
+import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
+---
+
+<html lang="zh">
+  <head>
+    <title>404 - FUTURE 攻坚组</title>
+
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta content={Astro.generator} name="generator" />
+
+    <link rel="canonical" href={Astro.url} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <style define:vars={{ ff: css.family }}>
+      @import "tailwindcss";
+
+      body {
+        @apply bg-neutral-900 text-white;
+        font-family: var(--ff);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="fixed flex flex-col gap-4 inset-0 items-center justify-center">
+      <div class="flex font-bold gap-1 items-end select-none text-neutral-700">
+        <h1 class="leading-none text-5xl">404</h1>
+        <div class="text-xl">
+          <h2 class="leading-none">Not</h2>
+          <h2 class="leading-none">Found</h2>
+        </div>
+      </div>
+      <a
+        class="text-blue-500 text-sm transition-colors hover:text-red-500"
+        href="/">回到主页</a
+      >
+    </div>
+  </body>
+</html>

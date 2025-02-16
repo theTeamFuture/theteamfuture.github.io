@@ -1,0 +1,41 @@
+---
+// Style sheets
+import "@/styles/base.css";
+
+// Components
+import Preloader from "@/components/Preloader.astro";
+import TimeCapsuleForm from "@/components/TimeCapsuleForm.astro";
+import TimeCapsuleModal from "@/components/TimeCapsuleModal.astro";
+
+// Fonts
+import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
+---
+
+<html lang="zh">
+  <head>
+    <title>Time Capsule</title>
+
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta content={Astro.generator} name="generator" />
+
+    <link rel="canonical" href={Astro.url} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <style define:vars={{ ff: css.family }}>
+      @import "tailwindcss";
+
+      body {
+        @apply bg-neutral-900 text-white;
+        font-family: var(--ff);
+      }
+    </style>
+  </head>
+  <body class="bg-neutral-900 font-misans text-white">
+    <Preloader />
+    <TimeCapsuleForm />
+    <TimeCapsuleModal />
+    <script src="@/utils/time-capsule.client"></script>
+  </body>
+</html>
