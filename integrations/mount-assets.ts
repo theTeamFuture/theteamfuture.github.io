@@ -10,6 +10,7 @@ export default function mountAssets(): AstroIntegration {
         // Skip local build
         if (process.env.GITHUB_ACTIONS !== "true") {
           logger.info("Skip mounting on local build");
+          fs.rmSync("meta.json");
           return;
         }
 
