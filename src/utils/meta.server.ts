@@ -2,6 +2,7 @@ import type { ImageMetadata } from "astro";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import fs from "node:fs";
+import path from 'node:path';
 
 // Get posts
 export const posts: CollectionEntry<"posts">[] = (
@@ -30,9 +31,9 @@ if (import.meta.env.PROD) {
   const postIdSlugMap: Record<string, string> = posts.reduce(
     (
       prev: Record<string, string>,
-      { id, data }: CollectionEntry<"posts">
+      { data, filePath }: CollectionEntry<"posts">
     ): Record<string, string> => {
-      prev[id] = data.slug;
+      prev[path.basename(filePath!)] = data.slug;
       return prev;
     },
     {}
@@ -40,9 +41,9 @@ if (import.meta.env.PROD) {
   const puzzleIdSlugMap: Record<string, string> = puzzles.reduce(
     (
       prev: Record<string, string>,
-      { id, data }: CollectionEntry<"puzzles">
+      { data, filePath }: CollectionEntry<"puzzles">
     ): Record<string, string> => {
-      prev[id] = data.slug;
+      prev[path.basename(filePath!)]= data.slug;
       return prev;
     },
     {}
