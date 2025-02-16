@@ -15,7 +15,10 @@ import ExtLink from "@/components/ExtLink.astro";
 const { post } = Astro.props;
 
 // Contants
-const author: CollectionEntry<"authors"> = await getEntry(post.data.author);
+const author: CollectionEntry<"authors"> = await getEntry(
+  "authors",
+  post.data.author.id.toLowerCase()
+)!;
 const { Content, remarkPluginFrontmatter } = await render(post);
 
 // Export path function
