@@ -1,13 +1,15 @@
 ---
+import moment from "moment";
+
 // Style sheets
-import '@/styles/markdown.css';
+import "@/styles/markdown.css";
 
 // Layouts
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 // Components
-import { Icon } from 'astro-icon/components';
-import ArticleMeta from '@/components/ArticleMeta.astro';
+import { Icon } from "astro-icon/components";
+import ArticleMeta from "@/components/ArticleMeta.astro";
 
 // Types
 type Props = {
@@ -15,23 +17,38 @@ type Props = {
   title: string;
   date: Date;
   tags?: string[];
-  length?: number;
+  word_count?: number;
 };
 
 // Injects
-const { menuUrl, title, date, tags, length } = Astro.props;
+const { menuUrl, title, date, tags, word_count } = Astro.props;
 ---
 
-<BaseLayout
-  title={`${title} - FUTURE 攻坚组`}
-  og={{
-    basic: {
-      title: `${title} - FUTURE 攻坚组`,
-      type: 'article',
-      image: '/favicon.svg',
-      url: Astro.request.url
-    }
-  }}>
+<BaseLayout>
+  <!-- Title -->
+  <title slot="head-title">{`${title} - FUTURE 攻坚组`}</title>
+
+  <!-- Metadata -->
+  <Fragment slot="head-metas">
+    <meta property="og:title" content={`${title} - FUTURE 攻坚组`} />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content="zh-CN" />
+    <meta property="og:site_name" content="FUTURE 攻坚组" />
+    <meta property="article:published_time" content={moment(date).format()} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} - FUTURE 攻坚组`} />
+    {word_count && <meta name="word_count" content={word_count.toString()} />}
+  </Fragment>
+
+  <!-- Links -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Main body -->
   <main class="flex flex-col mx-4 my-12 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
     <button
       class="flex items-center text-neutral-400 transition-colors hover:text-white"
@@ -41,19 +58,19 @@ const { menuUrl, title, date, tags, length } = Astro.props;
       <span>返回目录</span>
     </button>
     <h1 class="font-bold mt-8 text-3xl">{title}</h1>
-    <ArticleMeta date={date} length={length} tags={tags} />
+    <ArticleMeta date={date} word_count={word_count} tags={tags} />
     <hr class="border-t-2 border-neutral-700 my-4" />
     <slot />
   </main>
 </BaseLayout>
 
 <script>
-  import { navigate } from 'astro:transitions/client';
+  import { navigate } from "astro:transitions/client";
 
-  document.addEventListener('astro:page-load', (): void => {
+  document.addEventListener("astro:page-load", (): void => {
     document
-      .querySelector<HTMLButtonElement>('#back-posts-btn')
-      ?.addEventListener('click', function (): void {
+      .querySelector<HTMLButtonElement>("#back-posts-btn")
+      ?.addEventListener("click", function (): void {
         navigate(this.dataset.menuUrl!);
       });
   });

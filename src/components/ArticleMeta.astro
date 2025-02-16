@@ -1,35 +1,25 @@
 ---
-import moment from 'moment';
+import { formatNumber } from "@/utils/number";
+import moment from "moment";
 
 // Components
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 // Types
 type Props = {
   date: Date;
-  length?: number;
+  word_count?: number;
   tags?: string[];
 };
 
 // Injects
-const { date, length, tags } = Astro.props;
-
-// Functions
-const formatNumber = (num: number, unit: string): string => {
-  if (num < 1000) {
-    return num.toString() + ' ' + unit;
-  } else if (num < 1000000) {
-    return (num / 1000).toFixed(1) + 'k ' + unit;
-  } else {
-    return (num / 1000000).toFixed(1) + 'm ' + unit;
-  }
-};
+const { date, word_count, tags } = Astro.props;
 ---
 
 <div class="flex items-center gap-4 text-neutral-500 text-sm">
   <div class="flex items-center gap-1">
     <Icon name="mdi:calendar" />
-    <span>{moment(date).format('YYYY/MM/DD')}</span>
+    <span>{moment(date).format("YYYY/MM/DD")}</span>
   </div>
   {
     tags && (
@@ -42,10 +32,12 @@ const formatNumber = (num: number, unit: string): string => {
     )
   }
   {
-    length && (
+    word_count && (
       <div class="flex items-center gap-1">
         <Icon name="mdi:text" />
-        <span title={length.toString()}>{formatNumber(length, '字')}</span>
+        <span title={word_count.toString()}>
+          {formatNumber(word_count, "字")}
+        </span>
       </div>
     )
   }

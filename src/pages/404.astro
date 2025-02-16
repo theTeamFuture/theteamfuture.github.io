@@ -1,41 +1,33 @@
 ---
 // Style sheets
-import '@/styles/base.css';
-
-// Components
-import { SEO } from 'astro-seo';
-import Preloader from '@/components/Preloader.astro';
+import "@/styles/base.css";
 
 // Fonts
-import { css as miNormal } from '@/assets/fonts/MiSans-Normal.ttf';
-import { css as miSemi } from '@/assets/fonts/MiSans-Semibold.ttf';
+import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
 ---
 
 <html lang="zh">
   <head>
-    <SEO title="404 - FUTURE 攻坚组" charset="utf-8" />
-    <link href="/favicon.svg" rel="icon" />
+    <title>404 - FUTURE 攻坚组</title>
+
+    <meta charset="utf-8" />
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <meta content={Astro.generator} name="generator" />
-    <script
-      src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"
-      defer
-      is:inline></script>
-    <style
-      define:vars={{ miNormal: miNormal.family, miSemi: miSemi.family }}
-      is:global
-    >
-      .font-misans {
-        font-family: var(--miNormal);
-      }
-      .font-bold {
-        font-family: var(--miSemi);
-        font-weight: unset;
+
+    <link rel="canonical" href={Astro.url} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <style define:vars={{ ff: css.family }}>
+      @import "tailwindcss";
+
+      body {
+        @apply bg-neutral-900 text-white;
+        font-family: var(--ff);
       }
     </style>
   </head>
-  <body class="bg-neutral-900 font-misans text-white">
-    <Preloader />
+  <body>
     <div class="fixed flex flex-col gap-4 inset-0 items-center justify-center">
       <div class="flex font-bold gap-1 items-end select-none text-neutral-700">
         <h1 class="leading-none text-5xl">404</h1>
@@ -44,7 +36,10 @@ import { css as miSemi } from '@/assets/fonts/MiSans-Semibold.ttf';
           <h2 class="leading-none">Found</h2>
         </div>
       </div>
-      <a class="text-sm" href="/">回到主页</a>
+      <a
+        class="text-blue-500 text-sm transition-colors hover:text-red-500"
+        href="/">回到主页</a
+      >
     </div>
   </body>
 </html>

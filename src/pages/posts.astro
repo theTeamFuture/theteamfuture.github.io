@@ -1,26 +1,26 @@
 ---
-import { posts } from '@/utils/meta';
-import moment from 'moment';
+import { posts } from "@/utils/meta.server";
+import moment from "moment";
 
 // Layouts
-import ArchiveLayout from '@/layouts/ArchiveLayout.astro';
+import ArchiveLayout from "@/layouts/ArchiveLayout.astro";
 
 // Components
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 ---
 
 <ArchiveLayout title="所有文章" total={posts.length}>
   {
-    posts.map(({ data, slug }) => (
+    posts.map(({ data }) => (
       <a
         class="border border-neutral-600 flex flex-col p-4 rounded-lg text-white hover:bg-neutral-800 hover:text-white"
-        href={`/posts/${slug}`}
+        href={`/posts/${data.slug}`}
         title={data.title}>
         <h1 class="font-bold text-lg">{data.title}</h1>
         <div class="flex gap-4 items-center text-neutral-500 text-xs">
           <div class="flex gap-1 items-center">
             <Icon name="mdi:calendar" />
-            <span>{moment(data.published_at).format('YYYY/MM/DD')}</span>
+            <span>{moment(data.published_at).format("YYYY/MM/DD")}</span>
           </div>
           {data.tags && (
             <div class="flex gap-1 items-center">

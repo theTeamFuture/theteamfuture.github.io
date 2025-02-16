@@ -1,34 +1,34 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import type { GetStaticPaths } from 'astro';
-import { getEntry } from 'astro:content';
-import { avatars, posts } from '@/utils/meta';
+import type { CollectionEntry } from "astro:content";
+import type { GetStaticPaths } from "astro";
+import { avatars, posts } from "@/utils/meta.server";
+import { getEntry, render } from "astro:content";
 
 // Layouts
-import PostLayout from '@/layouts/PostLayout.astro';
+import PostLayout from "@/layouts/PostLayout.astro";
 
 // Components
-import { Image } from 'astro:assets';
-import ExternalLink from '@/components/utils/ExternalLink.astro';
+import { Image } from "astro:assets";
+import ExtLink from "@/components/ExtLink.astro";
 
 // Injects
 const { post } = Astro.props;
 
 // Contants
-const author: CollectionEntry<'authors'> = await getEntry(post.data.author);
-const { Content, remarkPluginFrontmatter } = await post.render();
+const author: CollectionEntry<"authors"> = await getEntry(post.data.author);
+const { Content, remarkPluginFrontmatter } = await render(post);
 
 // Export path function
 export const getStaticPaths = (() =>
-  posts.map((v: CollectionEntry<'posts'>) => {
+  posts.map((v: CollectionEntry<"posts">) => {
     // Validate slug
-    if (!/^(?!page$)[\da-zA-Z-]+$/.test(v.slug)) {
-      throw Error('Slug invalid: ' + v.slug);
+    if (!/^(?!page$)[\da-zA-Z-]+$/.test(v.data.slug)) {
+      throw Error("Slug invalid: " + v.data.slug);
     }
 
     return {
-      params: { slug: v.slug },
-      props: { post: v }
+      params: { slug: v.data.slug },
+      props: { post: v },
     };
   })) satisfies GetStaticPaths;
 ---
@@ -38,15 +38,15 @@ export const getStaticPaths = (() =>
   title={post.data.title}
   date={post.data.published_at}
   tags={post.data.tags}
-  length={remarkPluginFrontmatter.content_length}>
+  word_count={remarkPluginFrontmatter.word_count}>
   <div class="flex items-center my-4">
     {
-      author.data.avatar.startsWith('@avatars/') ? (
+      author.data.avatar.startsWith("@avatars/") ? (
         <Image
           alt="avatar"
           class="h-[60px] rounded-full transition-transform w-[60px] hover:scale-110"
           src={avatars[
-            author.data.avatar.replace(/^@avatars/, '/src/assets/avatars')
+            author.data.avatar.replace(/^@avatars/, "/src/assets/avatars")
           ]()}
         />
       ) : (
@@ -66,7 +66,7 @@ export const getStaticPaths = (() =>
         {
           author.data.urls?.map(
             ({ name, url }: { name: string; url: string }) => (
-              <ExternalLink href={url}>{name}</ExternalLink>
+              <ExtLink href={url}>{name}</ExtLink>
             )
           )
         }

@@ -1,9 +1,9 @@
 ---
 // Style sheets
-import '@/styles/markdown.css';
+import "@/styles/markdown.css";
 
 // Layouts
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import BaseLayout from "@/layouts/BaseLayout.astro";
 
 // Types
 type Props = {
@@ -15,16 +15,23 @@ type Props = {
 const { title, total } = Astro.props;
 ---
 
-<BaseLayout
-  title={`${title} - FUTURE 攻坚组`}
-  og={{
-    basic: {
-      title: `${title} - FUTURE 攻坚组`,
-      type: 'website',
-      image: '/favicon.svg',
-      url: Astro.request.url
-    }
-  }}>
+<BaseLayout>
+  <!-- Title -->
+  <title slot="head-title">{`${title} - FUTURE 攻坚组`}</title>
+
+  <!-- Metadata -->
+  <Fragment slot="head-metas">
+    <meta property="og:title" content={`${title} - FUTURE 攻坚组`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content="zh-CN" />
+    <meta property="og:site_name" content="FUTURE 攻坚组" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} - FUTURE 攻坚组`} />
+  </Fragment>
+
+  <!-- Main body -->
   <main
     class="flex flex-col gap-4 mx-4 my-12 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
     <h1 class="font-bold text-2xl">{title} ({total})</h1>

@@ -1,8 +1,12 @@
-/* Markdown */
+@import "tailwindcss";
 
 article {
   :not(pre) > code {
     @apply bg-neutral-600 font-mono px-1 py-0.5 rounded text-sm text-white;
+  }
+
+  a {
+    @apply text-blue-500 transition-colors hover:text-red-500;
   }
 
   audio {

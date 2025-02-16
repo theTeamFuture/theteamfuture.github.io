@@ -1,38 +1,34 @@
 ---
 // Style sheets
-import '@/styles/base.css';
+import "@/styles/base.css";
 
 // Components
-import { SEO } from 'astro-seo';
-import Preloader from '@/components/Preloader.astro';
-import TimeCapsuleForm from '@/components/time-capsule/TimeCapsuleForm.astro';
-import TimeCapsuleModal from '@/components/time-capsule/TimeCapsuleModal.astro';
+import Preloader from "@/components/Preloader.astro";
+import TimeCapsuleForm from "@/components/TimeCapsuleForm.astro";
+import TimeCapsuleModal from "@/components/TimeCapsuleModal.astro";
 
 // Fonts
-import { css as miNormal } from '@/assets/fonts/MiSans-Normal.ttf';
-import { css as miSemi } from '@/assets/fonts/MiSans-Semibold.ttf';
+import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
 ---
 
 <html lang="zh">
   <head>
-    <SEO title="Time Capsule" charset="utf-8" />
-    <link href="/favicon.svg" rel="icon" />
+    <title>Time Capsule</title>
+
+    <meta charset="utf-8" />
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <meta content={Astro.generator} name="generator" />
-    <script
-      src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"
-      defer
-      is:inline></script>
-    <style
-      define:vars={{ miNormal: miNormal.family, miSemi: miSemi.family }}
-      is:global
-    >
-      .font-misans {
-        font-family: var(--miNormal);
-      }
-      .font-bold {
-        font-family: var(--miSemi);
-        font-weight: unset;
+
+    <link rel="canonical" href={Astro.url} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+
+    <style define:vars={{ ff: css.family }}>
+      @import "tailwindcss";
+
+      body {
+        @apply bg-neutral-900 text-white;
+        font-family: var(--ff);
       }
     </style>
   </head>
@@ -40,6 +36,6 @@ import { css as miSemi } from '@/assets/fonts/MiSans-Semibold.ttf';
     <Preloader />
     <TimeCapsuleForm />
     <TimeCapsuleModal />
-    <script src="@/scripts/time-capsule"></script>
+    <script src="@/utils/time-capsule.client"></script>
   </body>
 </html>

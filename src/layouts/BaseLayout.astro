@@ -1,66 +1,100 @@
 ---
-import type { SEOProps } from 'astro-seo';
-
 // Style sheets
-import '@/styles/base.css';
+import "@/styles/base.css";
 
 // Components
-import { SEO } from 'astro-seo';
-import { ViewTransitions } from 'astro:transitions';
-import Footer from '@/components/Footer.astro';
-import Header from '@/components/Header.astro';
-import LoadBar from '@/components/LoadBar.astro';
-import Preloader from '@/components/Preloader.astro';
+import { ClientRouter } from "astro:transitions";
+import Loader from "@/components/Loader.astro";
+import Preloader from "@/components/Preloader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
 
 // Fonts
-import { css as miNormal } from '@/assets/fonts/MiSans-Normal.ttf';
-import { css as miSemi } from '@/assets/fonts/MiSans-Semibold.ttf';
-
-// Types
-type Props = {
-  title: string;
-  og?: SEOProps['openGraph'];
-};
-
-// Injects
-const { title, og } = Astro.props;
+import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
 ---
 
 <html lang="zh">
   <head>
-    <SEO title={title} charset="utf-8" openGraph={og} />
-    <link href="/favicon.svg" rel="icon" />
-    <meta content="width=device-width,initial-scale=1" name="viewport" />
-    <meta content={Astro.generator} name="generator" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
-      rel="stylesheet"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"
-      defer
-      is:inline></script>
-    <script src="@/scripts/base-layout"></script>
-    <style
-      define:vars={{ miNormal: miNormal.family, miSemi: miSemi.family }}
-      is:global
-    >
-      .font-misans {
-        font-family: var(--miNormal);
-      }
-      .font-bold {
-        font-family: var(--miSemi);
-        font-weight: unset;
+    <!-- Title -->
+    <slot name="head-title" />
+
+    <!-- Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <slot name="head-metas" />
+
+    <!-- Links -->
+    <link rel="canonical" href={Astro.url} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
+    <slot name="head-links" />
+
+    <!-- Styles -->
+    <style define:vars={{ ff: css.family }} is:global>
+      @import "tailwindcss";
+
+      body {
+        @apply bg-neutral-900 flex flex-col min-h-screen text-white;
+        font-family: var(--ff);
       }
     </style>
-    <ViewTransitions />
+    <slot name="head-styles" />
+
+    <!-- Scripts -->
+    <script>
+      import { fetchAndShow } from "@/utils/vercount.client";
+
+      // On page load
+      document.addEventListener("astro:page-load", (): void => {
+        // Add smooth scrolling for article anchors
+        document
+          .querySelectorAll<HTMLAnchorElement>(
+            "article a:not([data-smooth-scrolling])"
+          )
+          .forEach((el: HTMLAnchorElement): void => {
+            // If not an anchor
+            if (!el.getAttribute("href")?.startsWith("#")) {
+              return;
+            }
+
+            // Add listener
+            el.addEventListener("click", (ev: MouseEvent): void => {
+              ev.preventDefault();
+
+              // Get target element
+              const target: HTMLElement | null = document.querySelector(
+                el.getAttribute("href")!
+              );
+              if (target === null) {
+                return;
+              }
+
+              // Scroll to element
+              window.scrollTo({
+                top: window.scrollY + target.getBoundingClientRect().top - 80,
+                behavior: "smooth",
+              });
+            });
+
+            // Update attribute
+            el.setAttribute("data-smooth-scrolling", "");
+          });
+
+        // Show site count
+        fetchAndShow();
+      });
+    </script>
+    <slot name="head-scripts" />
+
+    <!-- View transition -->
+    <ClientRouter />
   </head>
-  <body
-    class="bg-neutral-900 flex flex-col font-misans min-h-screen text-white">
+  <body>
     <Preloader />
-    <LoadBar />
-    <Header />
+    <Loader />
+    <SiteHeader />
     <slot />
-    <Footer />
+    <SiteFooter />
   </body>
 </html>

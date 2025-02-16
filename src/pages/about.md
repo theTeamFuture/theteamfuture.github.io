@@ -1,5 +1,5 @@
 ---
-layout: '@/layouts/PageLayout.astro'
+layout: "@/layouts/PageLayout.astro"
 title: 关于
 date: 2024-05-19
 ---
