@@ -33,7 +33,7 @@ const fade: TransitionDirectionalAnimations = {
   </a>
   <nav class="hidden gap-8 items-center md:flex">
     <NavLink name="首页" title="INDEX" url="/" re={/^\/$/} />
-    <NavLink name="关于" title="ABOUT" url="/about" re={/^\/about(\/.*)?$/} />
+    <NavLink name="关于" title="ABOUT" url="/about" re={/^\/about\/?$/} />
     <NavLink name="文章" title="POSTS" url="/posts" re={/^\/posts(\/.*)?$/} />
     <NavLink
       name="谜题"
@@ -51,13 +51,7 @@ const fade: TransitionDirectionalAnimations = {
     transition:animate={fade}>
     <nav class="flex flex-col gap-4">
       <NavLink alt name="首页" title="INDEX" url="/" re={/^\/$/} />
-      <NavLink
-        alt
-        name="关于"
-        title="ABOUT"
-        url="/about"
-        re={/^\/about(\/.*)?$/}
-      />
+      <NavLink alt name="关于" title="ABOUT" url="/about" re={/^\/about\/?$/} />
       <NavLink
         alt
         name="文章"

@@ -18,13 +18,16 @@ import ExtLink from "@/components/ExtLink.astro";
     <p class="hidden sm:block">
       总访问量 <span id="busuanzi_value_site_pv">…</span>
     </p>
-    <p class="hidden select-none md:block">|</p>
-    <p class="hidden md:block">
-      使用 <ExtLink href="https://astro.build">Astro</ExtLink> 强力驱动
-    </p>
     <p class="select-none">|</p>
     <p>
       <ExtLink href="https://github.com/theTeamFuture">GitHub</ExtLink>
     </p>
+  </div>
+  <div class="hidden gap-2 items-center justify-center sm:flex">
+    <p>
+      使用 <ExtLink href="https://astro.build">Astro</ExtLink> 强力驱动
+    </p>
+    <p class="select-none">|</p>
+    <p>构建于：{__BUILD_TIME__}</p>
   </div>
 </footer>

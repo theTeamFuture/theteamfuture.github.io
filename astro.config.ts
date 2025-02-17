@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import { resolve } from "node:path";
+import moment from "moment";
 
 // Integrations
 import htmlMinify from "./integrations/html-minify";
@@ -55,6 +56,9 @@ export default defineConfig({
       : undefined,
   site: "https://theteamfuture.github.io",
   vite: {
+    define: {
+      __BUILD_TIME__: JSON.stringify(moment().format()),
+    },
     plugins: [font.vite(), tailwindcss()],
     resolve: {
       alias: {
