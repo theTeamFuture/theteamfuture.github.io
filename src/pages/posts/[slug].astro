@@ -17,7 +17,7 @@ const { post } = Astro.props;
 // Contants
 const author: CollectionEntry<"authors"> = await getEntry(
   "authors",
-  post.data.author.id.toLowerCase()
+  post.data.author.id.toLowerCase(),
 )!;
 const { Content, remarkPluginFrontmatter } = await render(post);
 

@@ -3,7 +3,7 @@ import { sha256 } from "js-sha256";
 import anime from "animejs";
 
 // Busy flag
-let busy: boolean = false;
+let busy = false;
 
 // Reset modal
 const resetModal = (): void => {
@@ -192,14 +192,14 @@ const decryptFile = async (raw: string, passwd: string): Promise<string> => {
     rawkey,
     { name: "AES-GCM" },
     false,
-    ["decrypt"]
+    ["decrypt"],
   );
 
   // Decrypt
   const binData: ArrayBuffer = await crypto.subtle.decrypt(
     { name: "AES-GCM", iv },
     key,
-    data
+    data,
   );
   const utf8Data: string = new TextDecoder().decode(binData);
   if (utf8Data.split("\n").length < 3) {

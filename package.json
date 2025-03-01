@@ -7,7 +7,8 @@
     "dev": "astro dev",
     "build": "scripts/mount-repos.sh && astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "biome format --write ."
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -40,6 +41,7 @@
   },
   "packageManager": "pnpm@10.5.2+sha512.da9dc28cd3ff40d0592188235ab25d3202add8a207afbedc682220e4a0029ffbff4562102b9e6e46b4e3f9e8bd53e6d05de48544b0c57d4b0179e22c76d1199b",
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@types/animejs": "^3.1.13",
     "@types/hast": "^3.0.4",
     "@types/html-minifier-terser": "^7.0.2",
@@ -48,6 +50,7 @@
   },
   "pnpm": {
     "onlyBuiltDependencies": [
+      "@biomejs/biome",
       "cn-font-split",
       "esbuild",
       "koffi",

@@ -23,7 +23,7 @@ const { date, word_count, tags } = Astro.props;
   </div>
   {
     tags && (
-      <div class="flex gap-1 items-center">
+      <div class="gap-1 hidden items-center md:flex">
         <Icon name="mdi:tag" />
         {tags.map((v: string) => (
           <span>{v}</span>

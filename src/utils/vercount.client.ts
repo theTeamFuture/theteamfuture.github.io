@@ -22,10 +22,10 @@ export const fetchAndShow = async (): Promise<void> => {
     }
     ["site_pv", "page_pv", "site_uv"].forEach((id: string): void => {
       const el: HTMLElement | null = document.querySelector(
-        `#busuanzi_value_${id}`
+        `#busuanzi_value_${id}`,
       );
       if (el !== null) {
-        const num: number = parseInt(data[id] || "0");
+        const num: number = Number.parseInt(data[id] || "0");
         el.textContent = formatNumber(num, "");
         el.title = num.toString();
       }
@@ -34,7 +34,7 @@ export const fetchAndShow = async (): Promise<void> => {
     console.error("Error fetching visitor count:", err);
     ["site_pv", "page_pv", "site_uv"].forEach((id: string): void => {
       const el: HTMLElement | null = document.querySelector(
-        `#busuanzi_value_${id}`
+        `#busuanzi_value_${id}`,
       );
       if (el !== null) {
         el.style.display = "none";

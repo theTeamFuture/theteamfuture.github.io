@@ -26,7 +26,7 @@ export default function mountAssets(): AstroIntegration {
 
         // Get meta data
         const meta: Record<string, Record<string, string>> = JSON.parse(
-          fs.readFileSync("meta.json", "utf-8")
+          fs.readFileSync("meta.json", "utf-8"),
         );
         logger.info("Meta data got");
 
@@ -52,7 +52,7 @@ export default function mountAssets(): AstroIntegration {
             const slug: string = meta.post[dir.name.slice(1) + ".md"];
             fs.renameSync(assetsPath, `dist/assets/posts/${slug}`);
             logger.info(`Mount: ${assetsPath} -> dist/assets/posts/${slug}`);
-          }
+          },
         );
 
         // Find puzzles assets
@@ -77,7 +77,7 @@ export default function mountAssets(): AstroIntegration {
             const slug: string = meta.puzzle[dir.name.slice(1) + ".md"];
             fs.renameSync(assetsPath, `dist/assets/puzzles/${slug}`);
             logger.info(`Mount: ${assetsPath} -> dist/assets/puzzles/${slug}`);
-          }
+          },
         );
 
         // Remove meta file

@@ -31,8 +31,8 @@ export default function htmlMinify(): AstroIntegration {
         for (const i of assets.values()) {
           for (const j of i) {
             if (j.pathname.endsWith(".html")) {
-              let oldSize: number = 0;
-              let newSize: number = 0;
+              let oldSize = 0;
+              let newSize = 0;
 
               await fs
                 .readFile(j.pathname, "utf-8")
@@ -50,8 +50,8 @@ export default function htmlMinify(): AstroIntegration {
                   "  " +
                     j.pathname +
                     " " +
-                    `(-${(((oldSize - newSize) / oldSize) * 100).toFixed(1)}%)`
-                )
+                    `(-${(((oldSize - newSize) / oldSize) * 100).toFixed(1)}%)`,
+                ),
               );
             }
           }
