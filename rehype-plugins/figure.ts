@@ -51,7 +51,6 @@ export default function rehypeFigure(): Transformer<Root> {
               },
               children: figures,
             };
-      console.log(tree);
     });
   };
 }
