@@ -42,9 +42,8 @@ import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
     <slot name="head-styles" />
 
     <!-- Scripts -->
+    <script src="https://events.vercount.one/js" is:inline defer></script>
     <script>
-      import { fetchAndShow } from "@/utils/vercount.client";
-
       // On page load
       document.addEventListener("astro:page-load", (): void => {
         // Add smooth scrolling for article anchors
@@ -80,9 +79,6 @@ import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
             // Update attribute
             el.setAttribute("data-smooth-scrolling", "");
           });
-
-        // Show site count
-        fetchAndShow();
       });
     </script>
     <slot name="head-scripts" />
