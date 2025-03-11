@@ -23,19 +23,11 @@ import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
 
-    <style define:vars={{ ff: css.family }}>
-      @import "tailwindcss";
-
-      body {
-        @apply bg-neutral-900 text-white;
-        font-family: var(--ff);
-      }
-    </style>
+    <script src="@/utils/time-capsule.client"></script>
   </head>
-  <body class="bg-neutral-900 font-misans text-white">
+  <body class="bg-neutral-900 text-white" style={{ fontFamily: css.family }}>
     <Preloader />
     <TimeCapsuleForm />
     <TimeCapsuleModal />
-    <script src="@/utils/time-capsule.client"></script>
   </body>
 </html>

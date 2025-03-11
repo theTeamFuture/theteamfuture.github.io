@@ -31,17 +31,14 @@ import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
     <slot name="head-links" />
 
     <!-- Styles -->
-    <style define:vars={{ ff: css.family }} is:global>
-      @import "tailwindcss";
-
-      body {
-        @apply bg-neutral-900 flex flex-col min-h-screen text-white;
-        font-family: var(--ff);
-      }
-    </style>
     <slot name="head-styles" />
 
     <!-- Scripts -->
+    <script
+      is:inline
+      src="https://events.vercount.one/js"
+      data-astro-rerun
+      defer></script>
     <script>
       // On page load
       document.addEventListener("astro:page-load", (): void => {
@@ -78,11 +75,6 @@ import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
             // Update attribute
             el.setAttribute("data-smooth-scrolling", "");
           });
-
-        // Trigger vercount
-        const el: HTMLScriptElement = document.createElement("script");
-        el.src = "https://events.vercount.one/js";
-        document.body.appendChild(el);
       });
     </script>
     <slot name="head-scripts" />
@@ -90,7 +82,9 @@ import { css } from "@/fonts/LXGWNeoXiHeiPlus.ttf";
     <!-- View transition -->
     <ClientRouter />
   </head>
-  <body>
+  <body
+    class="bg-neutral-900 flex flex-col min-h-screen text-white"
+    style={{ fontFamily: css.family }}>
     <Preloader />
     <Loader />
     <SiteHeader />
