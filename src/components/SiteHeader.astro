@@ -82,18 +82,17 @@ const fade: TransitionDirectionalAnimations = {
 </style>
 
 <script>
-  import anime from "animejs";
+  import { animate } from "animejs";
 
   // Show alternative navigation bar
   document
     .querySelector<HTMLButtonElement>("#nav-menu-btn")!
     .addEventListener("click", (): void => {
-      anime({
-        targets: "#alt-nav",
+      animate("#alt-nav", {
         opacity: ["0", "1"],
         duration: 200,
-        easing: "linear",
-        begin: (): void => {
+        ease: "linear",
+        onBegin: (): void => {
           document.querySelector<HTMLDivElement>("#alt-nav")!.style.display =
             "flex";
         },
@@ -105,12 +104,11 @@ const fade: TransitionDirectionalAnimations = {
     document
       .querySelector<HTMLDivElement>("#alt-nav")!
       .addEventListener("click", (): void => {
-        anime({
-          targets: "#alt-nav",
+        animate("#alt-nav", {
           opacity: ["1", "0"],
           duration: 200,
-          easing: "linear",
-          complete: (): void => {
+          ease: "linear",
+          onComplete: (): void => {
             document.querySelector<HTMLDivElement>("#alt-nav")!.style.display =
               "none";
           },

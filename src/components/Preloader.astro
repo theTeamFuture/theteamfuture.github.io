@@ -33,20 +33,19 @@
 </style>
 
 <script>
-  import anime from "animejs";
+  import { animate } from "animejs";
 
   class Preloader extends HTMLElement {
     public connectedCallback(): void {
       window.addEventListener(
         "load",
         (): void => {
-          anime({
-            targets: this,
+          animate(this, {
             opacity: [1, 0],
             duration: 500,
             delay: 1000,
-            easing: "easeInOutCubic",
-            complete: () => {
+            ease: "inOutCubic",
+            onComplete: () => {
               this.style.display = "none";
             },
           });

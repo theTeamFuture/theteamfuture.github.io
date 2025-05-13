@@ -1,6 +1,6 @@
 import { Base64 } from "js-base64";
 import { sha256 } from "js-sha256";
-import anime from "animejs";
+import { animate } from "animejs";
 
 // Busy flag
 let busy = false;
@@ -23,15 +23,14 @@ const showModal = (): void => {
   }
 
   busy = true;
-  anime({
-    targets: "#modal",
+  animate("#modal", {
     opacity: ["0", "1"],
     duration: 250,
-    easing: "linear",
-    begin: (): void => {
+    ease: "linear",
+    onBegin: (): void => {
       document.querySelector<HTMLDivElement>("#modal")!.style.display = "flex";
     },
-    complete: (): void => {
+    onComplete: (): void => {
       busy = false;
     },
   });
@@ -44,12 +43,11 @@ export const hideModal = (): void => {
   }
 
   busy = true;
-  anime({
-    targets: "#modal",
+  animate("#modal", {
     opacity: ["1", "0"],
     duration: 250,
-    easing: "linear",
-    complete: (): void => {
+    ease: "linear",
+    onComplete: (): void => {
       resetModal();
       document.querySelector<HTMLButtonElement>("#query-btn")!.disabled = false;
       busy = false;
