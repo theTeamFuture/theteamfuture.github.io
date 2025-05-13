@@ -1,74 +1,77 @@
-<f-loader transition:persist></f-loader>
-
 <style is:global>
   @import "tailwindcss";
 
-  f-loader {
+  #loader {
     @apply bg-blue-500 fixed h-1 hidden left-0 top-0 z-[999];
   }
 </style>
 
 <script>
-  import type { AnimeInstance } from "animejs";
-  import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
-  import anime from "animejs";
+  import type { JSAnimation } from "animejs";
+  import { animate } from "animejs";
 
-  class Loader extends HTMLElement {
-    private instance: AnimeInstance | null = null;
+  const el = document.createElement("div");
+  el.id = "loader";
 
-    public connectedCallback(): void {
-      // On page before preparation
-      document.addEventListener(
-        "astro:before-preparation",
-        (ev: TransitionBeforePreparationEvent): void => {
-          // Not show load bar when get assets
-          if (ev.to.pathname.startsWith("/assets")) {
-            return;
-          }
+  let animation: JSAnimation | null = null;
 
-          // Stop old animation
-          if (this.instance !== null) {
-            this.instance.pause();
-            this.instance.complete?.(this.instance);
-          }
+  document.addEventListener("DOMContentLoaded", () => {
+    document.body.prepend(el);
+  });
 
-          // Start new animation
-          this.instance = anime({
-            targets: this,
-            width: ["0%", "90%"],
-            duration: 5000,
-            easing: "easeOutCubic",
-            begin: (): void => {
-              this.style.display = "block";
-            },
-            complete: (): void => {
-              this.instance = null;
-            },
-          });
-        }
-      );
-
-      // On page loaded
-      document.addEventListener("astro:after-preparation", (): void => {
-        // Stop old animation
-        if (this.instance !== null) {
-          this.instance.pause();
-          this.instance.complete?.(this.instance);
-        }
-
-        // Start new animation
-        this.instance = anime({
-          targets: this,
-          width: "100%",
-          duration: 500,
-          easing: "linear",
-          complete: (): void => {
-            this.style.display = "none";
-            this.instance = null;
-          },
-        });
-      });
+  document.addEventListener("astro:before-preparation", (ev) => {
+    // Not show load bar when get assets
+    if (ev.to.pathname.startsWith("/assets")) {
+      return;
     }
-  }
-  customElements.define("f-loader", Loader);
+
+    // Stop old animation
+    if (animation !== null) {
+      animation.complete();
+    }
+
+    // Start new animation
+    animation = animate(el, {
+      width: ["0%", "90%"],
+      duration: 5000,
+      ease: "outCubic",
+      onBegin: (): void => {
+        el.style.display = "block";
+        el.style.opacity = "1";
+      },
+      onComplete: (): void => {
+        animation = null;
+      },
+    });
+  });
+
+  document.addEventListener("astro:before-swap", (ev) => {
+    ev.newDocument.body.prepend(el);
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    // Stop old animation
+    if (animation !== null) {
+      animation.cancel();
+      animation = null;
+    }
+
+    // Start new animation
+    animation = animate(el, {
+      width: {
+        to: "100%",
+        duration: 500
+      },
+      opacity: {
+        to: "0",
+        duration: 100,
+        delay: 500
+      },
+      ease: "linear",
+      onComplete: (): void => {
+        el.style.display = "none";
+        animation = null;
+      },
+    });
+  });
 </script>
