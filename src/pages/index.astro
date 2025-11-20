@@ -15,7 +15,7 @@ import ExtLink from "@/components/ExtLink.astro";
   <!-- Title -->
   <title slot="head-title">FUTURE 攻坚组</title>
 
-  <main class="mx-4 my-8 lg:min-w-[768px] lg:mx-auto lg:w-1/2">
+  <main class="mx-4 my-8 lg:min-w-3xl lg:mx-auto lg:w-1/2">
     <h1 class="font-bold my-8 text-2xl text-center">
       We create puzzles, we reveal puzzles
     </h1>
@@ -100,12 +100,12 @@ import ExtLink from "@/components/ExtLink.astro";
             </div>
             {data.report ? (
               <Icon
-                class="flex-shrink-0 text-5xl self-center text-neutral-700"
+                class="shrink-0 text-5xl self-center text-neutral-700"
                 name="mdi:box-variant"
               />
             ) : (
               <Icon
-                class="flex-shrink-0 text-5xl self-center text-neutral-500"
+                class="shrink-0 text-5xl self-center text-neutral-500"
                 name="mdi:box-variant-closed"
               />
             )}
@@ -116,7 +116,8 @@ import ExtLink from "@/components/ExtLink.astro";
     <p class="my-2 text-right text-sm">
       <a
         class="text-blue-500 transition-colors hover:text-red-500"
-        href="/puzzles">查看全部</a>
+        href="/puzzles">查看全部</a
+      >
     </p>
   </main>
 </BaseLayout>

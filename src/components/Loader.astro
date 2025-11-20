@@ -2,7 +2,7 @@
   @import "tailwindcss";
 
   #loader {
-    @apply bg-blue-500 fixed h-1 hidden left-0 top-0 z-[999];
+    @apply bg-blue-500 fixed h-1 hidden left-0 top-0 z-999;
   }
 </style>
 
@@ -60,12 +60,12 @@
     animation = animate(el, {
       width: {
         to: "100%",
-        duration: 500
+        duration: 500,
       },
       opacity: {
         to: "0",
         duration: 100,
-        delay: 500
+        delay: 500,
       },
       ease: "linear",
       onComplete: (): void => {
