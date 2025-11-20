@@ -16,7 +16,7 @@
     "@tailwindcss/vite": "^4.1.6",
     "alfaaz": "^1.1.0",
     "animejs": "^4.0.2",
-    "astro": "^5.7.12",
+    "astro": "^5.15.9",
     "astro-icon": "^1.1.5",
     "chalk": "^5.4.1",
     "hast-util-parse-selector": "^4.0.0",
