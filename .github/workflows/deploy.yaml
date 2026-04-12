@@ -5,6 +5,10 @@ on:
   repository_dispatch:
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  pages: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -71,7 +75,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v5
 
       - name: Clean up artifacts
