@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # vscode setting
 .vscode/settings.json
+
+# wrangler
+.wrangler
