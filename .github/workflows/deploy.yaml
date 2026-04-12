@@ -6,35 +6,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           lfs: true
 
       - name: Checkout posts repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: posts-repo
           repository: theTeamFuture/posts
           token: ${{ secrets.GH_PAT }}
 
       - name: Checkout time capsule repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: time-capsules-repo
           repository: theTeamFuture/time-capsules
           token: ${{ secrets.GH_PAT }}
 
       - name: Setup PNPM
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
 
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          node-version: lts/Jod
+          node-version: lts/Krypton
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
@@ -64,22 +64,17 @@ jobs:
           retention-days: 1
           if-no-files-found: error
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      pages: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
       - name: Clean up artifacts
         if: always()
-        uses: geekyeggo/delete-artifact@v5
+        uses: geekyeggo/delete-artifact@v6
         with:
           name: github-pages
