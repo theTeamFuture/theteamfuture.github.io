@@ -1,0 +1,9 @@
+allowBuilds:
+  cn-font-split: true
+  esbuild: false
+  koffi: false
+  protobufjs: false
+  sharp: false
+
+overrides:
+  katex: $katex
