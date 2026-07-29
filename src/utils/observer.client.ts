@@ -15,8 +15,11 @@ export const obFmtNum = (
     const num = Number(raw);
     if (!Number.isFinite(num) || num < 0) return false;
 
-    el.textContent = fmtNum(num, fmtNumOpts);
-    el.setAttribute("title", splitNum(num));
+    const fmt = fmtNum(num, fmtNumOpts);
+    const title = splitNum(num);
+
+    if (el.textContent !== fmt) el.textContent = fmt;
+    if (el.getAttribute("title") !== title) el.setAttribute("title", title);
     return true;
   };
 
