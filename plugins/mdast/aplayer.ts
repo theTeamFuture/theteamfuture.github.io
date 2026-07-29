@@ -9,6 +9,7 @@ const replaceNode = (
   attrs: Record<string, unknown>,
 ) => {
   const rawOpts = {
+    loop: "none",
     ...attrs,
     volume: attrs.volume ? Number(attrs.volume) : undefined,
     audio: [
@@ -26,17 +27,9 @@ const replaceNode = (
   const opts = btoa(JSON.stringify(rawOpts));
 
   const id = "aplayer-" + Math.random().toString(16).slice(2);
-  ctx.replaceNode(node, {
-    type: "leafDirective",
-    name: "__aplayer",
-    data: {
-      hName: "div",
-      hProperties: { id },
-    },
-    children: [
-      {
-        type: "html",
-        value: `<script>
+  ctx.insertAfter(node, {
+    type: "html",
+    value: `<script data-astro-rerun>
   (() => {
     const f = () => {
       const el = document.querySelector("#${id}");
@@ -54,8 +47,15 @@ const replaceNode = (
     }
   })();
 </script>`,
-      },
-    ],
+  });
+  ctx.replaceNode(node, {
+    type: "leafDirective",
+    name: "__aplayer",
+    data: {
+      hName: "div",
+      hProperties: { id },
+    },
+    children: [],
   });
 };
 
