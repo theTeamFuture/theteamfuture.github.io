@@ -1,5 +1,6 @@
 import type { MdastNode, MdastVisitorContext } from "satteri";
 import { defineMdastPlugin } from "satteri";
+import { theme } from "unocss/preset-wind4";
 import * as cheerio from "cheerio";
 
 // --- Helpers ---
@@ -9,13 +10,14 @@ const replaceNode = (
   attrs: Record<string, unknown>,
 ) => {
   const rawOpts = {
+    theme: theme.colors.blue[500],
     loop: "none",
     ...attrs,
     volume: attrs.volume ? Number(attrs.volume) : undefined,
     audio: [
       {
         name: attrs.name || "audio",
-        artist: attrs.artist,
+        artist: attrs.artist || "artist",
         url: attrs.url,
         cover: attrs.cover,
         lrc: attrs.lrc,
