@@ -44,6 +44,14 @@ const fontFamily =
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {
+      !empty && (
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdmirror.com/npm/aplayer/dist/APlayer.min.css"
+        />
+      )
+    }
     <slot name="head-links" />
 
     <!-- Styles -->

@@ -20,6 +20,7 @@ import spoiler from "./plugins/mdast/spoiler";
 
 // --- Vite plugins ---
 import font from "vite-plugin-font";
+import aplayer from "./plugins/mdast/aplayer";
 
 // Extend dayjs
 dayjs.extend(utc);
@@ -48,6 +49,7 @@ export default defineConfig({
       },
       hastPlugins: [externalLink(), figure()],
       mdastPlugins: [
+        aplayer(),
         katex(),
         spoiler({ title: "你知道的太多了" }),
         wordCounter(),
