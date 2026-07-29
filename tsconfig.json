@@ -1,0 +1,12 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "verbatimModuleSyntax": true,
+    "types": ["vite-plugin-font/src/font"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
+}

@@ -1,0 +1,54 @@
+---
+// --- Style sheets ---
+import "@/styles/base.scss";
+
+// --- Components ---
+import { ClientRouter } from "astro:transitions";
+import CRT from "@/components/cat/CRT.astro";
+import Loader from "@/components/cat/Loader.astro";
+import Preloader from "@/components/Preloader.astro";
+
+// --- Fonts ---
+import { css as lxgw } from "@/assets/fonts/LXGWNeoXiHeiScreenFull.ttf";
+import { css as emoji } from "@/assets/fonts/NotoColorEmoji_WindowsCompatible.ttf";
+
+// --- Constants ---
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const fontFamily =
+  [lxgw, emoji].map((s) => `'${s.family}'`).join() + ",var(--font-sans)";
+---
+
+<html class=":uno: scroll-smooth" lang="en">
+  <head>
+    <!-- Title -->
+    <slot name="head-title" />
+
+    <!-- Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <slot name="head-metas" />
+
+    <!-- Links -->
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href="/cat-favicon.svg" />
+    <link rel="shortcut icon" href="/cat-favicon.svg" type="image/svg+xml" />
+    <slot name="head-links" />
+
+    <!-- Styles -->
+    <slot name="head-styles" />
+
+    <!-- Scripts -->
+    <slot name="head-scripts" />
+
+    <!-- View router -->
+    <ClientRouter />
+  </head>
+  <body style={{ fontFamily }}>
+    {import.meta.env.PROD && <Preloader />}
+    <CRT>
+      <Loader />
+      <slot />
+    </CRT>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+---
+import { posts, puzzles } from "@/utils/meta.server";
+import dayjs from "dayjs";
+
+// --- Layouts ---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+// --- Components ---
+import { Image } from "astro:assets";
+import ExtLink from "@/components/ExtLink.astro";
+---
+
+<BaseLayout>
+  <title slot="head-title">FUTURE 攻坚组</title>
+  <Fragment slot="head-metas">
+    <meta property="og:title" content="FUTURE 攻坚组" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content="zh-CN" />
+    <meta property="og:site_name" content="FUTURE 攻坚组" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="FUTURE 攻坚组" />
+  </Fragment>
+
+  <main class=":uno: mx-4 my-8 lg:mx-auto lg:min-w-3xl lg:w-1/2">
+    <h1 class=":uno: text-2xl font-bold my-8 text-center">
+      We create puzzles, we reveal puzzles
+    </h1>
+    <div
+      class=":uno: flex flex-wrap gap-4 items-center justify-center md:flex-nowrap"
+    >
+      <ExtLink href="https://www.skland.com/">
+        <Image
+          alt="Skland"
+          draggable="false"
+          loading="eager"
+          src="https://img.shields.io/badge/Skland-FUTURE%E6%94%BB%E5%9D%9A%E7%BB%84-gray?labelColor=90C208&style=for-the-badge"
+          inferSize
+        />
+      </ExtLink>
+      <ExtLink href="https://space.bilibili.com/1795756019">
+        <Image
+          alt="Bilibili"
+          draggable="false"
+          loading="eager"
+          src="https://img.shields.io/badge/Bilibili-FUTURE%E6%94%BB%E5%9D%9A%E7%BB%84-gray?labelColor=00AEEC&style=for-the-badge"
+          inferSize
+        />
+      </ExtLink>
+      <ExtLink href="https://weibo.com/u/7917542342">
+        <Image
+          alt="Weibo"
+          draggable="false"
+          loading="eager"
+          src="https://img.shields.io/badge/Weibo-FUTURE%E6%94%BB%E5%9D%9A%E7%BB%84-gray?labelColor=FF8200&style=for-the-badge"
+          inferSize
+        />
+      </ExtLink>
+      <ExtLink href="https://github.com/theTeamFuture">
+        <Image
+          alt="GitHub"
+          draggable="false"
+          loading="eager"
+          src="https://img.shields.io/badge/GitHub-theTeamFuture-gray?labelColor=22272E&style=for-the-badge"
+          inferSize
+        />
+      </ExtLink>
+    </div>
+    <hr class=":uno: my-12 border-t-4 border-neutral-500" />
+    <h2 class=":uno: text-xl font-bold my-4">最新文章</h2>
+    <div class=":uno: gap-4 grid grid-rows-3 md:grid-cols-3 md:grid-rows-1">
+      {
+        posts.slice(0, 3).map(({ data }) => (
+          <a
+            class=":uno: px-4 py-4 border border-neutral-600 rounded-lg flex flex-col transition hover:bg-neutral-800"
+            href={`/posts/${data.slug}`}
+            title={data.title}
+          >
+            <h1 class="font-bold">{data.title}</h1>
+            <p class=":uno: text-sm text-neutral-500 mb-4">{data.excerpt}</p>
+            <div class=":uno: text-xs mt-auto flex gap-1 items-center justify-end">
+              <div class="i-mdi-calendar" />
+              <span>{dayjs(data.published_at).format("YYYY/MM/DD")}</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    <p class=":uno: text-sm my-2 text-right">
+      <a
+        class=":uno: text-blue-500 transition-colors hover:text-red-500"
+        href="/posts">查看全部</a
+      >
+    </p>
+    <h2 class=":uno: text-xl font-bold my-4">最新谜题</h2>
+    <div class="gap-4 grid grid-rows-3 md:grid-cols-3 md:grid-rows-1">
+      {
+        puzzles.slice(0, 3).map(({ data }) => (
+          <a
+            class=":uno: p-4 border border-neutral-600 rounded-lg flex gap-1 transition justify-between hover:bg-neutral-800"
+            href={`/puzzles/${data.slug}`}
+            title={data.title}
+          >
+            <div class=":uno: flex flex-col gap-2 justify-between">
+              <h1 class="font-bold">{data.title}</h1>
+              <div class=":uno: text-xs flex gap-1 items-center">
+                <div class="i-mdi-calendar" />
+                <span>{dayjs(data.published_at).format("YYYY/MM/DD")}</span>
+              </div>
+            </div>
+            {data.report ? (
+              <div class=":uno: i-mdi-box-variant text-5xl text-neutral-700 shrink-0 self-center" />
+            ) : (
+              <div class=":uno: i-mdi-box-variant-closed text-5xl text-neutral-700 shrink-0 self-center" />
+            )}
+          </a>
+        ))
+      }
+    </div>
+    <p class=":uno: text-sm my-2 text-right">
+      <a
+        class=":uno: text-blue-500 transition-colors hover:text-red-500"
+        href="/puzzles">查看全部</a
+      >
+    </p>
+  </main>
+</BaseLayout>

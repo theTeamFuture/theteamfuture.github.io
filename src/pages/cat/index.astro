@@ -1,0 +1,49 @@
+---
+// --- Fonts ---
+import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
+
+// --- Layouts ---
+import BaseLayout from "@/layouts/cat/BaseLayout.astro";
+
+// --- Components ---
+import HazardArea from "@/components/cat/HazardArea.astro";
+import SiteHeader from "@/components/cat/SiteHeader.astro";
+---
+
+<BaseLayout>
+  <title slot="head-title">Chrono Agency Terminal</title>
+
+  <div
+    class=":uno: flex flex-col gap-24 items-center inset-0 justify-center fixed"
+  >
+    <SiteHeader />
+    <nav
+      class=":uno: flex flex-col gap-8"
+      style={{ fontFamily: `'${spaceport.family}'` }}
+    >
+      <a href="/cat/database" data-crt
+        ><span class="i-mdi-database-search"></span>Database</a
+      >
+      <div class=":uno: opacity-50 inline-flex gap-1 items-center">
+        <span class="i-mdi-box-variant-closed"></span>Registry<HazardArea
+          class=":uno: opacity-50 h-12 w-300px translate-x-[-25%]"
+        />
+      </div>
+      <div class=":uno: opacity-50 inline-flex gap-1 items-center">
+        <span class="i-mdi-done-all"></span>Submission<HazardArea
+          class=":uno: opacity-50 h-12 w-300px translate-x-[-25%]"
+        />
+      </div>
+    </nav>
+  </div>
+</BaseLayout>
+
+<style lang="scss">
+  a {
+    --at-apply: "opacity-50 inline-flex gap-1 transition-opacity items-center hover:opacity-100";
+  }
+
+  span {
+    --at-apply: "h-8 w-8 inline-block -translate-y-1";
+  }
+</style>

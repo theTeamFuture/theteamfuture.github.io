@@ -1,0 +1,85 @@
+---
+import type { GetStaticPaths } from "astro";
+import { avatars, posts } from "@/utils/meta.server";
+import { getEntry, render } from "astro:content";
+
+// --- Layouts ---
+import PostLayout from "@/layouts/PostLayout.astro";
+
+// --- Components ---
+import { Image } from "astro:assets";
+import ExtLink from "@/components/ExtLink.astro";
+
+// --- Export path function ---
+export const getStaticPaths = (() =>
+  posts.map((v) => {
+    if (!/^(?!page$)[\da-zA-Z-]+$/.test(v.data.slug)) {
+      throw Error("Slug invalid: " + v.data.slug);
+    }
+    return {
+      params: { slug: v.data.slug },
+      props: { post: v },
+    };
+  })) satisfies GetStaticPaths;
+
+// --- Injects ---
+const { post } = Astro.props;
+
+// --- Contants ---
+const author = await getEntry("authors", post.data.author.id.toLowerCase())!;
+const { Content, remarkPluginFrontmatter } = await render(post);
+---
+
+<PostLayout
+  menuUrl="/posts"
+  title={post.data.title}
+  date={post.data.published_at}
+  tags={post.data.tags}
+  wordCount={remarkPluginFrontmatter.wordCount}
+>
+  <div class=":uno: my-4 flex items-center">
+    {
+      author.data.avatar.startsWith("@avatars/") ? (
+        <Image
+          alt="avatar"
+          class=":uno: rounded-full h-[60px] w-[60px] transition-transform hover:scale-110"
+          src={avatars[
+            author.data.avatar.replace(/^@avatars/, "/src/assets/avatars")
+          ]()}
+        />
+      ) : (
+        <Image
+          alt="avatar"
+          class=":uno: rounded-full h-[60px] w-[60px] transition-transform hover:scale-110"
+          height="200"
+          src={author.data.avatar}
+          width="200"
+        />
+      )
+    }
+    <div class=":uno: ml-4 flex flex-col">
+      <h1 class="font-bold">{author.data.name}</h1>
+      <p class=":uno: text-sm text-neutral-400">{author.data.intro}</p>
+      <div class=":uno: text-sm mt-1 flex gap-2 items-center">
+        {
+          author.data.urls?.map(({ name, url }) => (
+            <ExtLink href={url}>{name}</ExtLink>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+  <div
+    class=":uno: text-sm text-neutral-800 font-bold text-center border-b-2 border-neutral-800 border-dashed select-none"
+  >
+    Start of Post
+  </div>
+  <article class=":uno: my-8 prose prose-invert max-w-unset!">
+    <Content />
+  </article>
+  <div
+    class=":uno: text-sm text-neutral-800 font-bold mb-auto text-center border-t-2 border-neutral-800 border-dashed select-none"
+  >
+    End of Post
+  </div>
+</PostLayout>

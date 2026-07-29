@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /_astro/
+Disallow: /cat/
+Disallow: /pool/
+Disallow: /time-capsule/
+
+Sitemap: https://theteamfuture.org/sitemap-index.xml

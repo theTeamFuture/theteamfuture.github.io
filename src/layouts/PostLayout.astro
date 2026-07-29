@@ -1,0 +1,73 @@
+---
+import dayjs from "dayjs";
+
+// --- Layouts ---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+// --- Components ---
+import ArticleMeta from "@/components/ArticleMeta.astro";
+
+// --- Types ---
+interface Props {
+  menuUrl: string;
+  title: string;
+  date: Date;
+  tags?: string[];
+  wordCount?: number;
+}
+
+// --- Injects ---
+const { menuUrl, title, date, tags, wordCount } = Astro.props;
+---
+
+<BaseLayout>
+  <title slot="head-title">{`${title} - FUTURE 攻坚组`}</title>
+  <Fragment slot="head-metas">
+    <meta property="og:title" content={`${title} - FUTURE 攻坚组`} />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content="zh-CN" />
+    <meta property="og:site_name" content="FUTURE 攻坚组" />
+    <meta property="article:published_time" content={dayjs(date).format()} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} - FUTURE 攻坚组`} />
+    {wordCount && <meta name="word_count" content={wordCount.toString()} />}
+    <slot name="head-metas" />
+  </Fragment>
+  <Fragment slot="head-links">
+    <link
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"
+      rel="stylesheet"
+    />
+    <slot name="head-links" />
+  </Fragment>
+
+  <main class=":uno: mx-4 my-12 flex flex-col lg:mx-auto lg:min-w-3xl lg:w-1/2">
+    <button
+      class=":uno: text-neutral-400 flex cursor-pointer transition-colors items-center hover:text-white"
+      id="back-posts-btn"
+      data-menu-url={menuUrl}
+    >
+      <div class=":uno: i-mdi-arrow-back text-2xl"></div>
+      <span>返回目录</span>
+    </button>
+    <h1 class=":uno: text-3xl font-bold mt-8">{title}</h1>
+    <ArticleMeta date={date} wordCount={wordCount} tags={tags} />
+    <hr class=":uno: my-4 border-t-2 border-neutral-700" />
+    <slot />
+  </main>
+</BaseLayout>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  // --- On page load ---
+  document.addEventListener("astro:page-load", () =>
+    document
+      .querySelector<HTMLButtonElement>("#back-posts-btn")
+      ?.addEventListener("click", function () {
+        navigate(this.dataset.menuUrl!);
+      }),
+  );
+</script>

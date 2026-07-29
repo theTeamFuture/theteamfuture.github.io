@@ -1,0 +1,106 @@
+---
+// --- Layouts ---
+import BaseLayout from "@/layouts/cat/BaseLayout.astro";
+
+// --- Components ---
+import SiteHeader from "@/components/cat/SiteHeader.astro";
+import HazardArea from "@/components/cat/HazardArea.astro";
+
+// --- Fonts ---
+import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
+---
+
+<BaseLayout>
+  <title slot="head-title">Database - Chrono Agency Terminal</title>
+
+  <div class=":uno: mx-4 my-8 lg:(mx-auto min-w-5xl w-1/2)">
+    <div class=":uno: flex max-md:(flex-col items-center)">
+      <SiteHeader />
+      <nav class=":uno: flex gap-8 max-md:mt-4 md:(ml-8 pb-4 self-end)">
+        <a href="/cat/database" data-crt>
+          <div class=":uno: i-mdi:database-search h-8 w-8"></div>
+        </a>
+        <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
+          <div class=":uno: i-mdi-box-variant-closed h-8 w-8"></div>
+          <HazardArea class=":uno: opacity-50 inset-0" />
+        </div>
+        <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
+          <div class=":uno: i-mdi-done-all h-8 w-8"></div>
+          <HazardArea class=":uno: opacity-50 inset-0" />
+        </div>
+      </nav>
+    </div>
+  </div>
+  <hr class="border-t-2" data-crt />
+
+  <main
+    class=":uno: mx-4 my-8 lg:(mx-auto min-w-5xl w-1/2)"
+    style={{ fontFamily: `'${spaceport.family}'` }}
+    data-crt
+  >
+    <header class=":uno: text-2xl mb-8 flex gap-2 select-none items-center">
+      <div class=":uno: i-mdi-database-search h-8 w-8 -translate-y-1"></div><h2>
+        Database
+      </h2>
+    </header>
+    <form>
+      <label class="mb-4">
+        <b>Query Executor :</b>
+        <select class="outline-none" name="category">
+          <option value="public">Public Document</option>
+          <option value="classified">Classified Retriever</option>
+        </select>
+      </label>
+      <table class="mb-8">
+        <tbody>
+          <tr>
+            <th>Document ID</th>
+            <td><input type="text" required /></td>
+          </tr>
+          <tr>
+            <th>Entry ID</th>
+            <td><input type="text" required /></td>
+          </tr>
+          <tr>
+            <th>Password</th>
+            <td><input type="password" required /></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class=":uno: flex gap-4">
+        <button type="reset">Clear</button>
+        <button type="submit">Query</button>
+      </div>
+    </form>
+  </main>
+</BaseLayout>
+
+<style lang="scss">
+  a {
+    --at-apply: "opacity-50 transition-opacity hover:opacity-100";
+  }
+
+  button {
+    --at-apply: ":uno: px-2 py-1 border-2 border-white bg-white/0 cursor-pointer transition-color hover:(text-black bg-white)";
+  }
+
+  label {
+    --at-apply: "flex gap-4 py-2 items-center w-fit";
+  }
+
+  input {
+    --at-apply: "outline-none border-2 px-2 py-1";
+  }
+
+  td {
+    --at-apply: "pl-4";
+  }
+
+  th {
+    --at-apply: "text-left";
+  }
+
+  option {
+    --at-apply: "text-black";
+  }
+</style>

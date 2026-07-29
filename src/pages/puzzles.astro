@@ -1,0 +1,34 @@
+---
+import { puzzles } from "@/utils/meta.server";
+import dayjs from "dayjs";
+
+// --- Layouts ---
+import ArchiveLayout from "@/layouts/ArchiveLayout.astro";
+---
+
+<ArchiveLayout title="所有谜题" total={puzzles.length}>
+  <div class=":uno: gap-4 grid md:grid-cols-2">
+    {
+      puzzles.map(({ data }) => (
+        <a
+          class=":uno: text-white p-4 border border-neutral-600 rounded-lg flex items-center justify-between hover:text-white hover:bg-neutral-800"
+          href={`/puzzles/${data.slug}`}
+          title={data.title}
+        >
+          <div class=":uno: flex flex-col gap-2">
+            <h1 class=":uno: text-lg font-bold">{data.title}</h1>
+            <div class=":uno: text-sm text-neutral-500 flex gap-1 items-center">
+              <div class="i-mdi-calendar" />
+              <span>{dayjs(data.published_at).format("YYYY/MM/DD")}</span>
+            </div>
+          </div>
+          {data.report ? (
+            <div class=":uno: i-mdi-box-variant text-5xl text-neutral-700" />
+          ) : (
+            <div class=":uno: i-mdi-box-variant-closed text-5xl text-neutral-500" />
+          )}
+        </a>
+      ))
+    }
+  </div>
+</ArchiveLayout>

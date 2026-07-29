@@ -1,0 +1,122 @@
+---
+import type {
+  TransitionAnimation,
+  TransitionAnimationPair,
+  TransitionDirectionalAnimations,
+} from "astro";
+
+// --- Components ---
+import NavLink from "@/components/NavLink.astro";
+
+// --- Animations ---
+const fadeAnimation: TransitionAnimation = {
+  name: "fade",
+  duration: 200,
+  easing: "linear",
+};
+const fadeAnimationPair: TransitionAnimationPair = {
+  new: fadeAnimation,
+  old: fadeAnimation,
+};
+const fade: TransitionDirectionalAnimations = {
+  forwards: fadeAnimationPair,
+  backwards: fadeAnimationPair,
+};
+---
+
+<header
+  class=":uno: p-4 border-b-2 border-neutral-600 bg-neutral-900 flex select-none items-center top-0 justify-between sticky z-998 md:px-8"
+>
+  <a class=":uno: flex gap-2 items-center" href="/">
+    <div class="i-local-logo text-transparent h-10 w-10"></div>
+    <h1 class=":uno: text-xl text-white font-bold">FUTURE 攻坚组</h1>
+  </a>
+  <nav class=":uno: gap-8 hidden items-center md:flex">
+    <NavLink name="首页" title="INDEX" url="/" re={/^\/$/} />
+    <NavLink name="关于" title="ABOUT" url="/about" re={/^\/about\/?$/} />
+    <NavLink name="文章" title="POSTS" url="/posts" re={/^\/posts(\/.*)?$/} />
+    <NavLink
+      name="谜题"
+      title="PUZZLES"
+      url="/puzzles"
+      re={/^\/puzzles(\/.*)?$/}
+    />
+  </nav>
+  <button
+    class=":uno: i-mdi-menu md:hidden"
+    id="nav-menu-btn"
+    transition:persist></button>
+  <div
+    class=":uno: bg-black/90 hidden items-center inset-0 justify-center fixed z-40"
+    id="alt-nav"
+    transition:animate={fade}
+  >
+    <nav class=":uno: flex flex-col gap-4">
+      <NavLink alt name="首页" title="INDEX" url="/" re={/^\/$/} />
+      <NavLink alt name="关于" title="ABOUT" url="/about" re={/^\/about\/?$/} />
+      <NavLink
+        alt
+        name="文章"
+        title="POSTS"
+        url="/posts"
+        re={/^\/posts(\/.*)?$/}
+      />
+      <NavLink
+        alt
+        name="谜题"
+        title="PUZZLES"
+        url="/puzzles"
+        re={/^\/puzzles(\/.*)?$/}
+      />
+    </nav>
+  </div>
+</header>
+
+<style>
+  @keyframes fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  // @unocss-skip-start
+  import { animate } from "animejs";
+
+  // --- Show alternative navigation bar ---
+  document
+    .querySelector<HTMLButtonElement>("#nav-menu-btn")!
+    .addEventListener("click", () => {
+      animate("#alt-nav", {
+        opacity: ["0", "1"],
+        duration: 200,
+        ease: "linear",
+        onBegin: () => {
+          document.querySelector<HTMLDivElement>("#alt-nav")!.style.display =
+            "flex";
+        },
+      });
+    });
+
+  // --- Hide alternative navigation bar ---
+  document.addEventListener("astro:page-load", () =>
+    document
+      .querySelector<HTMLDivElement>("#alt-nav")!
+      .addEventListener("click", () => {
+        animate("#alt-nav", {
+          opacity: ["1", "0"],
+          duration: 200,
+          ease: "linear",
+          onComplete: () => {
+            document.querySelector<HTMLDivElement>("#alt-nav")!.style.display =
+              "none";
+          },
+        });
+      }),
+  );
+  // @unocss-skip-end
+</script>

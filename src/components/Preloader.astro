@@ -1,0 +1,66 @@
+<f-preloader transition:persist>
+  {
+    Array(6)
+      .fill(null)
+      .map((_val, idx) => <div style={{ animationDelay: `${idx * 0.1}s` }} />)
+  }
+</f-preloader>
+
+<style lang="scss" is:global>
+  @keyframes f-preloader-stretch {
+    0% {
+      height: 5px;
+    }
+    50% {
+      height: 30px;
+    }
+    100% {
+      height: 5px;
+    }
+  }
+
+  f-preloader {
+    --at-apply: "bg-neutral-950 flex gap-10px items-center inset-0 justify-center fixed z-1000";
+
+    div {
+      --at-apply: "rounded-sm bg-white h-1 w-1";
+      /* @unocss-skip-start */
+      animation: f-preloader-stretch 1s ease-in-out infinite;
+      /* @unocss-skip-end */
+    }
+  }
+</style>
+
+<script>
+  // @unocss-skip-start
+  import { animate } from "animejs";
+
+  customElements.define(
+    "f-preloader",
+    class extends HTMLElement {
+      private done = false;
+
+      public connectedCallback() {
+        if (this.done) return;
+        this.done = true;
+
+        window.addEventListener(
+          "load",
+          () => {
+            animate(this, {
+              opacity: [1, 0],
+              duration: 500,
+              delay: 1000,
+              ease: "inOutCubic",
+              onComplete: () => {
+                this.style.display = "none";
+              },
+            });
+          },
+          { once: true },
+        );
+      }
+    },
+  );
+  // @unocss-skip-end
+</script>

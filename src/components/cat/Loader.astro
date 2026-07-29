@@ -1,0 +1,52 @@
+<cat-loader transition:persist>
+  <div data-crt></div>
+</cat-loader>
+
+<style lang="scss" is:global>
+  cat-loader {
+    --at-apply: "bg-black/50 fixed inset-0 z-999 items-center justify-center hidden";
+
+    & div {
+      --at-apply: "border-2 border-t-transparent rounded-full w-12 h-12 animate-spin animate-duration-2s";
+    }
+  }
+</style>
+
+<script>
+  // @unocss-skip-start
+  import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
+
+  customElements.define(
+    "cat-loader",
+    class extends HTMLElement {
+      public connectedCallback() {
+        document.addEventListener(
+          "astro:before-preparation",
+          this.onBeforePreparation,
+        );
+        document.addEventListener("astro:after-swap", this.onAfterSwap);
+      }
+
+      public disconnectedCallback() {
+        document.removeEventListener(
+          "astro:before-preparation",
+          this.onBeforePreparation,
+        );
+        document.removeEventListener("astro:after-swap", this.onAfterSwap);
+      }
+
+      private onBeforePreparation = (ev: TransitionBeforePreparationEvent) => {
+        // Not show load bar when get assets
+        if (ev.to.pathname.startsWith("/assets")) return;
+
+        // --- Start new animation ---
+        this.style.display = "flex";
+      };
+
+      private onAfterSwap = () => {
+        this.style.display = "none";
+      };
+    },
+  );
+  // @unocss-skip-end
+</script>

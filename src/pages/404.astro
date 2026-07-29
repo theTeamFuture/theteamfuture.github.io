@@ -1,0 +1,25 @@
+---
+// --- Layouts ---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout empty>
+  <title slot="head-title">404 - FUTURE 攻坚组</title>
+  <div
+    class=":uno: flex flex-col gap-4 items-center inset-0 justify-center fixed"
+  >
+    <div
+      class=":uno: text-neutral-700 font-bold flex gap-1 select-none items-end"
+    >
+      <h1 class=":uno: text-5xl leading-none">404</h1>
+      <div class="text-xl">
+        <h2 class="leading-none">Not</h2>
+        <h2 class="leading-none">Found</h2>
+      </div>
+    </div>
+    <a
+      class=":uno: text-sm text-blue-500 transition-colors hover:text-red-500"
+      href="/">回到主页</a
+    >
+  </div>
+</BaseLayout>

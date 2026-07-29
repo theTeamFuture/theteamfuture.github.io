@@ -1,0 +1,23 @@
+/* Scrollbar */
+::-webkit-scrollbar {
+  --at-apply: "h-1 w-1";
+}
+::-webkit-scrollbar-thumb {
+  --at-apply: "bg-neutral-700 cursor-pointer";
+}
+::-webkit-scrollbar-track {
+  --at-apply: "bg-neutral-500 cursor-pointer";
+}
+
+/* Spoiler */
+.spoiler {
+  --at-apply: "bg-black";
+
+  &:hover > * {
+    --at-apply: "opacity-100";
+  }
+
+  > * {
+    --at-apply: "opacity-0 motion-safe:transition-opacity";
+  }
+}

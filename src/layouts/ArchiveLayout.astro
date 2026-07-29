@@ -1,0 +1,40 @@
+---
+// --- Layouts ---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+// --- Types ---
+interface Props {
+  title: string;
+  total: number;
+}
+
+// --- Injects ---
+const { title, total } = Astro.props;
+---
+
+<BaseLayout>
+  <title slot="head-title">{`${title} - FUTURE 攻坚组`}</title>
+  <Fragment slot="head-metas">
+    <meta property="og:title" content={`${title} - FUTURE 攻坚组`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/favicon.svg" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content="zh-CN" />
+    <meta property="og:site_name" content="FUTURE 攻坚组" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={`${title} - FUTURE 攻坚组`} />
+    <slot name="head-metas" />
+  </Fragment>
+
+  <main
+    class=":uno: mx-4 my-12 flex flex-col gap-4 lg:mx-auto lg:min-w-[768px] lg:w-1/2"
+  >
+    <h1 class=":uno: text-2xl font-bold">{title} ({total})</h1>
+    <slot />
+    <div
+      class=":uno: text-sm text-neutral-800 font-bold mb-auto text-center select-none"
+    >
+      End of Archives
+    </div>
+  </main>
+</BaseLayout>

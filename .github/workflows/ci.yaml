@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    paths-ignore:
+      - .husky/**
+      - .vscode/**
+      - assets/**
+      - public/**
+      - .commitlintrc
+      - .gitgnore
+      - .lintstagedrc
+      - .prettierrc
+      - eslint.config.mts
+      - LICENSE
+      - README.md
+      - tsconfig.check.json
+  workflow_dispatch:
+
+env:
+  NODE_ENV: production
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Checkout posts repository
+        uses: actions/checkout@v7
+        with:
+          repository: theTeamFuture/posts
+          token: ${{ secrets.GH_PAT }}
+          path: posts-repo
+
+      - name: Checkout time capsule repository
+        uses: actions/checkout@v7
+        with:
+          repository: theTeamFuture/time-capsules
+          token: ${{ secrets.GH_PAT }}
+          path: time-capsules-repo
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: package.json
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Update fonts
+        run: pnpm run update:fonts
+
+      - name: Install dependencies
+        run: pnpm install -P
+
+      - name: Build
+        run: SITE_REDIRECTS=$(cat posts-repo/redirect.json) pnpm run build:all
+
+      - name: Encrypt artifact
+        id: encrpyt
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          SMTP_FROM: ${{ secrets.SMTP_FROM }}
+          SMTP_TO: ${{ secrets.SMTP_TO }}
+        run: bash scripts/encrypt-artifact.sh
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          path: ${{ steps.encrpyt.outputs.name }}
+          retention-days: 1
+          if-no-files-found: error
+          archive: false

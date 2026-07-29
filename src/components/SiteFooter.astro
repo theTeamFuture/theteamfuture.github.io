@@ -1,0 +1,46 @@
+---
+// --- Components ---
+import ExtLink from "@/components/ExtLink.astro";
+---
+
+<footer
+  class=":uno: text-sm text-neutral-500 mt-auto p-8 text-center bg-neutral-950 flex flex-col gap-2 w-full items-center justify-center"
+  transition:persist
+>
+  <p>
+    本站所有内容除另有声明外，均在 <ExtLink
+      href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
+      >知识共享 署名-非商业性使用-相同方式共享 4.0 国际（CC BY-NC-SA
+      4.0）许可协议</ExtLink
+    > 下提供
+  </p>
+  <div class=":uno: flex gap-2 items-center justify-center">
+    <p>&copy;{new Date().getFullYear()} FUTURE 攻坚组</p>
+    <p class=":uno: hidden select-none sm:block">|</p>
+    <p class=":uno: hidden sm:block">
+      总访问量 <span id="vercount_value_site_pv">…</span>
+    </p>
+    <p class="select-none">|</p>
+    <p>
+      <ExtLink href="https://github.com/theTeamFuture">GitHub</ExtLink>
+    </p>
+  </div>
+  <div class=":uno: gap-2 hidden items-center justify-center sm:flex">
+    <p>
+      使用 <ExtLink href="https://astro.build">Astro</ExtLink> 强力驱动
+    </p>
+    <p class="select-none">|</p>
+    <p>构建于：{__BUILD_TIME__}</p>
+  </div>
+</footer>
+
+<script>
+  import { obFmtNum } from "@/utils/observer.client";
+
+  // --- On page load ---
+  document.addEventListener("astro:page-load", () =>
+    document
+      .querySelectorAll("#vercount_value_site_pv")
+      .forEach((el) => obFmtNum(el, {}, false, true)),
+  );
+</script>

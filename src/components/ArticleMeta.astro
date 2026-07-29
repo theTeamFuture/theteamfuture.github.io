@@ -1,0 +1,56 @@
+---
+import { fmtNum, splitNum } from "@/utils/number";
+import dayjs from "dayjs";
+
+// --- Types ---
+type Props = {
+  date: Date;
+  wordCount?: number;
+  tags?: string[];
+};
+
+// --- Injects ---
+const { date, wordCount, tags } = Astro.props;
+---
+
+<div class=":uno: text-sm text-neutral-500 flex gap-4 items-center">
+  <div class=":uno: flex gap-1 items-center">
+    <div class="i-mdi-calendar"></div>
+    <span>{dayjs(date).format("YYYY/MM/DD")}</span>
+  </div>
+  {
+    tags && (
+      <div class=":uno: gap-1 hidden items-center md:flex">
+        <div class="i-mdi-tag" />
+        {tags.map((v: string) => (
+          <span>{v}</span>
+        ))}
+      </div>
+    )
+  }
+  {
+    wordCount && (
+      <div class=":uno: flex gap-1 items-center">
+        <div class="i-mdi-text" />
+        <span title={splitNum(wordCount)}>
+          {fmtNum(wordCount, { postfix: "字" })}
+        </span>
+      </div>
+    )
+  }
+  <div class=":uno: flex gap-1 items-center">
+    <div class="i-mdi-eye-outline"></div>
+    <span id="vercount_value_page_pv">…</span>
+  </div>
+</div>
+
+<script>
+  import { obFmtNum } from "@/utils/observer.client";
+
+  // --- On page load ---
+  document.addEventListener("astro:page-load", () =>
+    document
+      .querySelectorAll("#vercount_value_page_pv")
+      .forEach((el) => obFmtNum(el)),
+  );
+</script>
