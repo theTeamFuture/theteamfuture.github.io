@@ -14,7 +14,6 @@ import { theme } from "unocss/preset-wind4";
 export default defineConfig({
   presets: [
     presetIcons({
-      autoInstall: true,
       collections: {
         local: FileSystemIconLoader("./src/assets/icons", (svg) =>
           svg.replace('fill="#000"', 'fill="transparent"'),
