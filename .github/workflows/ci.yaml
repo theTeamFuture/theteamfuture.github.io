@@ -53,11 +53,11 @@ jobs:
           cache: pnpm
           cache-dependency-path: pnpm-lock.yaml
 
-      - name: Update fonts
-        run: pnpm run update:fonts
-
       - name: Install dependencies
         run: pnpm install -P
+
+      - name: Update fonts
+        run: pnpm run update:fonts
 
       - name: Build
         run: SITE_REDIRECTS=$(cat posts-repo/redirect.json) pnpm run build:all
