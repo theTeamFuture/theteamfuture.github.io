@@ -1,0 +1,72 @@
+name: Deploy
+run-name: "deploy: ${{ github.event_name == 'repository_dispatch' && github.event.action || 'update site' }}"
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  pages: write
+
+env:
+  NODE_ENV: production
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Checkout posts repository
+        uses: actions/checkout@v7
+        with:
+          repository: theTeamFuture/posts
+          token: ${{ secrets.GH_PAT }}
+          path: posts-repo
+
+      - name: Checkout time capsule repository
+        uses: actions/checkout@v7
+        with:
+          repository: theTeamFuture/time-capsules
+          token: ${{ secrets.GH_PAT }}
+          path: time-capsules-repo
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v6
+        with:
+          cache: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: package.json
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install -P
+
+      - name: Update fonts
+        run: pnpm run update:fonts
+
+      - name: Build
+        run: SITE_REDIRECTS=$(cat posts-repo/redirect.json) pnpm run build:all
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: github-pages
+          path: dist/
+          retention-days: 1
+          if-no-files-found: error
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v5
+
+      - name: Clean up artifacts
+        if: always()
+        uses: geekyeggo/delete-artifact@v6
+        with:
+          name: github-pages
