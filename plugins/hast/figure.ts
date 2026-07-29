@@ -8,27 +8,25 @@ export default () =>
       {
         filter: ["img"],
         visit(node) {
-          if (node.properties.alt) {
-            return {
-              type: "element",
-              tagName: "figure",
-              properties: {},
-              children: [
-                node,
-                {
-                  type: "element",
-                  tagName: "figcaption",
-                  properties: {},
-                  children: [
-                    {
-                      type: "text",
-                      value: node.properties.alt.trim(),
-                    },
-                  ],
-                },
-              ],
-            };
-          }
+          return {
+            type: "element",
+            tagName: "figure",
+            properties: {},
+            children: [
+              node,
+              {
+                type: "element",
+                tagName: "figcaption",
+                properties: {},
+                children: [
+                  {
+                    type: "text",
+                    value: node.properties.alt?.trim() ?? "",
+                  },
+                ],
+              },
+            ],
+          };
         },
       },
     ],

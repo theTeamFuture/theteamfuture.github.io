@@ -33,6 +33,13 @@ export default defineConfig({
           "transition-duration": theme.default.transition.duration,
         },
         "a:hover": { color: theme.colors.red[500] },
+        audio: {
+          margin: "1rem 0",
+          width: "100%",
+        },
+        "blockquote p::before": {
+          content: '""',
+        },
         h2: {
           "border-bottom-width": "2px",
           "border-color": theme.colors.neutral[700],
@@ -47,6 +54,9 @@ export default defineConfig({
         "figure img": {
           margin: "0 auto",
           "max-width": "75%",
+        },
+        p: {
+          "overflow-wrap": "break-word",
         },
       },
     }),

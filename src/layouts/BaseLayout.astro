@@ -63,7 +63,7 @@ const fontFamily =
     {
       !empty && (
         <>
-          <Preloader />
+          {import.meta.env.PROD && <Preloader />}
           <Loader />
           <SiteHeader />
         </>
