@@ -49,10 +49,25 @@ jobs:
       - name: Build
         run: SITE_REDIRECTS=$(cat posts-repo/redirect.json) pnpm run build:all
 
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v5
+      - name: Create artifact
+        run: |
+          tar \
+            --dereference --hard-dereference \
+            --directory dist \
+            -cvf "$RUNNER_TEMP/artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=.[^/]* \
+            . \
+            >/dev/null 2>&1
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v7
         with:
-          path: dist/
+          name: github-pages
+          path: ${{ runner.temp }}/artifact.tar
+          retention-days: 1
+          if-no-files-found: error
 
   deploy:
     runs-on: ubuntu-latest
