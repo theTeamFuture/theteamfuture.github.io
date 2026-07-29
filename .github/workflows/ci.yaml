@@ -3,12 +3,15 @@ name: CI
 on:
   push:
     paths-ignore:
+      - .github/workflows/deploy.yaml
       - .husky/**
       - .vscode/**
       - assets/**
+      - contents/**
       - public/**
+      - scripts/preview-artifact.sh
       - .commitlintrc
-      - .gitgnore
+      - .gitignore
       - .lintstagedrc
       - .prettierrc
       - eslint.config.mts
