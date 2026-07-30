@@ -11,7 +11,9 @@
     "check": "astro check --tsconfig tsconfig.check.json",
     "build": "astro build",
     "build:all": "bash scripts/mount-repos.sh && pnpm run check && pnpm run build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "preview:artifact": "bash scripts/preview-artifact.sh",
+    "tag": "bash scripts/create-tag.sh"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

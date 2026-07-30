@@ -2,6 +2,8 @@ name: Deploy
 run-name: "deploy: ${{ github.event_name == 'repository_dispatch' && github.event.action || 'update site' }}"
 
 on:
+  push:
+    tags: [v*]
   repository_dispatch:
   workflow_dispatch:
 
