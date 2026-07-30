@@ -1,0 +1,49 @@
+---
+import { getCollection } from "astro:content";
+import dayjs from "dayjs";
+
+// --- Fonts ---
+import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
+
+// --- Components ---
+import DialogContainer from "../DialogContainer.astro";
+
+// --- Types ---
+interface Props {
+  id: string;
+}
+
+// --- Injects ---
+const { id } = Astro.props;
+
+// --- Constants ---
+const notifications = (await getCollection("notifications")).toSorted(
+  (a, b) => b.data.time.getTime() - a.data.time.getTime(),
+);
+---
+
+<DialogContainer {id}>
+  <div data-crt>
+    <h2
+      class=":uno: mb-4 flex gap-1"
+      style={{ fontFamily: `'${spaceport.family}'` }}
+    >
+      <div class=":uno: i-mdi-bell-notification h-5 w-5"></div>Notifications
+    </h2>
+    <div class=":uno: max-h-[calc(100vh-6rem)] overflow-y-auto">
+      {
+        notifications.map(({ data }) => (
+          <section class=":uno: py-1 pl-4 border-l-2">
+            <h3 class="mb-2">
+              <span class=":uno: font-bold mr-2">{data.title}</span>
+              <time class=":uno: text-xs opacity-50">
+                {dayjs.utc(data.time).format()}
+              </time>
+            </h3>
+            <div set:html={data.contents} />
+          </section>
+        ))
+      }
+    </div>
+  </div>
+</DialogContainer>

@@ -20,6 +20,15 @@ const authors = defineCollection({
   }),
 });
 
+const notifications = defineCollection({
+  loader: glob({ pattern: "**/[^_]*.yaml", base: "contents/notifications" }),
+  schema: z.object({
+    title: z.string().min(1),
+    time: z.string().transform((s) => new Date(s)),
+    contents: z.string(),
+  }),
+});
+
 const posts = defineCollection({
   loader: glob({ pattern: "**/[^_]*.md", base: "contents/posts" }),
   schema: z.object({
@@ -46,4 +55,4 @@ const puzzles = defineCollection({
 });
 
 // Export collections
-export const collections = { authors, posts, puzzles };
+export const collections = { authors, notifications, posts, puzzles };

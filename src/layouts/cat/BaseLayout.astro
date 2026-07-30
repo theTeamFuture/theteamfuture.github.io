@@ -6,6 +6,7 @@ import "@/styles/base.scss";
 import { ClientRouter } from "astro:transitions";
 import CRT from "@/components/cat/CRT.astro";
 import Loader from "@/components/cat/Loader.astro";
+import Notifications from "@/components/cat/dialogs/Notifications.astro";
 import Preloader from "@/components/Preloader.astro";
 
 // --- Fonts ---
@@ -36,6 +37,7 @@ const fontFamily =
     <slot name="head-links" />
 
     <!-- Styles -->
+    <script src="@/components/cat/web"></script>
     <slot name="head-styles" />
 
     <!-- Scripts -->
@@ -49,6 +51,7 @@ const fontFamily =
     <CRT>
       <Loader />
       <slot />
+      <Notifications id="dialog-notifications" />
     </CRT>
   </body>
 </html>

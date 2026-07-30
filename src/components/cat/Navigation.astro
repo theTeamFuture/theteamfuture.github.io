@@ -1,0 +1,91 @@
+---
+// --- Fonts ---
+import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
+
+// --- Components ---
+import HazardArea from "./HazardArea.astro";
+
+// --- Types ---
+interface Props {
+  variant?: "default" | "compact";
+}
+
+// --- Injects ---
+const { variant = "default" } = Astro.props;
+---
+
+{
+  variant === "default" ? (
+    <nav
+      class=":uno: flex flex-col gap-8"
+      style={{ fontFamily: `'${spaceport.family}'` }}
+    >
+      <button class="cursor-pointer" id="btn-notifications" data-crt>
+        <div class=":uno: i-mdi-bell-notification -translate-y-1" />
+        Notifications
+      </button>
+      <a href="/cat/database" data-crt>
+        <div class=":uno: i-mdi-database-search -translate-y-1" />
+        Database
+      </a>
+      <div class=":uno: opacity-50 inline-flex gap-1 items-center">
+        <div class=":uno: inline-flex gap-1 items-center" data-crt>
+          <div class=":uno: i-mdi-box-variant-closed -translate-y-1" />
+          Registry
+        </div>
+        <HazardArea class=":uno: opacity-50 h-12 w-300px translate-x-[-25%]" />
+      </div>
+      <div class=":uno: opacity-50 inline-flex gap-1 items-center">
+        <div class=":uno: inline-flex gap-1 items-center" data-crt>
+          <div class=":uno: i-mdi-done-all -translate-y-1" />
+          Submission
+        </div>
+        <HazardArea class=":uno: opacity-50 h-12 w-300px translate-x-[-25%]" />
+      </div>
+    </nav>
+  ) : (
+    <nav class=":uno: flex gap-8 max-md:mt-4 md:(ml-8 pb-4 self-end)">
+      <button class="cursor-pointer" id="btn-notifications" data-crt>
+        <div class="i-mdi-bell-notification" />
+      </button>
+      <a href="/cat/database" data-crt>
+        <div class="i-mdi:database-search" />
+      </a>
+      <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
+        <div class="i-mdi-box-variant-closed" />
+        <HazardArea class=":uno: opacity-50 inset-0" />
+      </div>
+      <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
+        <div class="i-mdi-done-all" />
+        <HazardArea class=":uno: opacity-50 inset-0" />
+      </div>
+    </nav>
+  )
+}
+
+<style lang="scss">
+  a,
+  button {
+    --at-apply: "opacity-50 inline-flex gap-1 transition-opacity items-center hover:opacity-100";
+  }
+
+  div[class*="i-mdi"] {
+    --at-apply: "h-8 w-8";
+  }
+</style>
+
+<script>
+  import type { CDialog } from "@/components/cat/web/dialog-container";
+
+  // --- On page load ---
+  document.addEventListener("astro:page-load", () => {
+    document
+      .querySelector<HTMLButtonElement>("#btn-notifications")
+      ?.addEventListener("click", () => {
+        const dia = document.querySelector<CDialog>("#dialog-notifications");
+        if (!dia) return;
+
+        dia.open();
+      });
+  });
+</script>

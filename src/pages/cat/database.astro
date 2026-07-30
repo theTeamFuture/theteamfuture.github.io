@@ -3,8 +3,8 @@
 import BaseLayout from "@/layouts/cat/BaseLayout.astro";
 
 // --- Components ---
+import Navigation from "@/components/cat/Navigation.astro";
 import SiteHeader from "@/components/cat/SiteHeader.astro";
-import HazardArea from "@/components/cat/HazardArea.astro";
 
 // --- Fonts ---
 import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
@@ -16,19 +16,7 @@ import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
   <div class=":uno: mx-4 my-8 lg:(mx-auto min-w-5xl w-1/2)">
     <div class=":uno: flex max-md:(flex-col items-center)">
       <SiteHeader />
-      <nav class=":uno: flex gap-8 max-md:mt-4 md:(ml-8 pb-4 self-end)">
-        <a href="/cat/database" data-crt>
-          <div class=":uno: i-mdi:database-search h-8 w-8"></div>
-        </a>
-        <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
-          <div class=":uno: i-mdi-box-variant-closed h-8 w-8"></div>
-          <HazardArea class=":uno: opacity-50 inset-0" />
-        </div>
-        <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
-          <div class=":uno: i-mdi-done-all h-8 w-8"></div>
-          <HazardArea class=":uno: opacity-50 inset-0" />
-        </div>
-      </nav>
+      <Navigation variant="compact" />
     </div>
   </div>
   <hr class="border-t-2" data-crt />
@@ -43,34 +31,46 @@ import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
         Database
       </h2>
     </header>
-    <form>
+    <form id="form-database">
       <label class="mb-4">
-        <b>Query Executor :</b>
-        <select class="outline-none" name="category">
+        <b>Query Executor</b>
+        <select class=":uno: px-2 py-1 outline-none border-2" name="executor">
           <option value="public">Public Document</option>
           <option value="classified">Classified Retriever</option>
+          <option value="legacy">Legacy</option>
         </select>
       </label>
-      <table class="mb-8">
-        <tbody>
-          <tr>
-            <th>Document ID</th>
-            <td><input type="text" required /></td>
-          </tr>
-          <tr>
-            <th>Entry ID</th>
-            <td><input type="text" required /></td>
-          </tr>
-          <tr>
-            <th>Password</th>
-            <td><input type="password" required /></td>
-          </tr>
-        </tbody>
-      </table>
-      <div class=":uno: flex gap-4">
-        <button type="reset">Clear</button>
-        <button type="submit">Query</button>
-      </div>
+
+      <section id="s-public" style="display:flex">
+        <label>
+          <b>Document ID</b>
+          <input name="s-public-id" type="text" required />
+        </label>
+      </section>
+
+      <section id="s-classified">
+        <label>
+          <b>Document ID</b>
+          <input name="s-classified-id" type="text" />
+        </label>
+        <label>
+          <b>Password</b>
+          <input name="s-classified-password" type="password" />
+        </label>
+      </section>
+
+      <section id="s-legacy">
+        <label>
+          <b>Entry ID</b>
+          <input name="s-legacy-id" type="text" />
+        </label>
+        <label>
+          <b>Password</b>
+          <input name="s-legacy-password" type="password" />
+        </label>
+      </section>
+
+      <button type="submit">Query</button>
     </form>
   </main>
 </BaseLayout>
@@ -85,11 +85,15 @@ import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
   }
 
   label {
-    --at-apply: "flex gap-4 py-2 items-center w-fit";
+    --at-apply: "flex flex-col py-2 items-start w-fit";
   }
 
   input {
     --at-apply: "outline-none border-2 px-2 py-1";
+  }
+
+  section {
+    --at-apply: "mb-8 hidden flex flex-col";
   }
 
   td {
@@ -104,3 +108,45 @@ import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
     --at-apply: "text-black";
   }
 </style>
+
+<script>
+  // @unocss-skip-start
+  document.addEventListener("astro:page-load", () => {
+    const form = document.querySelector<HTMLFormElement>("#form-database");
+    if (!form) return;
+
+    form
+      .querySelector<HTMLSelectElement>("[name=executor]")
+      ?.addEventListener("change", function () {
+        form
+          .querySelectorAll("section")
+          .forEach((el) => (el.style.display = "none"));
+        form.querySelectorAll("input").forEach((el) => {
+          el.value = "";
+          el.removeAttribute("required");
+        });
+
+        const sec = form.querySelector<HTMLDivElement>(
+          `section#s-${this.value}`,
+        );
+        if (!sec) return;
+
+        sec.style.display = "flex";
+        sec
+          .querySelectorAll("input")
+          .forEach((el) => el.setAttribute("required", ""));
+      });
+
+    form.addEventListener("submit", (ev) => {
+      ev.preventDefault();
+      const data = new FormData(form);
+
+      switch (data.get("executor")) {
+        case "public":
+        case "classified":
+        case "legacy":
+      }
+    });
+  });
+  // @unocss-skip-end
+</script>

@@ -23,7 +23,7 @@ import ExtLink from "@/components/ExtLink.astro";
     <meta name="twitter:title" content="FUTURE 攻坚组" />
   </Fragment>
 
-  <main class=":uno: mx-4 my-8 lg:mx-auto lg:min-w-3xl lg:w-1/2">
+  <main class=":uno: mx-4 my-8 lg:(mx-auto min-w-3xl w-1/2)">
     <h1 class=":uno: text-2xl font-bold my-8 text-center">
       We create puzzles, we reveal puzzles
     </h1>
@@ -69,7 +69,7 @@ import ExtLink from "@/components/ExtLink.astro";
     </div>
     <hr class=":uno: my-12 border-t-4 border-neutral-500" />
     <h2 class=":uno: text-xl font-bold my-4">最新文章</h2>
-    <div class=":uno: gap-4 grid grid-rows-3 md:grid-cols-3 md:grid-rows-1">
+    <div class=":uno: gap-4 grid grid-rows-3 md:(grid-cols-3 grid-rows-1)">
       {
         posts.slice(0, 3).map(({ data }) => (
           <a
@@ -94,7 +94,7 @@ import ExtLink from "@/components/ExtLink.astro";
       >
     </p>
     <h2 class=":uno: text-xl font-bold my-4">最新谜题</h2>
-    <div class="gap-4 grid grid-rows-3 md:grid-cols-3 md:grid-rows-1">
+    <div class="gap-4 grid grid-rows-3 md:(grid-cols-3 grid-rows-1)">
       {
         puzzles.slice(0, 3).map(({ data }) => (
           <a
