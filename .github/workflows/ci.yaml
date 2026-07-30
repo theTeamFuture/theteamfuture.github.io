@@ -9,6 +9,7 @@ on:
       - assets/**
       - contents/**
       - public/**
+      - scripts/create-tag.sh
       - scripts/preview-artifact.sh
       - .commitlintrc
       - .gitignore
@@ -19,6 +20,10 @@ on:
       - README.md
       - tsconfig.check.json
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
 
 env:
   NODE_ENV: production
