@@ -31,12 +31,12 @@ run_id = os.environ["GITHUB_RUN_ID"]
 server_url = os.environ["GITHUB_SERVER_URL"]
 
 message = EmailMessage()
-message["Subject"] = f"GitHub Pages artifact password: {repository} run {run_id}"
+message["Subject"] = f"GitHub Pages artifact ready: {repository} ({run_id})"
 message["From"] = os.environ["SMTP_FROM"]
 message["To"] = os.environ["SMTP_TO"]
 
 message.set_content(
-f"""A GitHub Pages debugging artifact was generated.
+f"""A GitHub Pages artifact was generated.
 
 Repository: {repository}
 Run ID: {run_id}
@@ -46,6 +46,9 @@ Artifact: {os.environ["ARTIFACT_NAME"]}
 
 Decryption password:
 {os.environ["ARTIFACT_PASSWORD"]}
+
+Preview command:
+pnpm run preview:artifact {run_id} {os.environ["ARTIFACT_PASSWORD"]}
 """
 )
 

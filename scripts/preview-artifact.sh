@@ -1,23 +1,17 @@
 set -euo pipefail
 
+# Constants
+REPO=theTeamFuture/theteamfuture.github.io
+
+# Check arguments
 if [[ $# -ne 2 ]]; then
-  echo "Usage: $0 <action-run-url> <decrypt-password>" >&2
-  echo "Example: $0 https://github.com/<owner>/<repo>/actions/runs/<run-id> <password>" >&2
+  echo "Usage: $0 <run-id> <decrypt-password>" >&2
   exit 1
 fi
 
-RUN_URL="$1"
+# Arguments
+RUN_ID="$1"
 export ARTIFACT_PASSWORD="$2"
-
-# Parse the action run URL
-if [[ "$RUN_URL" =~ ^https?://github\.com/([^/]+/[^/]+)/actions/runs/([0-9]+) ]]; then
-  REPO="${BASH_REMATCH[1]}"
-  RUN_ID="${BASH_REMATCH[2]}"
-else
-  echo "Error: could not parse run URL: $RUN_URL" >&2
-  echo "Expected: https://github.com/<owner>/<repo>/actions/runs/<run-id>" >&2
-  exit 1
-fi
 
 # Create a temporary working directory and ensure it is removed on exit
 WORK_DIR="$(mktemp -d -t preview-artifact-XXXXXX)"
@@ -39,11 +33,9 @@ echo "Work dir:   $WORK_DIR"
 
 # List artifacts of the run via the REST API and download the (single) one
 echo "Fetching artifact list..."
-ARTIFACT_JSON="$(gh api \
-  -H "Accept: application/vnd.github+json" \
-"/repos/$REPO/actions/runs/$RUN_ID/artifacts")"
+ARTIFACT_JSON="$(gh api -H "Accept: application/vnd.github+json" "/repos/$REPO/actions/runs/$RUN_ID/artifacts")"
 
-# Extract the first artifact's id and name via jq.
+# Extract the first artifact's id and name via jq
 ARTIFACT_ID="$(printf '%s' "$ARTIFACT_JSON" | jq -r '.artifacts[0].id')"
 ARTIFACT_NAME="$(printf '%s' "$ARTIFACT_JSON" | jq -r '.artifacts[0].name')"
 if [[ -z "$ARTIFACT_ID" || "$ARTIFACT_ID" == "null" ]]; then
@@ -55,9 +47,9 @@ echo "Artifact:  $ARTIFACT_NAME (id: $ARTIFACT_ID)"
 ARTIFACT_PATH="$DOWNLOAD_DIR/$ARTIFACT_NAME"
 echo "Downloading artifact..."
 gh api \
--H "Accept: application/vnd.github+json" \
-"/repos/$REPO/actions/artifacts/$ARTIFACT_ID/zip" \
-> "$ARTIFACT_PATH"
+  -H "Accept: application/vnd.github+json" \
+  "/repos/$REPO/actions/artifacts/$ARTIFACT_ID/zip" \
+  > "$ARTIFACT_PATH"
 
 # Decrypt and extract the tar.gz archive.
 echo "Decrypting and extracting..."
@@ -79,4 +71,4 @@ PORT="${PREVIEW_PORT:-8080}"
 echo
 echo "Preview server running at http://localhost:${PORT}"
 echo "Press Ctrl+C to stop."
-exec npx --yes http-server "$WWW_DIR" -p "$PORT" -c-1
+exec npx -y http-server "$WWW_DIR" -p "$PORT" -c-1
