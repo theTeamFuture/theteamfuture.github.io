@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/markdown-satteri": "^0.3.4",
+    "@astrojs/markdown-satteri": "^0.3.5",
     "@astrojs/sitemap": "^3.7.3",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify/utils": "^3.1.4",
@@ -23,7 +23,7 @@
     "@types/escape-html": "^1.0.4",
     "@unocss/astro": "^66.7.5",
     "animejs": "^4.5.0",
-    "astro": "^7.1.4",
+    "astro": "^7.1.5",
     "astro-minify-html-swc": "^0.1.12",
     "cheerio": "^1.2.0",
     "dayjs": "^1.11.21",
