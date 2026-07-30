@@ -52,21 +52,27 @@ const fade: TransitionDirectionalAnimations = {
     transition:animate={fade}
   >
     <nav class=":uno: flex flex-col gap-4">
-      <NavLink alt name="首页" title="INDEX" url="/" re={/^\/$/} />
-      <NavLink alt name="关于" title="ABOUT" url="/about" re={/^\/about\/?$/} />
+      <NavLink name="首页" title="INDEX" url="/" re={/^\/$/} variant="mobile" />
       <NavLink
-        alt
+        name="关于"
+        title="ABOUT"
+        url="/about"
+        re={/^\/about\/?$/}
+        variant="mobile"
+      />
+      <NavLink
         name="文章"
         title="POSTS"
         url="/posts"
         re={/^\/posts(\/.*)?$/}
+        variant="mobile"
       />
       <NavLink
-        alt
         name="谜题"
         title="PUZZLES"
         url="/puzzles"
         re={/^\/puzzles(\/.*)?$/}
+        variant="mobile"
       />
     </nav>
   </div>

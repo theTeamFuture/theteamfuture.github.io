@@ -14,7 +14,7 @@ export class CDialog extends HTMLElement {
       scaleY: [0, 1],
       duration: 100,
       onBegin: () => {
-        this.dataset.open = "1";
+        this.style.display = "flex";
       },
     });
   }
@@ -24,11 +24,11 @@ export class CDialog extends HTMLElement {
       scaleY: [1, 0],
       duration: 100,
       onComplete: () => {
-        delete this.dataset.open;
+        this.style.display = "none";
       },
     });
   }
 }
 
-// --- Register element ---
+// Register element
 customElements.define("c-dialog", CDialog);

@@ -24,11 +24,3 @@ const { id } = Astro.props;
     <slot />
   </div>
 </c-dialog>
-
-<style lang="scss" is:global>
-  c-dialog {
-    &[data-open] {
-      --at-apply: "flex";
-    }
-  }
-</style>

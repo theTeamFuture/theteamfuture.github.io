@@ -1,26 +1,28 @@
 ---
 // --- Types ---
 interface Props {
-  alt?: boolean;
   name: string;
   title: string;
   url: string;
   re: RegExp;
+  variant?: "default" | "mobile";
 }
 
 // --- Injects ---
-const { alt = false, name, title, url, re } = Astro.props;
+const { name, title, url, re, variant = "default" } = Astro.props;
 ---
 
 <a
   class:list={[
-    alt
-      ? ":uno: flex gap-2 transition-colors items-baseline hover:text-sky-400"
-      : ":uno: flex flex-col transition-colors items-start hover:text-sky-400",
+    variant === "default"
+      ? ":uno: flex flex-col transition-colors items-start hover:text-sky-400"
+      : ":uno: flex gap-2 transition-colors items-baseline hover:text-sky-400",
     re.test(Astro.url.pathname) ? "text-sky-400" : "text-white",
   ]}
   href={url}
 >
-  <span class={alt ? "text-xl" : ":uno: text-lg leading-none"}>{title}</span>
-  <span class={(!alt && "text-sm") || null}>{name}</span>
+  <span class={variant === "default" ? ":uno: text-lg leading-none" : "text-xl"}
+    >{title}</span
+  >
+  <span class={(variant === "mobile" && "text-sm") || null}>{name}</span>
 </a>

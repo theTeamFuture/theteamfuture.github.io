@@ -1,4 +1,4 @@
-<div class="crt">
+<div class=":uno: crt text-white bg-neutral-900 inset-0 fixed">
   <slot />
 </div>
 
@@ -24,7 +24,6 @@
     --crt-glow-strength: 0.2;
     --crt-scanline-opacity: 0.22;
     --crt-mask-opacity: 0.12;
-    --at-apply: "fixed inset-0 text-white bg-neutral-900";
 
     filter: saturate(1.25) contrast(1.08) brightness(1.05);
 
@@ -38,9 +37,8 @@
     }
 
     &::before {
-      --at-apply: "absolute inset-0 z-1000 pointer-events-none";
+      --uno: "pointer-events-none content-empty inset-0 absolute z-1000 mix-blend-overlay";
 
-      content: "";
       background:
         repeating-linear-gradient(
           to bottom,
@@ -61,13 +59,12 @@
       background-size:
         100% 4px,
         3px 100%;
-      mix-blend-mode: overlay;
     }
 
     &::after {
-      --at-apply: "absolute inset-0 pointer-events-none z-1001";
+      --uno: "pointer-events-none content-empty inset-0 absolute z-1001";
 
-      content: "";
+      animation: crt-refresh 10s linear infinite;
       background:
         linear-gradient(
           to bottom,
@@ -88,7 +85,6 @@
         100% 100%,
         100% 100%;
       box-shadow: inset 0 0 90px #000;
-      animation: crt-refresh 10s linear infinite;
     }
   }
 </style>

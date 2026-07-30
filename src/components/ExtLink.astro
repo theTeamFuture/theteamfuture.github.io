@@ -3,11 +3,17 @@ import type { HTMLAttributes } from "astro/types";
 
 // --- Types ---
 type Props = HTMLAttributes<"a">;
+
+// --- Injects ---
+const { class: klass, ...rests } = Astro.props;
 ---
 
 <a
-  class=":uno: text-blue-500 transition-colors hover:text-red-500"
+  class:list={[
+    ":uno: text-blue-500 transition-colors hover:text-red-500",
+    klass,
+  ]}
   rel="noopener noreferer"
   target="_blank"
-  {...Astro.props}><slot /></a
+  {...rests}><slot /></a
 >

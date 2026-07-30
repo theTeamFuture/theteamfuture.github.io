@@ -14,65 +14,88 @@ interface Props {
 const { variant = "default" } = Astro.props;
 ---
 
-{
-  variant === "default" ? (
-    <nav
-      class=":uno: flex flex-col gap-8"
-      style={{ fontFamily: `'${spaceport.family}'` }}
+<nav
+  class:list={[
+    variant === "default"
+      ? ":uno: flex flex-col gap-8"
+      : ":uno: flex gap-8 max-md:mt-4 md:(ml-8 pb-4 self-end)",
+  ]}
+  style={{ fontFamily: `'${spaceport.family}'` }}
+>
+  <button
+    class=":uno: opacity-50 inline-flex gap-1 cursor-pointer transition-opacity items-center hover:opacity-100"
+    id="btn-notifications"
+    data-crt
+  >
+    <div
+      class:list={[
+        ":uno: i-mdi-bell-notification h-8 w-8",
+        variant === "default" && "-translate-y-1",
+      ]}
     >
-      <button class="cursor-pointer" id="btn-notifications" data-crt>
-        <div class=":uno: i-mdi-bell-notification -translate-y-1" />
-        Notifications
-      </button>
-      <a href="/cat/database" data-crt>
-        <div class=":uno: i-mdi-database-search -translate-y-1" />
-        Database
-      </a>
-      <div class=":uno: opacity-50 inline-flex gap-1 items-center">
+    </div>
+    {variant === "default" && <>Notifications</>}
+  </button>
+
+  <a
+    class=":uno: opacity-50 inline-flex gap-1 transition-opacity items-center hover:opacity-100"
+    href="/cat/database"
+    data-crt
+  >
+    <div
+      class:list={[
+        ":uno: i-mdi-database-search h-8 w-8",
+        variant === "default" && "-translate-y-1",
+      ]}
+    >
+    </div>
+    {variant === "default" && <>Database</>}
+  </a>
+
+  <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
+    {
+      variant === "default" ? (
         <div class=":uno: inline-flex gap-1 items-center" data-crt>
-          <div class=":uno: i-mdi-box-variant-closed -translate-y-1" />
+          <div class=":uno: i-mdi-box-variant-closed h-8 w-8 -translate-y-1" />
           Registry
         </div>
-        <HazardArea class=":uno: opacity-50 h-12 w-300px translate-x-[-25%]" />
-      </div>
-      <div class=":uno: opacity-50 inline-flex gap-1 items-center">
+      ) : (
+        <div data-crt>
+          <div class=":uno: i-mdi-box-variant-closed h-8 w-8" />
+        </div>
+      )
+    }
+    <HazardArea
+      class:list={[
+        variant === "default"
+          ? ":uno: opacity-50 h-12 w-300px translate-x-[-25%]"
+          : ":uno: opacity-50 inset-0",
+      ]}
+    />
+  </div>
+
+  <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
+    {
+      variant === "default" ? (
         <div class=":uno: inline-flex gap-1 items-center" data-crt>
-          <div class=":uno: i-mdi-done-all -translate-y-1" />
+          <div class=":uno: i-mdi-done-all h-8 w-8 -translate-y-1" />
           Submission
         </div>
-        <HazardArea class=":uno: opacity-50 h-12 w-300px translate-x-[-25%]" />
-      </div>
-    </nav>
-  ) : (
-    <nav class=":uno: flex gap-8 max-md:mt-4 md:(ml-8 pb-4 self-end)">
-      <button class="cursor-pointer" id="btn-notifications" data-crt>
-        <div class="i-mdi-bell-notification" />
-      </button>
-      <a href="/cat/database" data-crt>
-        <div class="i-mdi:database-search" />
-      </a>
-      <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
-        <div class="i-mdi-box-variant-closed" />
-        <HazardArea class=":uno: opacity-50 inset-0" />
-      </div>
-      <div class=":uno: opacity-50 inline-flex gap-1 items-center relative">
-        <div class="i-mdi-done-all" />
-        <HazardArea class=":uno: opacity-50 inset-0" />
-      </div>
-    </nav>
-  )
-}
-
-<style lang="scss">
-  a,
-  button {
-    --at-apply: "opacity-50 inline-flex gap-1 transition-opacity items-center hover:opacity-100";
-  }
-
-  div[class*="i-mdi"] {
-    --at-apply: "h-8 w-8";
-  }
-</style>
+      ) : (
+        <div data-crt>
+          <div class=":uno: i-mdi-done-all h-8 w-8" />
+        </div>
+      )
+    }
+    <HazardArea
+      class:list={[
+        variant === "default"
+          ? ":uno: opacity-50 h-12 w-300px translate-x-[-25%]"
+          : ":uno: opacity-50 inset-0",
+      ]}
+    />
+  </div>
+</nav>
 
 <script>
   import type { CDialog } from "@/components/cat/web/dialog-container";

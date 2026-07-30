@@ -8,8 +8,13 @@ interface Props {
 const { class: klass } = Astro.props;
 ---
 
-<div class={"hazard-tape " + klass} data-crt>
-  <span class="hazard-tape__stripes" data-crt></span>
+<div
+  class:list={[":uno: hazard-tape absolute grid place-items-center", klass]}
+  data-crt
+>
+  <span
+    class=":uno: hazard-tape__stripes inset-0 absolute overflow-hidden"
+    data-crt></span>
 </div>
 
 <style lang="scss" is:global>
@@ -21,23 +26,17 @@ const { class: klass } = Astro.props;
 
   .hazard-tape {
     --crt-drop-color: rgb(255 0 0 / var(--crt-drop-strength));
-    --at-apply: "absolute grid place-items-center";
 
-    &__stripes {
-      --at-apply: "absolute inset-0 overflow-hidden";
+    &__stripes::before {
+      --uno: "content-empty transform-skew-x--30deg absolute";
 
-      &::before {
-        --at-apply: "absolute transform-skew-x--30deg";
-
-        content: "";
-        inset: -0% -100%;
-        background: repeating-linear-gradient(
-          to right,
-          transparent 0 3rem,
-          red 3rem 6rem
-        );
-        animation: hazard-stripes 0.8s linear infinite;
-      }
+      animation: hazard-stripes 0.8s linear infinite;
+      background: repeating-linear-gradient(
+        to right,
+        transparent 0 3rem,
+        red 3rem 6rem
+      );
+      inset: -0% -100%;
     }
   }
 </style>
