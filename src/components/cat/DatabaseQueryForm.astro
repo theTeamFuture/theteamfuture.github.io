@@ -1,0 +1,64 @@
+<c-database-query-form>
+  <form>
+    <label class="mb-4">
+      <b>Query Executor</b>
+      <select class=":uno: px-2 py-1 outline-none border-2" name="executor">
+        <option value="public">Public Document</option>
+        <option value="classified">Classified Retriever</option>
+        <option value="legacy">Legacy</option>
+      </select>
+    </label>
+
+    <section id="s-public" style="display:flex">
+      <label>
+        <b>Document ID</b>
+        <input name="s-public-id" type="text" required />
+      </label>
+    </section>
+
+    <section id="s-classified">
+      <label>
+        <b>Document ID</b>
+        <input name="s-classified-id" type="text" />
+      </label>
+      <label>
+        <b>Password</b>
+        <input name="s-classified-password" type="password" />
+      </label>
+    </section>
+
+    <section id="s-legacy">
+      <label>
+        <b>Entry ID</b>
+        <input name="s-legacy-id" type="text" />
+      </label>
+      <label>
+        <b>Password</b>
+        <input name="s-legacy-password" type="password" />
+      </label>
+    </section>
+
+    <button
+      class=":uno: px-2 py-1 border-2 border-white bg-white/0 cursor-pointer transition hover:(text-black bg-white)"
+      type="submit">Query</button
+    >
+  </form>
+</c-database-query-form>
+
+<style lang="scss">
+  label {
+    --at-apply: "flex flex-col py-2 items-start w-fit";
+  }
+
+  input {
+    --at-apply: "outline-none border-2 px-2 py-1";
+  }
+
+  section {
+    --at-apply: "mb-8 hidden flex flex-col";
+  }
+
+  option {
+    --at-apply: "text-black";
+  }
+</style>

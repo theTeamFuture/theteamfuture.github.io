@@ -3,6 +3,7 @@
 import BaseLayout from "@/layouts/cat/BaseLayout.astro";
 
 // --- Components ---
+import DatabaseQueryForm from "@/components/cat/DatabaseQueryForm.astro";
 import Navigation from "@/components/cat/Navigation.astro";
 import QueryResult from "@/components/cat/dialogs/QueryResult.astro";
 import SiteHeader from "@/components/cat/SiteHeader.astro";
@@ -32,135 +33,8 @@ import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
         Database
       </h2>
     </header>
-    <form id="form-database">
-      <label class="mb-4">
-        <b>Query Executor</b>
-        <select class=":uno: px-2 py-1 outline-none border-2" name="executor">
-          <option value="public">Public Document</option>
-          <option value="classified">Classified Retriever</option>
-          <option value="legacy">Legacy</option>
-        </select>
-      </label>
-
-      <section id="s-public" style="display:flex">
-        <label>
-          <b>Document ID</b>
-          <input name="s-public-id" type="text" required />
-        </label>
-      </section>
-
-      <section id="s-classified">
-        <label>
-          <b>Document ID</b>
-          <input name="s-classified-id" type="text" />
-        </label>
-        <label>
-          <b>Password</b>
-          <input name="s-classified-password" type="password" />
-        </label>
-      </section>
-
-      <section id="s-legacy">
-        <label>
-          <b>Entry ID</b>
-          <input name="s-legacy-id" type="text" />
-        </label>
-        <label>
-          <b>Password</b>
-          <input name="s-legacy-password" type="password" />
-        </label>
-      </section>
-
-      <button type="submit">Query</button>
-    </form>
+    <DatabaseQueryForm />
   </main>
 
   <QueryResult id="dialog-query-result" />
 </BaseLayout>
-
-<style lang="scss">
-  a {
-    --at-apply: "opacity-50 transition-opacity hover:opacity-100";
-  }
-
-  button {
-    --at-apply: ":uno: px-2 py-1 border-2 border-white bg-white/0 cursor-pointer transition-color hover:(text-black bg-white)";
-  }
-
-  label {
-    --at-apply: "flex flex-col py-2 items-start w-fit";
-  }
-
-  input {
-    --at-apply: "outline-none border-2 px-2 py-1";
-  }
-
-  section {
-    --at-apply: "mb-8 hidden flex flex-col";
-  }
-
-  td {
-    --at-apply: "pl-4";
-  }
-
-  th {
-    --at-apply: "text-left";
-  }
-
-  option {
-    --at-apply: "text-black";
-  }
-</style>
-
-<script>
-  import type { CQueryResult } from "@/components/cat/web/query-result";
-
-  // @unocss-skip-start
-  document.addEventListener("astro:page-load", () => {
-    const form = document.querySelector<HTMLFormElement>("#form-database");
-    if (!form) return;
-
-    form
-      .querySelector<HTMLSelectElement>("[name=executor]")
-      ?.addEventListener("change", function () {
-        form
-          .querySelectorAll("section")
-          .forEach((el) => (el.style.display = "none"));
-        form.querySelectorAll("input").forEach((el) => {
-          el.value = "";
-          el.removeAttribute("required");
-        });
-
-        const sec = form.querySelector<HTMLDivElement>(
-          `section#s-${this.value}`,
-        );
-        if (!sec) return;
-
-        sec.style.display = "flex";
-        sec
-          .querySelectorAll("input")
-          .forEach((el) => el.setAttribute("required", ""));
-      });
-
-    form.addEventListener("submit", (ev) => {
-      ev.preventDefault();
-      const data = new FormData(form);
-
-      switch (data.get("executor")) {
-        case "public":
-        case "classified":
-        case "legacy":
-      }
-
-      const dia = document.querySelector<CQueryResult>("#dialog-query-result")!;
-      dia.open();
-      dia.audio(
-        "example.mp3",
-        data.get("s-public-id") === "a"
-          ? "https://getsamplefiles.com/download/mp3/sample-1.mp3"
-          : "https://samplelib.com/mp3/sample-speech-1m.mp3",
-      );
-    });
-  });
-  // @unocss-skip-end
-</script>

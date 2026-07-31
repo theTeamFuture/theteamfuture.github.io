@@ -17,31 +17,48 @@ export class CQueryResult extends CDialog {
     this.showSection("not-found");
   }
 
-  public async text(name: string, data: string) {
+  public async text(name: string, content: string) {
     await this.minTimeout;
-    this.querySelector("#text-title")!.textContent = name;
-    this.querySelector("#text-content")!.textContent = data;
+    this.querySelector("#text-name")!.textContent = name;
+    this.querySelector("#text-content")!.textContent = content;
     this.dataset.closeable = "true";
     this.showSection("text");
   }
 
-  public async image(name: string, data: string) {
+  public async image(name: string, src: string) {
     await this.minTimeout;
-    this.querySelector("#image-title")!.textContent = name;
-    this.querySelector<HTMLImageElement>("#image-el")!.src = data;
+    this.querySelector("#image-name")!.textContent = name;
+    this.querySelector<HTMLImageElement>("#image-el")!.src = src;
     this.dataset.closeable = "true";
     this.showSection("image");
   }
 
-  public async audio(name: string, data: string) {
+  public async audio(name: string, src: string) {
     await this.minTimeout;
 
     const ap = this.querySelector<CAudioPlayer>("c-audio-player")!;
-    ap.init(name, data);
+    ap.init(name, src);
 
     this.addEventListener("close", () => ap.stop());
     this.dataset.closeable = "true";
     this.showSection("audio");
+  }
+
+  public async blob(name: string, blob: Blob) {
+    await this.minTimeout;
+    this.querySelector("#blob-name")!.textContent = name;
+    this.dataset.closeable = "true";
+    this.showSection("blob");
+
+    const el = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    el.href = url;
+    el.download = name;
+    el.style.display = "none";
+    document.body.appendChild(el);
+    el.click();
+    el.remove();
+    URL.revokeObjectURL(url);
   }
 
   private showSection(id: string) {
