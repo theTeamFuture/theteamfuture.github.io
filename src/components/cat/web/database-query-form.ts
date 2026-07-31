@@ -41,10 +41,10 @@ export class CDatabaseQueryForm extends HTMLElement {
       this.qryResult.open();
       switch (data.get("executor")) {
         case "public":
-          console.log("p");
+          this.qryResult.error("Not Found");
           break;
         case "classified":
-          console.log("c");
+          this.qryResult.error("Not Found");
           break;
         case "legacy":
           this.handleLegacy(data);
