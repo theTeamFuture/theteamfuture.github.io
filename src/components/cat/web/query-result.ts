@@ -3,6 +3,8 @@ import { CDialog } from "./dialog-container";
 
 // --- Export class ---
 export class CQueryResult extends CDialog {
+  [key: string]: unknown;
+
   private minTimeout: Promise<void> | null = null;
 
   public open() {
@@ -11,10 +13,24 @@ export class CQueryResult extends CDialog {
     super.open();
   }
 
-  public async notFound() {
+  public async show({
+    type,
+    name,
+    data,
+  }: {
+    type: string;
+    name: string;
+    data: unknown;
+  }) {
+    const handler = this[type];
+    if (typeof handler === "function") await handler.call(this, name, data);
+  }
+
+  public async error(err: string) {
     await this.minTimeout;
+    this.querySelector("#error-content")!.textContent = err;
     this.dataset.closeable = "true";
-    this.showSection("not-found");
+    this.showSection("error");
   }
 
   public async text(name: string, content: string) {

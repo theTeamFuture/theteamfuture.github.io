@@ -1,7 +1,13 @@
+import type { CQueryResult } from "./query-result";
+import { queryLegacy } from "@/utils/cat/legacy.client";
+
 // --- Export class ---
 export class CDatabaseQueryForm extends HTMLElement {
   private get form() {
     return this.querySelector("form")!;
+  }
+  private get qryResult() {
+    return document.querySelector<CQueryResult>("#dialog-query-result")!;
   }
 
   public connectedCallback() {
@@ -32,6 +38,7 @@ export class CDatabaseQueryForm extends HTMLElement {
       ev.preventDefault();
       const data = new FormData(this.form);
 
+      this.qryResult.open();
       switch (data.get("executor")) {
         case "public":
           console.log("p");
@@ -40,10 +47,26 @@ export class CDatabaseQueryForm extends HTMLElement {
           console.log("c");
           break;
         case "legacy":
-          console.log("l");
+          this.handleLegacy(data);
           break;
       }
     });
+  }
+
+  private async handleLegacy(data: FormData) {
+    const id = data.get("s-legacy-id") as string;
+    const pass = data.get("s-legacy-password") as string;
+
+    try {
+      const result = await queryLegacy(id, pass);
+      this.qryResult.show(result);
+    } catch (err) {
+      if (typeof err === "string") {
+        this.qryResult.error(err);
+      } else {
+        this.qryResult.error("Unexpected Error");
+      }
+    }
   }
 }
 

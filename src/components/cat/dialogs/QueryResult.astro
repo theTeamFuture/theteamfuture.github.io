@@ -16,8 +16,8 @@ const { id } = Astro.props;
 ---
 
 <DialogContainer {id} tag="c-query-result" closeable={false}>
-  <div data-crt>
-    <section id="querying">
+  <div>
+    <section id="querying" data-crt>
       <h2
         class=":uno: font-bold my-8 flex gap-2 justify-center"
         style={{ fontFamily: `'${spaceport.family}'` }}
@@ -29,16 +29,20 @@ const { id } = Astro.props;
       </h2>
     </section>
 
-    <section id="not-found">
+    <section id="error">
       <h2
-        class=":uno: font-bold my-8 text-center"
-        style={{ fontFamily: `'${spaceport.family}'` }}
+        class=":uno: text-red-500 font-bold my-8 text-center"
+        id="error-content"
+        style={{
+          fontFamily: `'${spaceport.family}'`,
+          "--crt-drop-color": "rgb(255 0 0 / var(--crt-drop-strength))",
+        }}
+        data-crt
       >
-        Not Found
       </h2>
     </section>
 
-    <section id="text">
+    <section id="text" data-crt>
       <h2
         class=":uno: font-bold mb-1 flex gap-2"
         style={{ fontFamily: `'${spaceport.family}'` }}
@@ -53,7 +57,7 @@ const { id } = Astro.props;
       </div>
     </section>
 
-    <section id="image">
+    <section id="image" data-crt>
       <h2
         class=":uno: font-bold mb-1 flex gap-2"
         style={{ fontFamily: `'${spaceport.family}'` }}
@@ -68,7 +72,7 @@ const { id } = Astro.props;
       />
     </section>
 
-    <section id="audio">
+    <section id="audio" data-crt>
       <h2
         class=":uno: font-bold mb-1 flex gap-2"
         style={{ fontFamily: `'${spaceport.family}'` }}
@@ -78,7 +82,7 @@ const { id } = Astro.props;
       <AudioPlayer />
     </section>
 
-    <section id="blob">
+    <section id="blob" data-crt>
       <h2
         class=":uno: font-bold mb-1 flex gap-2"
         style={{ fontFamily: `'${spaceport.family}'` }}
