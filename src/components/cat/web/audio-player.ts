@@ -116,7 +116,13 @@ export class CAudioPlayer extends HTMLElement {
     this.analyser = null;
     this.context?.close();
     this.context = null;
-    this.audio?.remove();
+
+    if (this.audio) {
+      const src = this.audio.querySelector("source")?.src;
+      if (src && src.startsWith("blob:")) URL.revokeObjectURL(src);
+      this.audio.remove();
+    }
+
     this.progress.value = "0";
     this.currentTime.textContent = "0:00";
 

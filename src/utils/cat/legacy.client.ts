@@ -41,8 +41,19 @@ export const queryLegacy = async (id: string, pass: string) => {
     return { type: "text", name, data };
   } else if (mime.startsWith("image")) {
     return { type: "image", name, data };
+  } else if (mime.startsWith("audio")) {
+    const audio = new Blob([decodeB64(data, "blob")], { type: mime });
+    return {
+      type: "audio",
+      name,
+      data: URL.createObjectURL(audio),
+    };
   } else {
-    return { type: "blob", name, data: decodeB64(data, "blob") };
+    return {
+      type: "blob",
+      name,
+      data: new Blob([decodeB64(data, "blob")], { type: mime }),
+    };
   }
 };
 
