@@ -1,0 +1,42 @@
+---
+// --- Fonts ---
+import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
+---
+
+<c-audio-player>
+  <canvas class=":uno: h-[200px] w-full" id="visualizer"></canvas>
+  <h3 class=":uno: text-sm mb-1" id="title"></h3>
+  <div
+    class=":uno: mb-2 flex gap-4 items-center justify-between"
+    style={{ fontFamily: `'${spaceport.family}'` }}
+  >
+    <span class=":uno: text-sm translate-y-0.5" id="current-time">0:00</span>
+    <input
+      class=":uno: w-full cursor-pointer"
+      id="progress"
+      max="100"
+      min="0"
+      step="0.1"
+      type="range"
+      value="0"
+    />
+    <span class=":uno: text-sm translate-y-0.5" id="duration">0:00</span>
+  </div>
+  <div class=":uno: flex items-center justify-between">
+    <div class=":uno: flex gap-2 items-center">
+      <button
+        class=":uno: i-mdi-play-pause opacity-50 h-8 w-8 cursor-pointer transition-opacity hover:opacity-100"
+        id="play-pause"></button>
+      <button
+        class=":uno: i-mdi-stop opacity-50 h-8 w-8 cursor-pointer transition-opacity hover:opacity-100"
+        id="stop"></button>
+      <button
+        class=":uno: i-mdi-download opacity-50 h-8 w-8 cursor-pointer transition-opacity hover:opacity-100"
+        id="download"></button>
+    </div>
+    <div class=":uno: flex items-center">
+      <div class=":uno: i-mdi-volume-source h-8 w-8"></div>
+      <input id="volume" max="1" min="0" step="0.01" type="range" value="0.8" />
+    </div>
+  </div>
+</c-audio-player>

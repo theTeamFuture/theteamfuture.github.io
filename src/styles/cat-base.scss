@@ -1,0 +1,7 @@
+/* Scrollbar */
+::-webkit-scrollbar {
+  --at-apply: "h-1 w-1";
+}
+::-webkit-scrollbar-thumb {
+  --at-apply: "bg-white";
+}

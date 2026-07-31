@@ -4,6 +4,7 @@ import BaseLayout from "@/layouts/cat/BaseLayout.astro";
 
 // --- Components ---
 import Navigation from "@/components/cat/Navigation.astro";
+import QueryResult from "@/components/cat/dialogs/QueryResult.astro";
 import SiteHeader from "@/components/cat/SiteHeader.astro";
 
 // --- Fonts ---
@@ -73,6 +74,8 @@ import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
       <button type="submit">Query</button>
     </form>
   </main>
+
+  <QueryResult id="dialog-query-result" />
 </BaseLayout>
 
 <style lang="scss">
@@ -110,6 +113,8 @@ import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
 </style>
 
 <script>
+  import type { CQueryResult } from "@/components/cat/web/query-result";
+
   // @unocss-skip-start
   document.addEventListener("astro:page-load", () => {
     const form = document.querySelector<HTMLFormElement>("#form-database");
@@ -146,6 +151,15 @@ import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
         case "classified":
         case "legacy":
       }
+
+      const dia = document.querySelector<CQueryResult>("#dialog-query-result")!;
+      dia.open();
+      dia.audio(
+        "example.mp3",
+        data.get("s-public-id") === "a"
+          ? "https://getsamplefiles.com/download/mp3/sample-1.mp3"
+          : "https://samplelib.com/mp3/sample-speech-1m.mp3",
+      );
     });
   });
   // @unocss-skip-end

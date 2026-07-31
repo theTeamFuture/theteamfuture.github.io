@@ -25,7 +25,7 @@
     "@types/escape-html": "^1.0.4",
     "@unocss/astro": "^66.7.5",
     "animejs": "^4.5.0",
-    "astro": "^7.1.5",
+    "astro": "^7.1.6",
     "astro-minify-html-swc": "^0.1.12",
     "cheerio": "^1.2.0",
     "dayjs": "^1.11.21",

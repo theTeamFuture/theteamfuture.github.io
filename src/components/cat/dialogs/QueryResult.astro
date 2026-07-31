@@ -1,0 +1,90 @@
+---
+// --- Fonts ---
+import { css as spaceport } from "@/assets/fonts/Spaceport_2006.otf";
+
+// --- Components ---
+import AudioPlayer from "../AudioPlayer.astro";
+import DialogContainer from "../DialogContainer.astro";
+
+// --- Types ---
+interface Props {
+  id: string;
+}
+
+// --- Injects ---
+const { id } = Astro.props;
+---
+
+<DialogContainer {id} tag="c-query-result" closeable={false}>
+  <div data-crt>
+    <section id="querying">
+      <h2
+        class=":uno: font-bold my-8 flex gap-2 justify-center"
+        style={{ fontFamily: `'${spaceport.family}'` }}
+      >
+        <div
+          class=":uno: border-2 border-l-transparent rounded-full h-5 w-5 animate-spin"
+        >
+        </div>Querying...
+      </h2>
+    </section>
+
+    <section id="not-found">
+      <h2
+        class=":uno: font-bold my-8 text-center"
+        style={{ fontFamily: `'${spaceport.family}'` }}
+      >
+        Not Found
+      </h2>
+    </section>
+
+    <section id="text">
+      <h2
+        class=":uno: font-bold mb-1 flex gap-2"
+        style={{ fontFamily: `'${spaceport.family}'` }}
+      >
+        Found Text
+      </h2>
+      <h3 class="text-sm" id="text-title"></h3>
+      <div
+        class=":uno: px-2 border-2 max-h-[calc(100vh-6.5rem)] overflow-y-auto"
+      >
+        <pre class=":uno: my-1 text-wrap" id="text-content"></pre>
+      </div>
+    </section>
+
+    <section id="image">
+      <h2
+        class=":uno: font-bold mb-1 flex gap-2"
+        style={{ fontFamily: `'${spaceport.family}'` }}
+      >
+        Found Image
+      </h2>
+      <h3 class="text-sm" id="image-title"></h3>
+      <img
+        class=":uno: mx-auto border-2 max-h-[calc(100vh-6.5rem)]"
+        id="image-el"
+        loading="lazy"
+      />
+    </section>
+
+    <section id="audio">
+      <h2
+        class=":uno: font-bold mb-1 flex gap-2"
+        style={{ fontFamily: `'${spaceport.family}'` }}
+      >
+        Found Audio
+      </h2>
+      <AudioPlayer />
+    </section>
+
+    <section id="blob">
+      <h2
+        class=":uno: font-bold mb-1 flex gap-2"
+        style={{ fontFamily: `'${spaceport.family}'` }}
+      >
+        Found Blob
+      </h2>
+    </section>
+  </div>
+</DialogContainer>
